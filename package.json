@@ -1,0 +1,19 @@
+{
+  "name": "slovo",
+  "version": "0.0.0",
+  "description": "A simple blog platform",
+  "homepage": "",
+  "author": {
+    "name": "Krzysztof Marecki",
+    "email": "marecki.krzysztof@gmail.com",
+    "url": ""
+  },
+  "keywords": [
+    "blog"
+  ],
+  "dependencies": {
+    "express": "^4.14.0",
+    "jade": "^1.11.0",
+    "pug": "^2.0.0-beta3"
+  }
+}
