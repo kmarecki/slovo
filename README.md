@@ -1,2 +1,2 @@
 # slovo
-A simple blog platform in Node.js
+A simple blog platform in Angular.js/Node.js

@@ -1,0 +1,28 @@
+{
+  "name": "slovo",
+  "description": "A simple blog platform",
+  "main": "",
+  "authors": [
+    "Krzysztof Marecki"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "blog"
+  ],
+  "homepage": "https://github.com/kmarecki/slovo",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.4",
+    "bootstrap": "^3.3.6",
+    "lodash": "^4.13.1",
+    "angular": "^1.5.7",
+    "systemjs": "*"
+  }
+}
