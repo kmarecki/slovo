@@ -5,8 +5,6 @@ interface IAppScope extends ng.IScope {
 }
 
 class AppController {
-    // private $scope: IAppScope;
-
     constructor($scope: IAppScope) {
         $scope.name = 'world2';
     }
