@@ -1,30 +1,9 @@
-doctype html
-html
-  head
-    title Blog name
-    script(src='/bower_components/system.js/dist/system.js')
+extends templates/layout
+
+block scripts
     script.
-        System.config({
-          baseURL: '/',
-          defaultJSExtensions: true,
-          transpiler: 'none',
-          map: {
-            'jquery': 'bower_components/jquery/dist/jquery.js',
-            'angular': 'bower_components/angular/angular.js'
-          }, 
-          meta: {
-            'jquery': {
-                format: 'global',
-                exports: 'jquery'
-            },
-            'angular': {
-                format: 'global',
-                exports: 'angular'
-            }
-          } 
-        });
-        SystemJS.import('app.module.js');
-    block scripts
-  body
+      SystemJS.import('app.module.js');
+
+block content
     div(ng-app='blogApp' ng-controller='AppController')
       p Hello. {{name}}!
