@@ -23,6 +23,7 @@
     "bootstrap": "^3.3.6",
     "lodash": "^4.13.1",
     "angular": "^1.5.7",
-    "systemjs": "*"
+    "system.js": "^0.19.31",
+    "angular-route": "^1.5.7"
   }
 }
