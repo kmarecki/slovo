@@ -2,8 +2,18 @@ extends templates/layout
 
 block scripts
     script.
+      SystemJS.import('components/articles/articles.module.js');
+      SystemJS.import('components/articles-nav/articles-nav.module.js');
       SystemJS.import('app.module.js');
 
 block content
     div(ng-app='blogApp' ng-controller='AppController')
-      p Hello. {{name}}!
+    header
+      h1 The Blog
+    section
+      articles
+    nav
+      articles-nav
+    footer
+        div
+          p @ 2016 Krzysztof Marecki

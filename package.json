@@ -14,7 +14,16 @@
   "dependencies": {
     "express": "^4.14.0",
     "jade": "^1.11.0",
-    "pug": "^2.0.0-beta3",
     "serve-static": "^1.11.1"
+  },
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-firefox-launcher": "^1.0.0"
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js"
   }
 }

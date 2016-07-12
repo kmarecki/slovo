@@ -1,14 +1,8 @@
 import * as angular from 'angular';
+import {AppController} from './app.controller';
 
-interface IAppScope extends ng.IScope {
-    name: string;
-}
-
-class AppController {
-    constructor($scope: IAppScope) {
-        $scope.name = 'world2';
-    }
-}
-
-let app = angular.module('blogApp', []);
+let app = angular.module('blogApp', [
+    'articles',
+    'articlesNav',
+]);
 app.controller('AppController', AppController);
