@@ -1,7 +1,5 @@
-<nav class="vcenter">
-    <ul>
-        <li><a href="#foo">June</a></li>
-        <li><a href="#bar">April</a></li>
-        <li><a href="#baz">January</a></li>
+<nav>
+    <ul ng-repeat="link in $ctrl.links">
+        <li><a href="#foo">{{link}}</a></li>
     </ul>
 </nav>
