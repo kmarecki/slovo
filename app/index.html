@@ -2,7 +2,8 @@
 
 <head>
     <title>Admin</title>
-    <link rel="stylesheets" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/app.css" />
     <script src="/bower_components/system.js/dist/system.js"></script>
     <script>
       System.config({
@@ -11,21 +12,22 @@
         transpiler: 'none',
         map: {
           'jquery': 'bower_components/jquery/dist/jquery.js',
-          'angular': 'bower_components/angular/angular.js',
           'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
+          'angular': 'bower_components/angular/angular.js',
         }, 
         meta: {
           'jquery': {
               format: 'global',
               exports: 'jquery'
           },
+          'bootsrap': {
+              format: 'global',
+              deps: ['jquery']
+          },
           'angular': {
               format: 'global',
               exports: 'angular'
           },
-          'bootsrap': {
-              deps: ['jquery']
-          }
         } 
       });
       SystemJS.import('components/articles/articles.module.js');
@@ -35,17 +37,20 @@
 </head>
 
 <body>
-    <div ng-app="blogApp" ng-controller="AppController">
-        <header>
+    <div class="container" ng-app="blogApp" ng-controller="AppController">
+        <header class="jumbotron text-center">
             <h1>The Blog</h1>
+            <p>My personal rumblings</p>
         </header>
-        <section>
-            <articles></articles>
-        </section>
-        <nav>
-            <articles-nav></articles-nav>
-        </nav>
-        <footer>
+        <div class="row vertical-align">
+            <div class="col-sm-8">
+                <articles></articles>
+            </div>
+            <div class="col-sm-4">
+                <articles-nav></articles-nav>
+            </div>
+        </div>
+        <footer class="text-center">
             <div>
                 <p>@ 2016 Krzysztof Marecki</p>
             </div>
