@@ -14,27 +14,20 @@
   "dependencies": {
     "express": "^4.14.0",
     "jade": "^1.11.0",
+    "karma": "^0.13.22",
     "serve-static": "^1.11.1"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
-    "karma-firefox-launcher": "^1.0.0"
+    "karma-requirejs": "^1.0.0",
+    "karma-requirejs-preprocessor": "0.0.2",
+    "karma-systemjs": "^0.14.0"
   },
   "scripts": {
     "test": "karma start karma.conf.js"
-  },
-  "jspm": {
-    "directories": {
-      "baseURL": "app"
-    },
-    "dependencies": {},
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
-    }
   }
 }

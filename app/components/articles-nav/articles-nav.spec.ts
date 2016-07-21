@@ -1,16 +1,16 @@
-import {ArticlesNavController} from './articles-nav.controller.ts';
+import 'angular';
+import 'angular-mocks';
+import  './articles-nav.module';
+
+import {ArticlesNavController} from './articles-nav.controller';
 
 describe('articlesNav', () => {
-    //beforeEach(module('articlesNav'));
+    beforeEach(angular.mock.module('articlesNav'));
     describe('ArticlesNavController', () => {
         let ctrl: ArticlesNavController;
-
-        beforeEach(inject(function ($componentController, _$httpBackend_) {
-            let $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('phones/phones.json')
-                .respond([{ name: 'Nexus S' }, { name: 'Motorola DROID' }]);
-
-            ctrl = <ArticlesNavController>$componentController('phoneList');
+        
+        beforeEach(inject(function ($componentController) {
+            ctrl = <ArticlesNavController>$componentController('articlesNav');
         }));
 
         it('should be 4 links', () => {
@@ -18,3 +18,4 @@ describe('articlesNav', () => {
         });
     });
 });
+
