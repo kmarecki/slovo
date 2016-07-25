@@ -3,6 +3,10 @@ import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
 
+import {MongoConfiguration} from 'mongoose-repos';
+import * as apiRoutes from './routes/api';
+
+let config = require('config');
 let root =  path.join(__dirname, '..');
 let app = express();
 
@@ -12,6 +16,9 @@ app.set('view engine', 'jade');
 
 let publicPath = path.join(root, 'app');
 app.use('/', express.static(publicPath));
+app.use(apiRoutes.router);
+
+MongoConfiguration.uri = config.MongoDb.uri;
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

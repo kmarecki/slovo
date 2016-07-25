@@ -22,9 +22,10 @@
     "jquery": "^2.2.4",
     "bootstrap": "^3.3.6",
     "lodash": "^4.13.1",
-    "angular": "^1.5.7",
+    "angular": "^1.5.8",
     "system.js": "^0.19.31",
-    "angular-route": "^1.5.7",
-    "angular-mocks": "^1.5.7"
+    "angular-route": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "angular-resource": "^1.5.8"
   }
 }
