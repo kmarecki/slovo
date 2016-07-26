@@ -30,17 +30,23 @@ export class PostRepository extends MongoRepository {
 
     findPosts(callback: (err: Error, headers: { id: any, title: string, date: Date }[]) => any): void {
 
-        this.connect();
-        this.Post.find({})
-            .sort({ title: 'asc' })
-            .select({ date: 1, title: 1 })
-            .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
-                return {
-                    date: item.date,
-                    id: item._id,
-                    title: item.title,
-                };
-            }));
+        // this.connect();
+        // this.Post.find({})
+        //     .sort({ title: 'asc' })
+        //     .select({ date: 1, title: 1 })
+        //     .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
+        //         return {
+        //             date: item.date,
+        //             id: item._id,
+        //             title: item.title,
+        //         };
+        //     }));
+
+        callback(null, [
+            { date: new Date(2015, 2, 23), id: 1, title: 'First post' },
+            { date: new Date(2015, 3, 23), id: 1, title: 'Second post' },
+            { date: new Date(2016, 5, 23), id: 1, title: 'Third post' },
+        ]);
     };
 
     savePost(post: Post, callback: (err: Error) => any): void {

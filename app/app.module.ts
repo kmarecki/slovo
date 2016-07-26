@@ -1,9 +1,11 @@
-import * as angular from 'angular';
+import * as ng from 'angular';
+import 'angular-resource';
+
 import {AppController} from './app.controller';
 
-let app = angular.module('blogApp', [
+let app = ng.module('blogApp', [
     'articles',
     'articlesNav',
-    'core.post'
+    'core',
 ]);
 app.controller('AppController', AppController);

@@ -14,23 +14,17 @@
           'jquery': 'bower_components/jquery/dist/jquery.js',
           'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
           'angular': 'bower_components/angular/angular.js',
+          'angular-resource': 'bower_components/angular-resource/angular-resource.js',
         }, 
         meta: {
-          'jquery': {
-              format: 'global',
-              exports: 'jquery'
-          },
-          'bootsrap': {
-              format: 'global',
-              deps: ['jquery']
-          },
-          'angular': {
-              format: 'global',
-              exports: 'angular'
-          },
+          'jquery': {format: 'global', exports: 'jquery'},
+          'bootsrap': {format: 'global', deps: ['jquery']},
+          'angular': {format: 'global', exports: 'angular'},
+          'angular-resource' : {format: 'global', deps: ['angular']},
         } 
       });
       SystemJS.import('core/post/post.module.js');
+      SystemJS.import('core/core.module.js');
       SystemJS.import('components/articles/articles.module.js');
       SystemJS.import('components/articles-nav/articles-nav.module.js');
       SystemJS.import('app.module.js');
