@@ -1,8 +1,8 @@
 <html>
 
 <head>
-  <title>Admin</title>
-  <link rel="stylesheets" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <title>The Blog Admin Panel</title>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <script src="/bower_components/system.js/dist/system.js"></script>
   <script>
       System.config({
@@ -11,31 +11,51 @@
         transpiler: 'none',
         map: {
           'jquery': 'bower_components/jquery/dist/jquery.js',
-          'angular': 'bower_components/angular/angular.js',
           'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
+          'angular': 'bower_components/angular/angular.js',
+          'angular-route': 'bower_components/angular-route/angular-route.js',
         }, 
         meta: {
-          'jquery': {
-              format: 'global',
-              exports: 'jquery'
-          },
-          'angular': {
-              format: 'global',
-              exports: 'angular'
-          },
-          'bootsrap': {
-              deps: ['jquery']
-          }
+          'jquery': {format: 'global', exports: 'jquery'},
+          'bootsrap': {format: 'global', deps: ['jquery'] },
+          'angular': {format: 'global', exports: 'angular'},
+          'angular-route' : {format: 'global', deps: ['angular']},
         } 
       });
+      SystemJS.import('admin/components/comments/comments.module.js');
+      SystemJS.import('admin/components/posts/posts.module.js');
+      SystemJS.import('admin/components/post/post.module.js');
+      SystemJS.import('admin/components/users/users.module.js');
+      SystemJS.import('admin/components/components.module.js');
+      SystemJS.import('admin/admin.module.js');
     </script>
-  <script>SystemJS.import('admin/admin.module.js');</script>
 </head>
 
 <body>
-  <div ng-app="adminApp" ng-controller="AdminController">
-    <h1>Admin Html page</h1>
-    <p>Hello {{name}}!</p>
+  <div class="container" ng-app="adminApp" ng-controller="AdminController">
+    <header class="text-center">
+      <h1>The Blog Admin Panel</h1>
+    </header>
+    <div class="row vertical-align">
+      <div class="col-sm-4">
+        <nav>
+          <nav>
+            <ul>
+              <li><a href="#posts">Posts</a></li>
+              <li><a href="#comments">Comments</a></li>
+              <li><a href="#settings">Settings</a></li>
+              <li><a href="#users">Users</a></li>
+            </ul>
+          </nav>
+        </nav>
+      </div>
+      <div class="col-sm-8" ng-view/>
+    </div>
+    <footer class="text-center">
+      <div>
+        <p>@ 2016 Krzysztof Marecki</p>
+      </div>
+    </footer>
   </div>
 </body>
 

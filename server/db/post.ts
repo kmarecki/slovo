@@ -44,8 +44,8 @@ export class PostRepository extends MongoRepository {
 
         callback(null, [
             { date: new Date(2015, 2, 23), id: 1, title: 'First post' },
-            { date: new Date(2015, 3, 23), id: 1, title: 'Second post' },
-            { date: new Date(2016, 5, 23), id: 1, title: 'Third post' },
+            { date: new Date(2015, 3, 23), id: 2, title: 'Second post' },
+            { date: new Date(2016, 5, 23), id: 3, title: 'Third post' },
         ]);
     };
 

@@ -1,5 +1,5 @@
 import * as ng from 'angular';
-import 'angular-resource';
+// import 'angular-resource';
 
 import {AppController} from './app.controller';
 
