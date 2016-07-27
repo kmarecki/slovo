@@ -1,6 +1,8 @@
 import * as ng from 'angular';
 import 'angular-route';
 
+import './components/components.module';
+
 interface IAdminScope extends ng.IScope {
     name: string;
 }
@@ -15,19 +17,26 @@ let app = ng.module('adminApp', [
     'ngRoute',
     'components',
 ]);
-app.config(['$routeProvider', function ($routeProvider: ng.route.IRouteProvider) {
+app.config(['$routeProvider', '$locationProvider', function (
+    $routeProvider: ng.route.IRouteProvider,
+    $locationProvider: ng.ILocationProvider) {
+
     $routeProvider.
+        when('/comments', {
+            template: '<comments></comments>',
+        }).
         when('/posts', {
             template: '<posts></posts>',
         }).
         when('/post', {
             template: '<post></post>',
         }).
-        when('/comments', {
-            template: '<comments></comments>',
+        when('/settings', {
+            template: '<settings></settings>',
         }).
         when('/users', {
             template: '<users></users>',
         });
+    $locationProvider.html5Mode(true);
 }]);
 app.controller('AdminController', AdminController);

@@ -22,13 +22,9 @@
           'angular-route' : {format: 'global', deps: ['angular']},
         } 
       });
-      SystemJS.import('admin/components/comments/comments.module.js');
-      SystemJS.import('admin/components/posts/posts.module.js');
-      SystemJS.import('admin/components/post/post.module.js');
-      SystemJS.import('admin/components/users/users.module.js');
-      SystemJS.import('admin/components/components.module.js');
       SystemJS.import('admin/admin.module.js');
     </script>
+    <base href="/admin/"/>
 </head>
 
 <body>
@@ -41,10 +37,10 @@
         <nav>
           <nav>
             <ul>
-              <li><a href="#posts">Posts</a></li>
-              <li><a href="#comments">Comments</a></li>
-              <li><a href="#settings">Settings</a></li>
-              <li><a href="#users">Users</a></li>
+              <li><a href="posts">Posts</a></li>
+              <li><a href="comments">Comments</a></li>
+              <li><a href="settings">Settings</a></li>
+              <li><a href="users">Users</a></li>
             </ul>
           </nav>
         </nav>
