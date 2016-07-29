@@ -14,8 +14,8 @@
   "dependencies": {
     "config": "^1.21.0",
     "express": "^4.14.0",
+    "express-app": "0.0.2",
     "jade": "^1.11.0",
-    "karma": "^0.13.22",
     "mongoose": "^4.5.5",
     "mongoose-repos": "0.0.5",
     "serve-static": "^1.11.1"
