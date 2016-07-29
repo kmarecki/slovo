@@ -4,6 +4,7 @@
   <title>The Blog Admin Panel</title>
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/styles/app.css" />
+  <link rel="stylesheet" href="/styles/admin.css" />
   <script src="/bower_components/system.js/dist/system.js"></script>
   <script>
       System.config({
@@ -25,28 +26,31 @@
       });
       SystemJS.import('admin/admin.module.js');
     </script>
-    <base href="/admin/"/>
+  <base href="/admin/" />
 </head>
 
 <body>
   <div class="container" ng-app="adminApp" ng-controller="AdminController">
     <header class="text-center">
-      <h1>The Blog Admin Panel</h1>
+      <h1>Admin Panel</h1>
     </header>
+    <nav>
+      <ul class="list-inline">
+        <li><a href="/">Blog</a></li>
+      </ul>
+    </nav>
     <div class="row vertical-align">
       <div class="col-sm-4">
         <nav>
-          <nav>
-            <ul>
-              <li><a href="posts">Posts</a></li>
-              <li><a href="comments">Comments</a></li>
-              <li><a href="settings">Settings</a></li>
-              <li><a href="users">Users</a></li>
-            </ul>
-          </nav>
+          <ul>
+            <li><a href="posts">Posts</a></li>
+            <li><a href="comments">Comments</a></li>
+            <li><a href="settings">Settings</a></li>
+            <li><a href="users">Users</a></li>
+          </ul>
         </nav>
       </div>
-      <div class="col-sm-8" ng-view/>
+      <div class="col-sm-8" ng-view></div>
     </div>
     <footer class="text-center">
       <div>

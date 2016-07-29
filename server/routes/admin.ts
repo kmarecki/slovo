@@ -7,7 +7,6 @@ import {ExpressApp} from 'express-app';
 export let router = express.Router();
 
 router.get('/admin/*', (req: express.Request, res: express.Response) => {
-    console.log(req.path);
     let filePath = path.join(ExpressApp.physicalPath, req.path);
     fs.exists(filePath, (exists) => {
         if (exists) {

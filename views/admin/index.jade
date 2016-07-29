@@ -1,9 +1,0 @@
-extends ../templates/layout
-
-block scripts
-    script.
-        SystemJS.import('admin/admin.module.js');
-block content
-    div(ng-app='adminApp' ng-controller='AdminController')
-      h1 Admin page
-      p Hello {{name}}!
