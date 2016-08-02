@@ -1,4 +1,3 @@
-import * as ng from 'angular';
 import {IPostHeader, PostDataService} from '../../core/post/post.service';
 
 export class ArticlesNavController {

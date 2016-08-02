@@ -7,7 +7,7 @@ export interface IPostHeader extends ng.resource.IResource<IPostHeader> {
 }
 
 export interface IPost extends ng.resource.IResource<IPost> {
-    id: number;
+    id: string;
     title: string;
     date: Date;
     text: string;

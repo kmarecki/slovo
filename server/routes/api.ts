@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {PostRepository} from '../db/post';
+import {Post, PostRepository} from '../db/post';
 
 export let router = express.Router();
 
@@ -24,6 +24,15 @@ router.get('/api/posts', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/api/posts', (req: express.Request, res: express.Response) => {
+     let db = new PostRepository();
+     let post = <Post>req.body;
+     db.savePost(post, (err) => {
+         if (err) {
+              handleError(res, err.message, 'Failed to save a post');
+         } else {
+             res.status(201);
+         }
+     });
 });
 
 router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {

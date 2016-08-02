@@ -1,5 +1,5 @@
 import * as express from 'express';
-
+import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as path from 'path';
 
@@ -12,6 +12,10 @@ let config = require('config');
 let root =  path.join(__dirname, '..');
 let publicPath = path.join(root, 'app');
 let app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 ExpressApp.physicalPath = publicPath;
 
 app.set('port', process.env.PORT || 3000);

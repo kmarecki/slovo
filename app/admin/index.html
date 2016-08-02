@@ -15,12 +15,14 @@
           'jquery': 'bower_components/jquery/dist/jquery.js',
           'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
           'angular': 'bower_components/angular/angular.js',
+          'angular-resource': 'bower_components/angular-resource/angular-resource.js',
           'angular-route': 'bower_components/angular-route/angular-route.js',
         }, 
         meta: {
           'jquery': {format: 'global', exports: 'jquery'},
           'bootsrap': {format: 'global', deps: ['jquery'] },
           'angular': {format: 'global', exports: 'angular'},
+          'angular-resource' : {format: 'global', deps: ['angular']},
           'angular-route' : {format: 'global', deps: ['angular']},
         } 
       });

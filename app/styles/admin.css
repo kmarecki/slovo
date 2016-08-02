@@ -9,6 +9,10 @@
     background: grey;
 }
 
-[class^="col-"] > h3{
-  margin-top: 0px;
+[class^="col-"] > textarea, p{
+  margin-top: 0em;
+}
+
+[class^="col-"] > h3 {
+  margin-top: 0em;
 }

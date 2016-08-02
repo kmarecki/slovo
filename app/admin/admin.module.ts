@@ -1,6 +1,7 @@
 import * as ng from 'angular';
 import 'angular-route';
 
+import '../core/core.module';
 import './components/components.module';
 
 interface IAdminScope extends ng.IScope {
@@ -15,6 +16,7 @@ class AdminController {
 
 let app = ng.module('adminApp', [
     'ngRoute',
+    'core',
     'components',
 ]);
 app.config(['$routeProvider', '$locationProvider', function (
