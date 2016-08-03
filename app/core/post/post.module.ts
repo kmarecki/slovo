@@ -1,5 +1,4 @@
 import * as ng from 'angular';
-import 'angular-resource';
 
 import {PostDataService} from './post.service';
 

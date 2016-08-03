@@ -1,4 +1,5 @@
 import * as ng from 'angular';
+import 'angular-resource';
 
 import './core/core.module';
 import './components/components.module';

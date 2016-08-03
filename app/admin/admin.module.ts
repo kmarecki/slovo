@@ -1,5 +1,9 @@
 import * as ng from 'angular';
+
+import 'angular-resource';
 import 'angular-route';
+import 'angular-sanitize';
+import 'angular-ui-bootsrap';
 
 import '../core/core.module';
 import './components/components.module';
@@ -16,6 +20,8 @@ class AdminController {
 
 let app = ng.module('adminApp', [
     'ngRoute',
+    'ngSanitize',
+    'ui.bootstrap',
     'core',
     'components',
 ]);

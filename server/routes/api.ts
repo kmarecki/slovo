@@ -30,7 +30,7 @@ router.post('/api/posts', (req: express.Request, res: express.Response) => {
          if (err) {
               handleError(res, err.message, 'Failed to save a post');
          } else {
-             res.status(201);
+             res.status(201).end();
          }
      });
 });
