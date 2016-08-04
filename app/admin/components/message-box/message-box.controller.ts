@@ -14,12 +14,12 @@ export class MessageBoxController {
             animation: true,
             bindToController: true,
             controller: MessageBoxController,
-            controllerAs: 'ctrl',
+            controllerAs: '$ctrl',
             templateUrl: 'components/message-box/message-box.template.html',
             resolve: {
                 message: () => message,
                 title: () => title,
-            }
+            },
         };
         $uibModal.open(options);
     }

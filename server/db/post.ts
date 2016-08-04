@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-import {MongoRepository, defaultHandler, defaultResultHandler, defaultResultArrayHandler} from 'mongoose-repos';
+import {MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler} from 'mongoose-repos';
 
 export interface Post {
     title: string;
@@ -50,13 +50,8 @@ export class PostRepository extends MongoRepository {
     };
 
     savePost(post: Post, callback: (err: Error) => any): void {
-        this.connect();
         let query = { category: post.category, title: post.title };
-        this.Post.findOneAndUpdate(
-            query,
-            post,
-            { upsert: true },
-            (err) => defaultHandler(err, callback));
+        this.findOneAndSave(this.Post, query, post, (err) => defaultHandler(err, callback));
     }
 
     removePost(
@@ -73,11 +68,19 @@ export class PostRepository extends MongoRepository {
 
     protected addSchemas(): void {
         let schema = new mongoose.Schema({
+            postId: Number,
             category: String,
             date: Date,
             title: String,
             text: String,
         });
-        this.Post = this.addModel<PostModel>('Post', schema);
+        let options: SchemaOptions = {
+            autoIncrement: true,
+            autoIncrementOptions : {
+                field: 'postId',
+                startAt: 1,
+            },
+        }
+        this.Post = this.addModel<PostModel>('Post', schema, options);
     }
 }

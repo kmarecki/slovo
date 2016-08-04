@@ -25,12 +25,20 @@ export class PostController {
     }
 
     save(): void {
-        this.title = `${this.title} has been changed`;
-        this.text = `${this.text} has been changed`;
         let postResource = this.postDataService.getPostResource();
-        postResource.save({}, this, undefined, (err) => {
+        postResource.save({}, this.toModel(), undefined, (err) => {
             MessageBoxController.show(this.$uibModal, MessageBoxType.Error, 'Error', this.formatError(err));
         });
+    }
+
+    private toModel(): IPost {
+        let model: IPost = {
+            id: this.id,
+            date: new Date(Date.now()),
+            text: this.text,
+            title: this.title,
+        };
+        return model;
     }
 
     private formatError(err: any): string {

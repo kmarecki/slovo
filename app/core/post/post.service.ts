@@ -1,21 +1,21 @@
 import * as ng from 'angular';
 
-export interface IPostHeader extends ng.resource.IResource<IPostHeader> {
+export interface IPostHeader {
     id: number;
     title: string;
     date: Date;
 }
 
-export interface IPost extends ng.resource.IResource<IPost> {
+export interface IPost {
     id: string;
     title: string;
     date: Date;
     text: string;
 }
 
-export interface IPostHeaderResource extends ng.resource.IResourceClass<IPostHeader> { }
+export interface IPostHeaderResource extends ng.resource.IResourceClass<ng.resource.IResource<IPostHeader>> { }
 
-export interface IPostResource extends ng.resource.IResourceClass<IPost> { }
+export interface IPostResource extends ng.resource.IResourceClass<ng.resource.IResource<IPost>> { }
 
 export interface IPostDataService {
     getPostHeaderResource(): IPostHeaderResource;
