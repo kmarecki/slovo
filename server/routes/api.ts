@@ -36,6 +36,15 @@ router.post('/api/posts', (req: express.Request, res: express.Response) => {
 });
 
 router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
+    let db = new PostRepository();
+    let postId = req.params.id;
+    db.findPost(postId, (err, post) => {
+        if (err) {
+            handleError(res, err.message, `Failed to get post {Id: ${postId}}`);
+        } else {
+            res.status(200).json(post);
+        }
+    });
 });
 
 router.put('/api/posts/:id', (req: express.Request, res: express.Response) => {

@@ -6,7 +6,7 @@ export class ArticlesNavController {
     links: string[];
 
     constructor(private postDataService: PostDataService) {
-        this.links = []//'June', 'April', 'March', 'January'];
+        this.links = []
         let postHeaderResource = postDataService.getPostHeaderResource();
         postHeaderResource.query((headers: IPostHeader[]) => {
             for (let header of headers) {

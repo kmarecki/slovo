@@ -11,12 +11,14 @@
         defaultJSExtensions: true,
         transpiler: 'none',
         map: {
+          'lodash' : 'bower_components/lodash/dist/lodash.js',
           'jquery': 'bower_components/jquery/dist/jquery.js',
           'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
           'angular': 'bower_components/angular/angular.js',
           'angular-resource': 'bower_components/angular-resource/angular-resource.js',
         }, 
         meta: {
+          'lodash': {format: 'global', exports: '_'},
           'jquery': {format: 'global', exports: 'jquery'},
           'bootsrap': {format: 'global', deps: ['jquery']},
           'angular': {format: 'global', exports: 'angular'},

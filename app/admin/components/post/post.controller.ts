@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 
 import {IPost, PostDataService} from '../../../core/post/post.service';
-import {MessageBoxType, MessageBoxController} from '../message-box/message-box.controller';
+import {MessageBoxController} from '../message-box/message-box.controller';
 
 interface IPostRouteParams extends ng.route.IRouteParamsService {
     id: string;
@@ -27,7 +27,7 @@ export class PostController {
     save(): void {
         let postResource = this.postDataService.getPostResource();
         postResource.save({}, this.toModel(), undefined, (err) => {
-            MessageBoxController.show(this.$uibModal, MessageBoxType.Error, 'Error', this.formatError(err));
+            MessageBoxController.showError(this.$uibModal, err);
         });
     }
 
@@ -39,9 +39,5 @@ export class PostController {
             title: this.title,
         };
         return model;
-    }
-
-    private formatError(err: any): string {
-        return `Status Code ${err.status}: ${err.statusText}<br/>${err.data.error}`;
     }
 };
