@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 import {MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler} from 'mongoose-repos';
 
 export interface Post {
+    postId: number;
     title: string;
     category: string;
     date: Date;
@@ -17,50 +18,41 @@ export class PostRepository extends MongoRepository {
     private Post: mongoose.Model<PostModel>;
 
     findPost(
-        title: string,
-        category: string,
+        postId: number,
         callback: (err: Error, Post: Post) => any): void {
 
         this.connect();
-        let query = { category: category, title: title };
+        let query = { postId: postId };
         this.Post.findOne(
             query,
             (err, result) => defaultResultHandler(err, result, callback));
     };
 
     findPosts(callback: (err: Error, headers: { id: any, title: string, date: Date }[]) => any): void {
-
-        // this.connect();
-        // this.Post.find({})
-        //     .sort({ title: 'asc' })
-        //     .select({ date: 1, title: 1 })
-        //     .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
-        //         return {
-        //             date: item.date,
-        //             id: item._id,
-        //             title: item.title,
-        //         };
-        //     }));
-
-        callback(null, [
-            { date: new Date(2015, 2, 23), id: 1, title: 'First post' },
-            { date: new Date(2015, 3, 23), id: 2, title: 'Second post' },
-            { date: new Date(2016, 5, 23), id: 3, title: 'Third post' },
-        ]);
+        this.connect();
+        this.Post.find({})
+            .sort({ postId: 'asc' })
+            .select({ date: 1, postId: 1, title: 1 })
+            .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
+                return {
+                    date: item.date,
+                    postId: item.postId,
+                    title: item.title,
+                };
+            }));
     };
 
     savePost(post: Post, callback: (err: Error) => any): void {
-        let query = { category: post.category, title: post.title };
+        let query = { postId: post.postId };
         this.findOneAndSave(this.Post, query, post, (err) => defaultHandler(err, callback));
     }
 
     removePost(
-        title: string,
-        category: string,
+        postId: number,
         callback: (err: Error) => any): void {
 
         this.connect();
-        let query = { category: title, title: title };
+        let query = { postId: postId };
         this.Post.remove(
             query,
             (err) => defaultHandler(err, callback));

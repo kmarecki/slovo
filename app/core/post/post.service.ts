@@ -1,13 +1,13 @@
 import * as ng from 'angular';
 
 export interface IPostHeader {
-    id: number;
+    postId: number;
     title: string;
     date: Date;
 }
 
 export interface IPost {
-    id: string;
+    postId: number;
     title: string;
     date: Date;
     text: string;

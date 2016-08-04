@@ -10,7 +10,7 @@ interface IPostRouteParams extends ng.route.IRouteParamsService {
 export class PostController {
     static $inject = ['$routeParams', '$uibModal', 'postDataService'];
 
-    id: string;
+    postId: number;
     title: string;
     text: string;
 
@@ -19,7 +19,7 @@ export class PostController {
         private $uibModal: ng.ui.bootstrap.IModalService,
         private postDataService: PostDataService
     ) {
-        this.id = $routeParams && $routeParams.id ? $routeParams.id : '0';
+        this.postId = $routeParams && $routeParams.id ? Number($routeParams.id) : undefined;
         this.title = 'First Title';
         this.text = 'Bla bla';
     }
@@ -33,7 +33,7 @@ export class PostController {
 
     private toModel(): IPost {
         let model: IPost = {
-            id: this.id,
+            postId: this.postId,
             date: new Date(Date.now()),
             text: this.text,
             title: this.title,
