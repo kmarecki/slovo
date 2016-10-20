@@ -60,7 +60,11 @@ export class PostRepository extends MongoRepository {
 
     protected addSchemas(): void {
         let schema = new mongoose.Schema({
-            postId: Number,
+            postId: {
+                type: Number,
+                unique: true,
+                index: true,
+            },
             category: String,
             date: Date,
             title: String,
