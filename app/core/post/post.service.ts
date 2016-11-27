@@ -31,6 +31,6 @@ export class PostDataService implements IPostDataService {
     };
 
     getPostResource(): IPostResource {
-        return <IPostResource>this.$resource('/api/posts/:id');
+        return <IPostResource>this.$resource('/api/post/:id');
     };
 }

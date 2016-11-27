@@ -28,7 +28,7 @@ export class PostRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, callback));
     };
 
-    findPosts(callback: (err: Error, headers: { id: any, title: string, date: Date }[]) => any): void {
+    findPostHeaders(callback: (err: Error, headers: { id: any, title: string, date: Date }[]) => any): void {
         this.connect();
         this.Post.find({})
             .sort({ postId: 'asc' })
@@ -41,6 +41,15 @@ export class PostRepository extends MongoRepository {
                 };
             }));
     };
+
+     findPosts(callback: (err: Error, posts: Post[]) => any): void {
+        this.connect();
+        this.Post.find({})
+            .sort({ postId: 'asc' })
+            .select({ })
+            .exec((err, result) => defaultResultArrayHandler(err, result, callback));
+    };
+
 
     savePost(post: Post, callback: (err: Error) => any): void {
         let query = { postId: post.postId };

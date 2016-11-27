@@ -14,6 +14,17 @@ function handleError(
 
 router.get('/api/posts', (req: express.Request, res: express.Response) => {
     let db = new PostRepository();
+    db.findPostHeaders((err, headers) => {
+        if (err) {
+            handleError(res, err.message, 'Failed to get posts');
+        } else {
+            res.status(200).json(headers);
+        }
+    });
+});
+
+router.get('/api/post', (req: express.Request, res: express.Response) => {
+    let db = new PostRepository();
     db.findPosts((err, headers) => {
         if (err) {
             handleError(res, err.message, 'Failed to get posts');
@@ -23,7 +34,7 @@ router.get('/api/posts', (req: express.Request, res: express.Response) => {
     });
 });
 
-router.post('/api/posts', (req: express.Request, res: express.Response) => {
+router.post('/api/post', (req: express.Request, res: express.Response) => {
      let db = new PostRepository();
      let post = <Post>req.body;
      db.savePost(post, (err) => {
@@ -35,7 +46,7 @@ router.post('/api/posts', (req: express.Request, res: express.Response) => {
      });
 });
 
-router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
+router.get('/api/post/:id', (req: express.Request, res: express.Response) => {
     let db = new PostRepository();
     let postId = req.params.id;
     db.findPost(postId, (err, post) => {
@@ -47,8 +58,8 @@ router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
     });
 });
 
-router.put('/api/posts/:id', (req: express.Request, res: express.Response) => {
+router.put('/api/post/:id', (req: express.Request, res: express.Response) => {
 });
 
-router.delete('/api/posts/:id', (req: express.Request, res: express.Response) => {
+router.delete('/api/post/:id', (req: express.Request, res: express.Response) => {
 });
