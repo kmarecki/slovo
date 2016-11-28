@@ -8,6 +8,7 @@ export interface Post {
     category: string;
     date: Date;
     text: string;
+    isPublished: boolean;
 }
 
 

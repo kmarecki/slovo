@@ -19,6 +19,7 @@ export interface IPostResource extends ng.resource.IResourceClass<ng.resource.IR
 
 export interface IPostDataService {
     getPostHeaderResource(): IPostHeaderResource;
+    getPostResource(): IPostResource;
 }
 
 export class PostDataService implements IPostDataService {

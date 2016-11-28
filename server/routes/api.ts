@@ -62,4 +62,13 @@ router.put('/api/post/:id', (req: express.Request, res: express.Response) => {
 });
 
 router.delete('/api/post/:id', (req: express.Request, res: express.Response) => {
+    let db = new PostRepository();
+    let postId = req.params.id;
+    db.removePost(postId, (err) => {
+         if (err) {
+            handleError(res, err.message, `Failed to delete post {Id: ${postId}}`);
+        } else {
+            res.status(204).end();
+        }
+    });
 });

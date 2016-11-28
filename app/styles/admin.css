@@ -9,10 +9,23 @@
     background: grey;
 }
 
+.buttons {
+  display: block;
+}
+
 [class^="col-"] > textarea, p{
   margin-top: 0em;
 }
 
 [class^="col-"] > h3 {
   margin-top: 0em;
+}
+
+div { 
+  overflow: visible; 
+  white-space: nowrap; 
+}
+
+ul {
+  list-style-type: none;
 }

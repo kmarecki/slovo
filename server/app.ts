@@ -20,8 +20,6 @@ app.use(bodyParser.json());
 ExpressApp.physicalPath = publicPath;
 
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(root, 'views'));
-app.set('view engine', 'jade');
 
 app.use(adminRoutes.router);
 app.use(apiRoutes.router);
