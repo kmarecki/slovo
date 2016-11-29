@@ -42,7 +42,7 @@ export class PostsController {
     }
 
     editPost(postId: number): void {
-        this.$location.path(`/post/${postId}`);
+        this.$location.path(`/posts/${postId}`).replace();
     }
 
     removePost(postId: number): void {

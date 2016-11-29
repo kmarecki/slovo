@@ -8,7 +8,7 @@ interface IPostRouteParams extends ng.route.IRouteParamsService {
 }
 
 export class PostController {
-    static $inject = ['$routeParams', '$uibModal', 'postDataService'];
+    static $inject = ['$routeParams', '$uibModal', '$location', 'postDataService'];
 
     postId: number;
     title: string;
@@ -17,6 +17,7 @@ export class PostController {
     constructor(
         private $routeParams: IPostRouteParams,
         private $uibModal: ng.ui.bootstrap.IModalService,
+        private $location: ng.ILocationService,
         private postDataService: IPostDataService
     ) {
         this.postId = $routeParams && $routeParams.id ? Number($routeParams.id) : undefined;
@@ -24,28 +25,29 @@ export class PostController {
     }
 
     private refreshModel() {
-        let postResource = this.postDataService.getPostResource();
-        postResource.get(
-            { id: this.postId },
-            (result: IPost) => {
-                this.title = result.title;
-                this.text = result.text;
-            },
-            (err) => {
-                if (this.postId !== undefined) {
+        if (this.postId !== undefined) {
+            let postResource = this.postDataService.getPostResource();
+            postResource.get(
+                { id: this.postId },
+                (result: IPost) => {
+                    this.title = result.title;
+                    this.text = result.text;
+                },
+                (err) => {
                     MessageBoxController.showError(this.$uibModal, err);
-                } else {
-                    this.title = 'First Title';
-                    this.text = 'Bla bla';
-                }
-            });
+                });
+        }
     }
 
     save(): void {
         let postResource = this.postDataService.getPostResource();
-        postResource.save({}, this.toModel(), undefined, (err) => {
-            MessageBoxController.showError(this.$uibModal, err);
-        });
+        postResource.save({}, this.toModel(),
+            () => {
+                this.$location.path('/posts');
+            },
+            (err) => {
+                MessageBoxController.showError(this.$uibModal, err);
+            });
     }
 
     private toModel(): IPost {

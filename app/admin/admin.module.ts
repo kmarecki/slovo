@@ -36,7 +36,10 @@ app.config(['$routeProvider', '$locationProvider', function (
         when('/posts', {
             template: '<posts></posts>',
         }).
-        when('/post', {
+        when('/posts/create', {
+            template: '<post></post>',
+        }).
+        when('/posts/:id', {
             template: '<post></post>',
         }).
         when('/settings', {

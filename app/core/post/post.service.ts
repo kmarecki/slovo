@@ -28,10 +28,10 @@ export class PostDataService implements IPostDataService {
     constructor(private $resource: ng.resource.IResourceService) { }
 
     getPostHeaderResource(): IPostHeaderResource {
-        return <IPostHeaderResource>this.$resource('/api/posts');
+        return <IPostHeaderResource>this.$resource('/api/postHeaders');
     };
 
     getPostResource(): IPostResource {
-        return <IPostResource>this.$resource('/api/post/:id');
+        return <IPostResource>this.$resource('/api/posts/:id');
     };
 }
