@@ -28,6 +28,7 @@
     "angular-mocks": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-bootstrap": "^2.0.1",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "showdown": "^1.5.1"
   }
 }

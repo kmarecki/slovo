@@ -48,7 +48,7 @@ export class PostRepository extends MongoRepository {
         this.Post.find({})
             .sort({ postId: 'asc' })
             .select({ })
-            .exec((err, result) => defaultResultArrayHandler(err, result, callback));
+            .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
     };
 
 
