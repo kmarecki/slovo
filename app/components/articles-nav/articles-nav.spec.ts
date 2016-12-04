@@ -14,7 +14,7 @@ describe('articlesNav', () => {
         }));
 
         it('should be 4 links', () => {
-            expect(ctrl.links.length).toEqual(4);
+            expect(ctrl.model.links.length).toEqual(4);
         });
     });
 });

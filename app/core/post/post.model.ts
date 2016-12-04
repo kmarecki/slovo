@@ -1,16 +1,37 @@
 import * as showdown from 'showdown';
-import {IPost} from './post.service';
+import {IPost, IPostHeader} from './post.service';
+
+export class PostHeaderModel {
+    postId: number;
+    date: string;
+    title: string;
+
+    refreshFrom(header: IPostHeader): void {
+        this.postId = header.postId;
+        this.date = header.date.toString();
+        this.title = header.title;
+    }
+}
 
 export class PostModel {
+    postId; number;
     title: string;
     text: string;
 
-    static toModel(post: IPost) {
-        let model = new PostModel();
-        model.title = model.title;
+    refreshFrom(post: IPost): void {
+        this.title = post.title;
 
         let converter = new showdown.Converter();
-        model.text = converter.makeHtml(post.text);
-        return model;
+        this.text = converter.makeHtml(post.text);
+    }
+
+    saveTo(): IPost {
+        let post: IPost = {
+            postId: this.postId,
+            date: new Date(Date.now()),
+            text: this.text,
+            title: this.title,
+        };
+        return post;
     }
 }

@@ -1,17 +1,18 @@
 import {IPostHeader, PostDataService} from '../../core/post/post.service';
-
+import {ArticlesNavModel} from './articles-nav.model';
 export class ArticlesNavController {
     static $inject = ['postDataService'];
 
-    links: string[];
+    model = new ArticlesNavModel();
 
     constructor(private postDataService: PostDataService) {
-        this.links = []
-        let postHeaderResource = postDataService.getPostHeaderResource();
+        this.refreshModel();
+    }
+
+    private refreshModel(): void {
+        let postHeaderResource = this.postDataService.getPostHeaderResource();
         postHeaderResource.query((headers: IPostHeader[]) => {
-            for (let header of headers) {
-                this.links.push(`${header.date}: ${header.title}`);
-            }
+           this.model.refresh(headers);
         });
     }
 }

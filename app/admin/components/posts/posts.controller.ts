@@ -2,13 +2,13 @@ import * as ng from 'angular';
 import * as _ from 'lodash';
 
 import { IPost, IPostHeader, IPostHeaderResource, PostDataService } from '../../../core/post/post.service';
+import { PostsModel } from './posts.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
 
 export class PostsController {
     static $inject = ['$uibModal', '$location', 'postDataService'];
 
-    headers: IPostHeader[];
-    selectedPost: IPost;
+    model = new PostsModel();
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
@@ -22,8 +22,8 @@ export class PostsController {
         let postHeaderResource = this.postDataService.getPostHeaderResource();
         postHeaderResource.query(
             (headers) => {
-                this.headers = headers;
-                let firstHeader = _.first(this.headers);
+                this.model.refreshHeaders(headers);
+                let firstHeader = _.first(this.model.headers);
                 if (firstHeader) {
                     this.selectPost(firstHeader.postId);
                 }
@@ -35,8 +35,8 @@ export class PostsController {
         let postResource = this.postDataService.getPostResource();
         postResource.get(
             { id: postId },
-            (result) => {
-                this.selectedPost = result;
+            (result: IPost) => {
+                this.model.selectPost(result);
             },
             (err) => MessageBoxController.showError(this.$uibModal, err));
     }
