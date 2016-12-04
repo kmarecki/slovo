@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
-import {MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler} from 'mongoose-repos';
+import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler } from 'mongoose-repos';
 
-import {IPost, IPostHeader} from '../../shared/entities/post';
+import { IPost, IPostHeader } from '../../shared/entities/post';
 
 interface PostModel extends IPost, mongoose.Document { }
 
@@ -18,7 +18,7 @@ export class PostRepository extends MongoRepository {
         this.Post.findOne(
             query,
             (err, result) => defaultResultHandler(err, result, callback));
-    };
+    }
 
     findPostHeaders(callback: (err: Error, headers: IPostHeader[]) => any): void {
         this.connect();
@@ -33,15 +33,15 @@ export class PostRepository extends MongoRepository {
                 };
                 return header;
             }));
-    };
+    }
 
-     findPosts(callback: (err: Error, posts:IPost[]) => any): void {
+    findPosts(callback: (err: Error, posts: IPost[]) => any): void {
         this.connect();
         this.Post.find({})
             .sort({ postId: 'asc' })
-            .select({ })
+            .select({})
             .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
-    };
+    }
 
 
     savePost(post: IPost, callback: (err: Error) => any): void {
@@ -74,7 +74,7 @@ export class PostRepository extends MongoRepository {
         });
         let options: SchemaOptions = {
             autoIncrement: true,
-            autoIncrementOptions : {
+            autoIncrementOptions: {
                 field: 'postId',
                 startAt: 1,
             },
