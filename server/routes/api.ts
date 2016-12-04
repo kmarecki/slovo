@@ -1,5 +1,7 @@
 import * as express from 'express';
-import {Post, PostRepository} from '../db/post';
+
+import { IPost } from '../../shared/entities/post';
+import { PostRepository } from '../db/post';
 
 export let router = express.Router();
 
@@ -8,8 +10,8 @@ function handleError(
     message: string,
     reason: string,
     code?: number) {
-  console.log('ERROR: ' + reason);
-  res.status(code || 500).json({ 'error': message});
+    console.log('ERROR: ' + reason);
+    res.status(code || 500).json({ 'error': message });
 }
 
 router.get('/api/postHeaders', (req: express.Request, res: express.Response) => {
@@ -35,15 +37,15 @@ router.get('/api/posts', (req: express.Request, res: express.Response) => {
 });
 
 router.post('/api/posts', (req: express.Request, res: express.Response) => {
-     let db = new PostRepository();
-     let post = <Post>req.body;
-     db.savePost(post, (err) => {
-         if (err) {
-              handleError(res, err.message, 'Failed to save a post');
-         } else {
-             res.status(201).end();
-         }
-     });
+    let db = new PostRepository();
+    let post = <IPost>req.body;
+    db.savePost(post, (err) => {
+        if (err) {
+            handleError(res, err.message, 'Failed to save a post');
+        } else {
+            res.status(201).end();
+        }
+    });
 });
 
 router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
@@ -65,7 +67,7 @@ router.delete('/api/posts/:id', (req: express.Request, res: express.Response) =>
     let db = new PostRepository();
     let postId = req.params.id;
     db.removePost(postId, (err) => {
-         if (err) {
+        if (err) {
             handleError(res, err.message, `Failed to delete post {Id: ${postId}}`);
         } else {
             res.status(204).end();

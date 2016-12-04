@@ -1,18 +1,9 @@
 import * as mongoose from 'mongoose';
-
 import {MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler} from 'mongoose-repos';
 
-export interface Post {
-    postId: number;
-    title: string;
-    category: string;
-    date: Date;
-    text: string;
-    isPublished: boolean;
-}
+import {IPost, IPostHeader} from '../../shared/entities/post';
 
-
-interface PostModel extends Post, mongoose.Document { }
+interface PostModel extends IPost, mongoose.Document { }
 
 export class PostRepository extends MongoRepository {
 
@@ -20,7 +11,7 @@ export class PostRepository extends MongoRepository {
 
     findPost(
         postId: number,
-        callback: (err: Error, Post: Post) => any): void {
+        callback: (err: Error, Post: IPost) => any): void {
 
         this.connect();
         let query = { postId: postId };
@@ -29,21 +20,22 @@ export class PostRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, callback));
     };
 
-    findPostHeaders(callback: (err: Error, headers: { id: any, title: string, date: Date }[]) => any): void {
+    findPostHeaders(callback: (err: Error, headers: IPostHeader[]) => any): void {
         this.connect();
         this.Post.find({})
             .sort({ postId: 'asc' })
             .select({ date: 1, postId: 1, title: 1 })
             .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
-                return {
+                let header: IPostHeader = {
                     date: item.date,
                     postId: item.postId,
                     title: item.title,
                 };
+                return header;
             }));
     };
 
-     findPosts(callback: (err: Error, posts: Post[]) => any): void {
+     findPosts(callback: (err: Error, posts:IPost[]) => any): void {
         this.connect();
         this.Post.find({})
             .sort({ postId: 'asc' })
@@ -52,7 +44,7 @@ export class PostRepository extends MongoRepository {
     };
 
 
-    savePost(post: Post, callback: (err: Error) => any): void {
+    savePost(post: IPost, callback: (err: Error) => any): void {
         let query = { postId: post.postId };
         this.findOneAndSave(this.Post, query, post, (err) => defaultHandler(err, callback));
     }

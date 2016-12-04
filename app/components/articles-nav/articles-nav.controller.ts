@@ -1,4 +1,5 @@
-import {IPostHeader, PostDataService} from '../../core/post/post.service';
+import {IPostHeader} from '../../../shared/entities/post';
+import {PostDataService} from '../../core/post/post.service';
 import {ArticlesNavModel} from './articles-nav.model';
 export class ArticlesNavController {
     static $inject = ['postDataService'];

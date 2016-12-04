@@ -1,6 +1,7 @@
 import * as ng from 'angular';
 
-import { IPost, IPostDataService } from '../../../core/post/post.service';
+import { IPost} from '../../../../shared/entities/post';
+import { IPostDataService } from '../../../core/post/post.service';
 import { PostModel } from '../../../core/post/post.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
 

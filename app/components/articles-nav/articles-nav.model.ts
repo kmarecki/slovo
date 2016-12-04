@@ -1,4 +1,5 @@
-import { IPostHeader } from '../../core/post/post.service';
+import { IPostHeader } from '../../../shared/entities/post';
+
 
 export class ArticlesNavModel {
     links: string[];

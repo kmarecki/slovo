@@ -1,4 +1,4 @@
-import { IPost } from '../../core/post/post.service';
+import { IPost} from '../../../shared/entities/post';
 import { PostModel } from '../../core/post/post.model';
 
 export class ArticlesModel {

@@ -1,5 +1,5 @@
 import * as showdown from 'showdown';
-import {IPost, IPostHeader} from './post.service';
+import { IPost, IPostHeader} from '../../../shared/entities/post';
 
 export class PostHeaderModel {
     postId: number;

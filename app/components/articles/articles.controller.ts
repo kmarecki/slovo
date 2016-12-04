@@ -1,7 +1,8 @@
 import * as angular from 'angular';
 import * as showdown from 'showdown';
 
-import {IPost, PostDataService} from '../../core/post/post.service';
+import {IPost} from '../../../shared/entities/post';
+import {PostDataService} from '../../core/post/post.service';
 import {ArticlesModel} from './articles.model';
 
 export class ArticlesController {

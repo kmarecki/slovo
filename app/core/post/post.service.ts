@@ -1,17 +1,6 @@
 import * as ng from 'angular';
+import {IPost, IPostHeader} from '../../../shared/entities/post';
 
-export interface IPostHeader {
-    postId: number;
-    title: string;
-    date: Date;
-}
-
-export interface IPost {
-    postId: number;
-    title: string;
-    date: Date;
-    text: string;
-}
 
 export interface IPostHeaderResource extends ng.resource.IResourceClass<ng.resource.IResource<IPostHeader>> { }
 

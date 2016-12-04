@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { IPost, IPostHeader} from '../../../core/post/post.service';
+import { IPost, IPostHeader} from '../../../../shared/entities/post';
 import { PostModel, PostHeaderModel } from '../../../core/post/post.model';
 
 export class PostsModel {
