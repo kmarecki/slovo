@@ -9,7 +9,7 @@ export let router = express.Router();
 router.get('/admin/*', (req: express.Request, res: express.Response) => {
     let filePath = path.join(ExpressApp.physicalPath, req.path);
     fs.stat(filePath, (err, stats) => {
-        if (stats.isFile()) {
+        if (stats && stats.isFile()) {
             res.sendFile(filePath);
         } else {
             let indexPath = path.join(ExpressApp.physicalPath, 'admin', 'index.html');
