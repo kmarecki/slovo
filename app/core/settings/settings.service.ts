@@ -1,5 +1,5 @@
 import * as ng from 'angular';
-import {ISettings} from '../../../shared/entities/settings';
+import { ISettings } from '../../../shared/entities/settings';
 
 
 export interface ISettingsResource extends ng.resource.IResourceClass<ng.resource.IResource<ISettings>> { }
@@ -14,7 +14,7 @@ export class SettingsDataService implements ISettingsDataService {
 
     constructor(private $resource: ng.resource.IResourceService) { }
 
-     getSettingsResource(): ISettingsResource {
-        return <ISettingsResource>this.$resource('/api/settings');
+    getSettingsResource(): ISettingsResource {
+        return <ISettingsResource>this.$resource('/api/siteSettings');
     };
 }
