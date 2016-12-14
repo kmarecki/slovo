@@ -6,58 +6,36 @@
     <link rel="stylesheet" href="styles/app.css" />
     <script src="/bower_components/system.js/dist/system.js"></script>
     <script>
-      System.config({
-        baseURL: '/',
-        defaultJSExtensions: true,
-        transpiler: 'none',
-        map: {
-          'lodash' : 'bower_components/lodash/dist/lodash.js',
-          'jquery': 'bower_components/jquery/dist/jquery.js',
-          'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
-          'showdown' : 'bower_components/showdown/dist/showdown.js',
-          'angular': 'bower_components/angular/angular.js',
-          'angular-resource': 'bower_components/angular-resource/angular-resource.js',
-          'angular-sanitize': 'bower_components/angular-sanitize/angular-sanitize.js'
-        }, 
-        meta: {
-          'lodash': {format: 'global', exports: '_'},
-          'showdown': {format: 'global', exports: 'showdown'},
-          'jquery': {format: 'global', exports: 'jquery'},
-          'bootsrap': {format: 'global', deps: ['jquery']},
-          'angular': {format: 'global', exports: 'angular'},
-          'angular-resource' : {format: 'global', deps: ['angular']},
-          'angular-sanitize' : {format: 'global', deps: ['angular']},
-        } 
-      });
-      System.import('app.module.js');
+        System.config({
+            baseURL: '/',
+            defaultJSExtensions: true,
+            transpiler: 'none',
+            map: {
+                'lodash': 'bower_components/lodash/dist/lodash.js',
+                'jquery': 'bower_components/jquery/dist/jquery.js',
+                'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
+                'showdown': 'bower_components/showdown/dist/showdown.js',
+                'angular': 'bower_components/angular/angular.js',
+                'angular-resource': 'bower_components/angular-resource/angular-resource.js',
+                'angular-sanitize': 'bower_components/angular-sanitize/angular-sanitize.js'
+            },
+            meta: {
+                'lodash': { format: 'global', exports: '_' },
+                'showdown': { format: 'global', exports: 'showdown' },
+                'jquery': { format: 'global', exports: 'jquery' },
+                'bootsrap': { format: 'global', deps: ['jquery'] },
+                'angular': { format: 'global', exports: 'angular' },
+                'angular-resource': { format: 'global', deps: ['angular'] },
+                'angular-sanitize': { format: 'global', deps: ['angular'] },
+            }
+        });
+        System.import('app.module.js');
     </script>
 </head>
 
 <body>
-    <div class="container" ng-app="blogApp" ng-controller="AppController">
-        <header class="jumbotron text-center">
-            <h1>The Blog</h1>
-            <p>My personal rumblings</p>
-        </header>
-        <nav>
-            <ul class="list-inline">
-                <li><a href="/">Blog</a></li>
-                <li><a href="/admin">Admin Panel</a></li>
-            </ul>
-        </nav>
-        <div class="row vertical-align">
-            <div class="col-sm-8">
-                <articles></articles>
-            </div>
-            <div class="col-sm-4">
-                <articles-nav></articles-nav>
-            </div>
-        </div>
-        <footer class="text-center">
-            <div>
-                <p>@ 2016 Krzysztof Marecki</p>
-            </div>
-        </footer>
+    <div class="container" ng-app="blogApp">
+        <app></app>
     </div>
 </body>
 

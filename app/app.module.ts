@@ -12,4 +12,7 @@ let app = ng.module('blogApp', [
     'core',
     'components',
 ]);
-app.controller('AppController', AppController);
+app.component('app', {
+    controller: AppController,
+    templateUrl: './app.template.html',
+});
