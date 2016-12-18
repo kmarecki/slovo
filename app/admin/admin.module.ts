@@ -7,6 +7,7 @@ import 'angular-ui-bootsrap';
 
 import '../core/core.module';
 import './components/components.module';
+import './directives/directives.module';
 
 interface IAdminScope extends ng.IScope {
     name: string;
@@ -24,6 +25,7 @@ let app = ng.module('adminApp', [
     'ui.bootstrap',
     'core',
     'components',
+    'directives',
 ]);
 app.config(['$routeProvider', '$locationProvider', function (
     $routeProvider: ng.route.IRouteProvider,
