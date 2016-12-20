@@ -1,13 +1,17 @@
 import { IPostHeader } from '../../../shared/entities/post';
+import { LinkModel} from '../../core/link/link.model';
 
 
 export class ArticlesNavModel {
-    links: string[];
+    links: LinkModel[];
 
     refresh(headers: IPostHeader[]): void {
         this.links = [];
         for (let header of headers) {
-            this.links.push(`${header.date}: ${header.title}`);
+            let text = `${header.date}: ${header.title}`;
+            let href = `#${header.title}`;
+            let link = new LinkModel(text, href);
+            this.links.push(link);
         }
     }
 }
