@@ -11,5 +11,5 @@ body, html{
 
 .vertical-align > [class^="col-"],
 .vertical-align > [class*=" col-"] {
-  
+  align-self: flex-start;
 }
