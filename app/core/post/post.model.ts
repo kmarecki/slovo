@@ -17,12 +17,14 @@ export class PostModel {
     postId; number;
     title: string;
     text: string;
+    textToDisplay: string;
 
     refreshFrom(post: IPost): void {
         this.title = post.title;
+        this.text = post.text;
 
         let converter = new showdown.Converter();
-        this.text = converter.makeHtml(post.text);
+        this.textToDisplay = converter.makeHtml(this.text);
     }
 
     saveTo(): IPost {
