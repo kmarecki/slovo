@@ -7,47 +7,47 @@
   <link rel="stylesheet" href="/styles/admin.css" />
   <script src="/bower_components/system.js/dist/system.js"></script>
   <script>
-      System.config({
-        baseURL: '/',
-        defaultJSExtensions: true,
-        transpiler: 'none',
-        map: {
-          'lodash' : 'bower_components/lodash/dist/lodash.js',
-          'jquery': 'bower_components/jquery/dist/jquery.js',
-          'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
-          'showdown' : 'bower_components/showdown/dist/showdown.js',
-          'angular': 'bower_components/angular/angular.js',
-          'angular-resource': 'bower_components/angular-resource/angular-resource.js',
-          'angular-route': 'bower_components/angular-route/angular-route.js',
-          'angular-sanitize': 'bower_components/angular-sanitize/angular-sanitize.js',
-          'angular-ui-bootsrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-        }, 
-        meta: {
-          'jquery': {format: 'global', exports: 'jquery'},
-          'bootsrap': {format: 'global', deps: ['jquery'] },
-          'showdown': {format: 'global', exports: 'showdown'},         
-          'angular': {format: 'global', exports: 'angular'},
-          'angular-resource' : {format: 'global', deps: ['angular']},
-          'angular-route' : {format: 'global', deps: ['angular']},
-          'angular-sanitize' : {format: 'global', deps: ['angular']},
-          'angular-ui-bootstrrap' : {format: 'global', deps: ['angular']},
-        } 
-      });
-      SystemJS.import('admin/admin.module.js');
-    </script>
-  <base href="/admin/" />
+    System.config({
+      baseURL: '/',
+      defaultJSExtensions: true,
+      transpiler: 'none',
+      map: {
+        'lodash': 'bower_components/lodash/dist/lodash.js',
+        'jquery': 'bower_components/jquery/dist/jquery.js',
+        'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
+        'showdown': 'bower_components/showdown/dist/showdown.js',
+        'angular': 'bower_components/angular/angular.js',
+        'angular-resource': 'bower_components/angular-resource/angular-resource.js',
+        'angular-route': 'bower_components/angular-route/angular-route.js',
+        'angular-sanitize': 'bower_components/angular-sanitize/angular-sanitize.js',
+        'angular-ui-bootsrap': 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      },
+      meta: {
+        'jquery': { format: 'global', exports: 'jquery' },
+        'bootsrap': { format: 'global', deps: ['jquery'] },
+        'showdown': { format: 'global', exports: 'showdown' },
+        'angular': { format: 'global', exports: 'angular' },
+        'angular-resource': { format: 'global', deps: ['angular'] },
+        'angular-route': { format: 'global', deps: ['angular'] },
+        'angular-sanitize': { format: 'global', deps: ['angular'] },
+        'angular-ui-bootstrrap': { format: 'global', deps: ['angular'] },
+      }
+    });
+    SystemJS.import('admin/admin.module.js');
+  </script>
+<base href="/admin/" />
 </head>
 
 <body>
   <div class="container-fluid" ng-app="adminApp" ng-controller="AdminController">
-    <header class="text-center">
-      <h1>Admin Panel</h1>
+    <header>
+      <h1 class="text-center">Admin Panel</h1>
+      <nav>
+        <ul class="list-inline">
+          <li><a href="/">Blog</a></li>
+        </ul>
+      </nav>
     </header>
-    <nav>
-      <ul class="list-inline">
-        <li><a href="/">Blog</a></li>
-      </ul>
-    </nav>
     <div class="row vertical-align">
       <div class="col-xs-2 side">
         <nav>
