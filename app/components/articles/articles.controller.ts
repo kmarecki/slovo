@@ -1,9 +1,9 @@
 import * as angular from 'angular';
 import * as showdown from 'showdown';
 
-import {IPost} from '../../../shared/entities/post';
-import {PostDataService} from '../../core/post/post.service';
-import {ArticlesModel} from './articles.model';
+import { IPost } from '../../../shared/entities/post';
+import { PostDataService } from '../../core/post/post.service';
+import { ArticlesModel } from './articles.model';
 
 export class ArticlesController {
     static $inject = ['postDataService'];
@@ -16,8 +16,11 @@ export class ArticlesController {
 
     private refreshModel() {
         let postResource = this.postDataService.getPostResource();
-            postResource.query((posts: IPost[]) => {
-            this.model.refresh(posts);
-        });
+        //TODO Refactor query call to method extending IPostResource
+        postResource.query(
+            { published: true },
+            (posts: IPost[]) => {
+                this.model.refresh(posts);
+            });
     }
 }

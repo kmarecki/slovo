@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 import * as _ from 'lodash';
 
-import { IPost} from '../../../../shared/entities/post';
+import { IPost } from '../../../../shared/entities/post';
 import { IPostHeaderResource, IPostDataService } from '../../../core/post/post.service';
 import { PostsModel } from './posts.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
@@ -22,6 +22,7 @@ export class PostsController {
     private refreshModel() {
         let postHeaderResource = this.postDataService.getPostHeaderResource();
         postHeaderResource.query(
+            { published: false },
             (headers) => {
                 this.model.refreshHeaders(headers);
                 let firstHeader = _.first(this.model.headers);

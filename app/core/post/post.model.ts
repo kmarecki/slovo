@@ -18,10 +18,12 @@ export class PostModel {
     title: string;
     text: string;
     textToDisplay: string;
+    published: boolean;
 
     refreshFrom(post: IPost): void {
         this.title = post.title;
         this.text = post.text;
+        this.published = post.published;
 
         let converter = new showdown.Converter();
         this.textToDisplay = converter.makeHtml(this.text);
@@ -33,6 +35,7 @@ export class PostModel {
             date: new Date(Date.now()),
             text: this.text,
             title: this.title,
+            published: this.published
         };
         return post;
     }

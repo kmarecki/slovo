@@ -10,12 +10,11 @@
                         <button type="button" class="btn-xs" ng-click="$ctrl.editPost(header.postId)">Edit</button>
                         <button type="button" class="btn-xs" ng-click="$ctrl.removePost(header.postId)">Del</button>
                     </div>
-                 </li>
+                </li>
             </ul>
         </nav>
-        </div>
-        <div class="col-xs-8">
-            <div ng-bind-html="$ctrl.model.selectedPost.textToDisplay" />
-        </div>
+    </div>
+    <div class="col-xs-8">
+        <div ng-bind-html="$ctrl.model.selectedPost.textToDisplay" />
     </div>
 </div>

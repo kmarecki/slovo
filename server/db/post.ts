@@ -20,9 +20,12 @@ export class PostRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, callback));
     }
 
-    findPostHeaders(callback: (err: Error, headers: IPostHeader[]) => any): void {
+    findPostHeaders(
+        onlyPublished: boolean,
+        callback: (err: Error, headers: IPostHeader[]) => any): void {
         this.connect();
-        this.Post.find({})
+        let query = onlyPublished ? {published: true} : {};
+        this.Post.find(query)
             .sort({ postId: 'asc' })
             .select({ date: 1, postId: 1, title: 1 })
             .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
@@ -35,9 +38,12 @@ export class PostRepository extends MongoRepository {
             }));
     }
 
-    findPosts(callback: (err: Error, posts: IPost[]) => any): void {
+    findPosts(
+        onlyPublished: boolean,
+        callback: (err: Error, posts: IPost[]) => any): void {
         this.connect();
-        this.Post.find({})
+        let query = onlyPublished ? {published: true} : {};
+        this.Post.find(query)
             .sort({ postId: 'asc' })
             .select({})
             .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
@@ -71,6 +77,7 @@ export class PostRepository extends MongoRepository {
             date: Date,
             title: String,
             text: String,
+            published: Boolean
         });
         let options: SchemaOptions = {
             autoIncrement: true,

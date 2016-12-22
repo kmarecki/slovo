@@ -9,5 +9,5 @@ export interface IPost {
     title: string;
     date: Date;
     text: string;
-    
+    published: boolean;
 }

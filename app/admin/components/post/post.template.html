@@ -1,9 +1,11 @@
 <div class="row">
-    <div class="col-xs-11">
+    <div class="col-xs-10">
         <input class="input-lg form-control" type="text" ng-model="$ctrl.model.title" />
     </div>
-    <div class="col-xs-1">
-        <a class="btn btn-info" ng-click="$ctrl.save()">Save</a></li>
+    <div class="col-xs-2 vertical-align">
+        <a class="btn btn-info" ng-click="$ctrl.save()">Save</a>
+        <a class="btn btn-info ng-hide" ng-hide="$ctrl.model.published" ng-click="$ctrl.publish()">Publish</a>
+        <a class="btn btn-info ng-hide" ng-hide="!$ctrl.model.published" ng-click="$ctrl.hide()">Hide</a>
     </div>
 </div>
 <div class="row">

@@ -49,4 +49,14 @@ export class PostController {
                 MessageBoxController.showError(this.$uibModal, err);
             });
     }
+
+    publish(): void {
+        this.model.published = true;
+        this.save();
+    }
+
+    hide(): void {
+        this.model.published = false;
+        this.save();
+    }
 };

@@ -8,8 +8,9 @@ import { PostRepository } from '../../db/post';
 export let router = express.Router();
 
 router.get('/api/postHeaders', (req: express.Request, res: express.Response) => {
+    let onlyPublished = req.param('published') == 'true';
     let db = new PostRepository();
-    db.findPostHeaders((err, headers) => {
+    db.findPostHeaders(onlyPublished, (err, headers) => {
         if (err) {
             ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
         } else {
@@ -19,8 +20,9 @@ router.get('/api/postHeaders', (req: express.Request, res: express.Response) => 
 });
 
 router.get('/api/posts', (req: express.Request, res: express.Response) => {
+    let onlyPublished = req.param('published') == 'true';
     let db = new PostRepository();
-    db.findPosts((err, headers) => {
+    db.findPosts(onlyPublished, (err, headers) => {
         if (err) {
             ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
         } else {
