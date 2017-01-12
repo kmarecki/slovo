@@ -14,15 +14,14 @@ export class PostsController {
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
         private $location: ng.ILocationService,
-        private postDataService: IPostDataService
+        private postDataService: IPostDataService,
     ) {
         this.refreshModel();
     }
 
     private refreshModel() {
-        let postHeaderResource = this.postDataService.getPostHeaderResource();
-        postHeaderResource.query(
-            { published: false },
+        this.postDataService.getPostHeaders(
+            false,
             (headers) => {
                 this.model.refreshHeaders(headers);
                 let firstHeader = _.first(this.model.headers);
@@ -34,10 +33,9 @@ export class PostsController {
     }
 
     selectPost(postId: number): void {
-        let postResource = this.postDataService.getPostResource();
-        postResource.get(
-            { id: postId },
-            (result: IPost) => {
+        this.postDataService.getPost(
+            postId,
+            (result) => {
                 this.model.selectPost(result);
             },
             (err) => MessageBoxController.showError(this.$uibModal, err));
@@ -48,11 +46,34 @@ export class PostsController {
     }
 
     removePost(postId: number): void {
-        let postResource = this.postDataService.getPostResource();
-        postResource.delete(
-            { id: postId },
+        this.postDataService.deletePost(
+            postId, 
             (result) => {
                 this.refreshModel();
             });
     }
+
+    private setPublished(postId, published: boolean): void {
+         this.postDataService.getPost(
+            postId, 
+            (post) => {
+                post.published = published;
+                this.postDataService.savePost(
+                    post,
+                    () => {
+                        this.refreshModel();
+                    },
+                    (err) => MessageBoxController.showError(this.$uibModal, err));
+            },
+            (err) => MessageBoxController.showError(this.$uibModal, err));
+    }
+
+    publish(postId: number): void {
+        this.setPublished(postId, true);
+    }
+
+    hide(postId: number): void {
+       this.setPublished(postId, false);
+    }
+
 }

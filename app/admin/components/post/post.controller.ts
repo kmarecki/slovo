@@ -1,6 +1,6 @@
 import * as ng from 'angular';
 
-import { IPost} from '../../../../shared/entities/post';
+import { IPost } from '../../../../shared/entities/post';
 import { IPostDataService } from '../../../core/post/post.service';
 import { PostModel } from '../../../core/post/post.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
@@ -25,23 +25,20 @@ export class PostController {
     }
 
     private refreshModel() {
-        if (this.model.postId !== undefined) {
-            let postResource = this.postDataService.getPostResource();
-            postResource.get(
-                { id: this.model.postId },
-                (result: IPost) => {
-                    this.model.refreshFrom(result);
-                },
-                (err) => {
-                    MessageBoxController.showError(this.$uibModal, err);
-                });
-        }
+        this.postDataService.getPost(
+            this.model.postId,
+            (post) => {
+                this.model.refreshFrom(post);
+            },
+            (err) => {
+                MessageBoxController.showError(this.$uibModal, err);
+            });
     }
 
     save(): void {
-        let postResource = this.postDataService.getPostResource();
         let post = this.model.saveTo();
-        postResource.save({}, post,
+        this.postDataService.savePost(
+            post,
             () => {
                 this.$location.path('/posts');
             },

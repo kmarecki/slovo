@@ -5,11 +5,13 @@ export class PostHeaderModel {
     postId: number;
     date: string;
     title: string;
+    published: boolean;
 
     refreshFrom(header: IPostHeader): void {
         this.postId = header.postId;
         this.date = header.date.toString();
         this.title = header.title;
+        this.published = header.published;
     }
 }
 

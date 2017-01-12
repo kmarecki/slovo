@@ -27,12 +27,13 @@ export class PostRepository extends MongoRepository {
         let query = onlyPublished ? {published: true} : {};
         this.Post.find(query)
             .sort({ postId: 'asc' })
-            .select({ date: 1, postId: 1, title: 1 })
+            .select({ date: 1, postId: 1, title: 1, published: 1 })
             .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
                 let header: IPostHeader = {
                     date: item.date,
                     postId: item.postId,
                     title: item.title,
+                    published: item.published
                 };
                 return header;
             }));
