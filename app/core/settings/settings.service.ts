@@ -6,7 +6,9 @@ export interface ISettingsResource extends ng.resource.IResourceClass<ng.resourc
 
 
 export interface ISettingsDataService {
-    getSettingsResource(): ISettingsResource;
+    getSettings(result: (settings: ISettings) => any, err?: (err) => any);
+
+    saveSettings(settings: ISettings, success: () => any, err?: (err) => any);
 }
 
 export class SettingsDataService implements ISettingsDataService {
@@ -14,7 +16,29 @@ export class SettingsDataService implements ISettingsDataService {
 
     constructor(private $resource: ng.resource.IResourceService) { }
 
-    getSettingsResource(): ISettingsResource {
+    private getSettingsResource(): ISettingsResource {
         return <ISettingsResource>this.$resource('/api/siteSettings');
     };
+
+    getSettings(result: (settings: ISettings) => any, err?: (err) => any) {
+        let resource = this.getSettingsResource();
+        resource.get(
+            (settings) => {
+                result(settings);
+            },
+            (err) => {
+                err(err);
+            });
+    }
+
+    saveSettings(settings: ISettings, success: () => any, err?: (err) => any) {
+        let resource = this.getSettingsResource();
+        resource.save({}, settings,
+            () => {
+                success();
+            },
+            (err) => {
+                err(err);
+            });
+    }
 }

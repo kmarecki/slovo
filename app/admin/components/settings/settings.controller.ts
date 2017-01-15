@@ -17,8 +17,7 @@ export class SettingsController {
     }
 
     private refreshModel() {
-        let resource = this.settingsDataService.getSettingsResource();
-        resource.get(
+        this.settingsDataService.getSettings(
             (settings) => {
                 this.settings = settings;
             },
@@ -26,8 +25,7 @@ export class SettingsController {
     }
 
     save(): void {
-        let resource = this.settingsDataService.getSettingsResource();
-        resource.save({}, this.settings,
+        this.settingsDataService.saveSettings(this.settings,
             () => {
                 this.$location.path('/posts');
             },

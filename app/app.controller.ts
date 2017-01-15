@@ -14,8 +14,7 @@ export class AppController {
     }
 
     private refreshModel() {
-        let resource = this.settingsDataService.getSettingsResource();
-        resource.get(
+        this.settingsDataService.getSettings(
             (settings) => {
                 this.settings = settings;
             });
