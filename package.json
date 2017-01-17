@@ -14,12 +14,17 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "config": "^1.21.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-app": "0.0.7",
+    "express-session": "^1.14.2",
     "jade": "^1.11.0",
     "lodash": "^4.14.1",
     "mongoose": "^4.5.10",
     "mongoose-repos": "0.0.6",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "serve-static": "^1.11.1",
     "showdown": "^1.5.1"
   },
