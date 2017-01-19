@@ -4,6 +4,7 @@ import 'angular-resource';
 import 'angular-route';
 import 'angular-sanitize';
 import 'angular-ui-bootsrap';
+import 'angular-ui-router';
 
 import '../core/core.module';
 import './components/components.module';
@@ -23,33 +24,50 @@ let app = ng.module('adminApp', [
     'ngRoute',
     'ngSanitize',
     'ui.bootstrap',
+    'ui.router',
     'core',
     'components',
     'directives',
 ]);
-app.config(['$routeProvider', '$locationProvider', function (
+app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
     $routeProvider: ng.route.IRouteProvider,
-    $locationProvider: ng.ILocationProvider) {
+    $locationProvider: ng.ILocationProvider,
+    $stateProvider: ng.ui.router.IStateProvider) {
 
-    $routeProvider.
-        when('/comments', {
+    $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'login.html'
+        })
+        .state('panel', {
+            url: '/',
+            templateUrl: 'panel.html'
+        })
+        .state('panel.comments', {
+            url: 'comments',
             template: '<comments></comments>',
-        }).
-        when('/posts', {
+        })
+        .state('panel.posts', {
+            url: 'posts',
             template: '<posts></posts>',
-        }).
-        when('/posts/create', {
+        })
+        .state('panel.post-create', {
+            url: 'posts/create',
             template: '<post></post>',
-        }).
-        when('/posts/:id', {
+        })
+        .state('panel.post-edit', {
+            url: 'posts/:id',
             template: '<post></post>',
-        }).
-        when('/settings', {
+        })
+        .state('panel.settings', {
+            url: 'settings',
             template: '<settings></settings>',
-        }).
-        when('/users', {
+        })
+        .state('panel.users', {
+            url: 'users',
             template: '<users></users>',
         });
+
     $locationProvider.html5Mode(true);
 }]);
 app.controller('AdminController', AdminController);

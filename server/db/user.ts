@@ -29,7 +29,7 @@ export class UserRepository extends MongoRepository {
             }));
     }
 
-    findUserById(
+    findById(
         userId: number,
         callback: (err: Error, user: IUser) => any): void {
 
@@ -40,7 +40,7 @@ export class UserRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, callback));
     }
 
-    findUserByName(
+    findByName(
         userName: string,
         callback: (err: Error, user: IUser) => any): void {
 
@@ -50,6 +50,12 @@ export class UserRepository extends MongoRepository {
             query,
             (err, result) => defaultResultHandler(err, result, callback));
     }
+
+    save(user: IUser, callback: (err: Error) => any): void {
+        let query = { userId: user.userId };
+        this.findOneAndSave(this.User, query, user, (err) => defaultHandler(err, callback));
+    }
+
 
     protected addSchemas(): void {
         let schema = new mongoose.Schema({

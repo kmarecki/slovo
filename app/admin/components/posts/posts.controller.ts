@@ -7,13 +7,13 @@ import { PostsModel } from './posts.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
 
 export class PostsController {
-    static $inject = ['$uibModal', '$location', 'postDataService'];
+    static $inject = ['$uibModal', '$state', 'postDataService'];
 
     model = new PostsModel();
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $location: ng.ILocationService,
+        private $state: ng.ui.router.IStateService,
         private postDataService: IPostDataService,
     ) {
         this.refreshModel();
@@ -42,7 +42,7 @@ export class PostsController {
     }
 
     editPost(postId: number): void {
-        this.$location.path(`/posts/${postId}`).replace();
+        this.$state.go('panel.post-edit', { id: postId});
     }
 
     removePost(postId: number): void {

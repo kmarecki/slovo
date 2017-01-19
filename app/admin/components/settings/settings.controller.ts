@@ -4,13 +4,13 @@ import { ISettingsDataService } from '../../../core/settings/settings.service';
 import { MessageBoxController } from '../message-box/message-box.controller';
 
 export class SettingsController {
-    static $inject = ['$uibModal', '$location', 'settingsDataService'];
+    static $inject = ['$uibModal', '$state', 'settingsDataService'];
 
     settings: ISettings;
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $location: ng.ILocationService,
+        private $state: ng.ui.router.IStateService,
         private settingsDataService: ISettingsDataService
     ) {
         this.refreshModel();
@@ -27,7 +27,7 @@ export class SettingsController {
     save(): void {
         this.settingsDataService.saveSettings(this.settings,
             () => {
-                this.$location.path('/posts');
+                this.$state.go('panel.posts');
             },
             (err) => {
                 MessageBoxController.showError(this.$uibModal, err);

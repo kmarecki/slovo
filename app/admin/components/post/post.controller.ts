@@ -10,14 +10,14 @@ interface IPostRouteParams extends ng.route.IRouteParamsService {
 }
 
 export class PostController {
-    static $inject = ['$routeParams', '$uibModal', '$location', 'postDataService'];
+    static $inject = ['$routeParams', '$uibModal', '$state', 'postDataService'];
 
     model = new PostModel();
 
     constructor(
         private $routeParams: IPostRouteParams,
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $location: ng.ILocationService,
+        private $state: ng.ui.router.IStateService,
         private postDataService: IPostDataService
     ) {
         this.model.postId = $routeParams && $routeParams.id ? Number($routeParams.id) : undefined;
@@ -40,7 +40,7 @@ export class PostController {
         this.postDataService.savePost(
             post,
             () => {
-                this.$location.path('/posts');
+                this.$state.go('panel.posts');
             },
             (err) => {
                 MessageBoxController.showError(this.$uibModal, err);
