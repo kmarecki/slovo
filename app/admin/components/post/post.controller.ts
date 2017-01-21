@@ -5,22 +5,19 @@ import { IPostDataService } from '../../../core/post/post.service';
 import { PostModel } from '../../../core/post/post.model';
 import { MessageBoxController } from '../message-box/message-box.controller';
 
-interface IPostRouteParams extends ng.route.IRouteParamsService {
-    id: string;
-}
-
 export class PostController {
-    static $inject = ['$routeParams', '$uibModal', '$state', 'postDataService'];
+    static $inject = ['$uibModal', '$state', 'postDataService'];
 
     model = new PostModel();
 
     constructor(
-        private $routeParams: IPostRouteParams,
         private $uibModal: ng.ui.bootstrap.IModalService,
         private $state: ng.ui.router.IStateService,
         private postDataService: IPostDataService
     ) {
-        this.model.postId = $routeParams && $routeParams.id ? Number($routeParams.id) : undefined;
+        this.model.postId = $state.params && (<any>$state.params).id
+            ? Number((<any>$state.params).id) 
+            : undefined;
         this.refreshModel();
     }
 
