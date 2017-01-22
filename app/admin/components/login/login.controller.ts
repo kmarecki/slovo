@@ -13,7 +13,7 @@ export class LoginController {
 
      }     
 
-     login(): void {
-         
+     login() {
+
      }
 }

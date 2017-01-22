@@ -12,6 +12,8 @@ import {MongoConfiguration, MongoDb} from 'mongoose-repos';
 
 import * as adminRoutes from './routes/admin';
 
+import * as apiRoutes from './routes/api/api';
+//TODO Combine seperate api routers
 import * as postRoutes from './routes/api/post';
 import * as settingsRoutes from './routes/api/settings';
 
@@ -35,6 +37,7 @@ ExpressApp.physicalPath = publicPath;
 app.set('port', process.env.PORT || 3000);
 
 app.use(adminRoutes.router);
+app.use(apiRoutes.router);
 app.use(postRoutes.router);
 app.use(settingsRoutes.router);
 app.use('/', express.static(ExpressApp.physicalPath));

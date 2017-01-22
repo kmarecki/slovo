@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler } from 'mongoose-repos';
 
-import { IUser } from '../../shared/entities/user';
+import { IUser, UserLevel } from '../../shared/entities/user';
 
 interface UserModel extends IUser, mongoose.Document { }
 
@@ -21,8 +21,8 @@ export class UserRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, (err, user) => {
                 if (user === null && err === null) {
                     this.User.create(
-                        { authId: authId, authStrategy: authStrategy},
-                    callback);
+                        { authId: authId, authStrategy: authStrategy },
+                        callback);
                 } else {
                     callback(err, user);
                 }
@@ -51,6 +51,24 @@ export class UserRepository extends MongoRepository {
             (err, result) => defaultResultHandler(err, result, callback));
     }
 
+    create(
+        username: string,
+        password: string,
+        callback: (err: Error) => any): void {
+        
+         let user: IUser = {
+            userId: 0,
+            authId: '',
+            authStrategy: 'local',
+            userName: username,
+            password: password,
+            email: '',
+            userLevel: UserLevel.User
+        };
+
+        this.save(user, callback);
+    }
+
     save(user: IUser, callback: (err: Error) => any): void {
         let query = { userId: user.userId };
         this.findOneAndSave(this.User, query, user, (err) => defaultHandler(err, callback));
@@ -65,13 +83,13 @@ export class UserRepository extends MongoRepository {
                 index: true
             },
             authId: String,
-            authStrategy: String, 
+            authStrategy: String,
             userName: String,
             password: String,
             email: String,
             userLevel: Number
         });
-         let options: SchemaOptions = {
+        let options: SchemaOptions = {
             autoIncrement: true,
             autoIncrementOptions: {
                 field: 'userId',

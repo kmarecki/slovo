@@ -1,10 +1,11 @@
 import * as passport from 'passport';
 import { Strategy } from 'passport-local';
+import * as jwt from 'passport-jwt';
 
 import { IUser } from '../shared/entities/user';
 import { UserRepository } from './db/user';
 
-var strategy = new Strategy(
+let strategy = new Strategy(
     (username, password, done) => {
         let db = new UserRepository();
         db.findByName(username, (err, user) => {
@@ -18,9 +19,34 @@ var strategy = new Strategy(
     });
 passport.use(strategy);
 
+let jwtOptions: jwt.StrategyOptions = {
+    secretOrKey: 'qwerty',
+    jwtFromRequest: jwt.ExtractJwt.fromAuthHeader()
+};
+let jwtStrategy = new jwt.Strategy(
+    jwtOptions,
+    (payload, done) => {
+        let db = new UserRepository();
+        db.findById(payload.userId, (err, user) => {
+            if (err) {
+                done(err, false);
+            } else {
+                if (user) {
+                    done(null, user);
+                } else {
+                    done(null, false);
+                }
+            }
+        });
+        done(null, { userName: 'test1' })
+    }
+);
+
+passport.use(jwtStrategy);
+
 passport.serializeUser<IUser, number>((user, done) => {
     done(null, user.userId);
-}); 
+});
 
 passport.deserializeUser<IUser, number>((id, done) => {
     let db = new UserRepository();
