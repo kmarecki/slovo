@@ -37,7 +37,7 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: 'login.html'
+            template: '<login></login>'
         })
         .state('panel', {
             url: '/',
