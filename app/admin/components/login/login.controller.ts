@@ -14,6 +14,6 @@ export class LoginController {
      }     
 
      login() {
-
+        this.$state.go('panel');
      }
 }

@@ -40,26 +40,8 @@
 <base href="/admin/" />
 </head>
 
-<body>
-  <div class="container-fluid" ng-app="adminApp">
-    <header>
-      <h1 class="text-center">Admin Panel</h1>
-      <nav>
-        <ul class="list-inline">
-          <li><a href="/">Blog</a></li>
-          <li><a ui-sref="login">Login</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div class="row vertical-align" ui-view>
-    </div>
-  </div>
-  <footer class="text-center">
-    <div>
-      <p>@ 2016 Krzysztof Marecki</p>
-    </div>
-  </footer>
-  </div>
+<body ng-app="adminApp">
+    <app></app>
 </body>
 
 </html>

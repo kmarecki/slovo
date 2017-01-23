@@ -41,7 +41,7 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
         })
         .state('panel', {
             url: '/',
-            templateUrl: 'panel.html'
+            template: '<panel></panel>'
         })
         .state('panel.comments', {
             url: 'comments',
