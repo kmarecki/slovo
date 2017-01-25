@@ -7,8 +7,13 @@ import 'angular-ui-bootsrap';
 import 'angular-ui-router';
 
 import '../core/core.module';
-import './components/components.module';
 import './directives/directives.module';
+import './services/services.module';
+
+import './components/components.module';
+
+
+import { Run } from './run';
 
 interface IAdminScope extends ng.IScope {
     name: string;
@@ -26,13 +31,14 @@ let app = ng.module('adminApp', [
     'ui.bootstrap',
     'ui.router',
     'core',
-    'components',
     'directives',
+    'services',
+    'components',
 ]);
 app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
     $routeProvider: ng.route.IRouteProvider,
     $locationProvider: ng.ILocationProvider,
-    $stateProvider: ng.ui.router.IStateProvider) {
+    $stateProvider: ng.ui.IStateProvider) {
 
     $stateProvider
         .state('login', {
@@ -71,3 +77,7 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
     $locationProvider.html5Mode(true);
 }]);
 app.controller('AdminController', AdminController);
+
+//app.run(['$rootScope', '$state', '$stateParams', Run]);
+
+

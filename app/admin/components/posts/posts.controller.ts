@@ -13,7 +13,7 @@ export class PostsController {
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $state: ng.ui.router.IStateService,
+        private $state: ng.ui.IStateService,
         private postDataService: IPostDataService,
     ) {
         this.refreshModel();

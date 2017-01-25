@@ -1,19 +1,29 @@
 import * as ng from 'angular';
 
+import { IAuthService } from '../../services/auth.service';
+import { MessageBoxController, MessageBoxType } from '../message-box/message-box.controller';
+
 export class LoginController {
-     static $inject = ['$uibModal', '$state']
+    static $inject = ['$uibModal', '$state', 'services.auth']
 
-     user: string;
-     password: string;
+    username: string;
+    password: string;
 
-     constructor(
+    constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $state: ng.ui.router.IStateService,
-     ) {
+        private $state: ng.ui.IStateService,
+        private authService: IAuthService
+    ) {
 
-     }     
+    }
 
-     login() {
-        this.$state.go('panel');
-     }
+    login() {
+        this.authService
+            .login(this.username, this.password)
+            .then(() => {
+                this.$state.go('panel');
+            },
+            (msg) => MessageBoxController.show(
+                this.$uibModal, MessageBoxType.Error, '', msg));
+    }
 }

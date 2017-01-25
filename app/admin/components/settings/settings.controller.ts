@@ -10,7 +10,7 @@ export class SettingsController {
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $state: ng.ui.router.IStateService,
+        private $state: ng.ui.IStateService,
         private settingsDataService: ISettingsDataService
     ) {
         this.refreshModel();

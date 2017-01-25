@@ -6,44 +6,46 @@ import * as jwt from 'jsonwebtoken';
 
 import { ExpressApp } from 'express-app';
 
+import { IAuthenticateRequest, IAuthenticateResponse }  from '../../../shared/contracts/authenticate';
 import { IUser, UserLevel } from '../../../shared/entities/user';
 import { UserRepository } from '../../db/user';
 
 export let router = express.Router();
 
 router.post('/api/authenticate', (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    let request = <IAuthenticateRequest>req.body;
     let db = new UserRepository();
-    db.findByName(username, (err, user) => {
+    db.findByName(request.username, (err, user) => {
         if (err) {
             throw err;
         }
 
-        if (user && user.password === password) {
+        let response: IAuthenticateResponse;
+        if (user && user.password === request.password) {
             var token = jwt.sign(user, 'qwerty');
-            res.json({ success: true, token: `JWT ${token}` });
-
+            response = { success: true, token: `JWT ${token}` };
         } else {
-            res.json({ success: false, msg: 'Authentication failed.' });
+            response = { success: false, msg: 'Authentication failed.' };
         }
+        res.json(response);
     });
 });
 
 router.post('/api/signup', (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    let request = <IAuthenticateRequest>req.body;
+    let response: IAuthenticateResponse;
 
-    if (!username || !password) {
-        res.json({ success: false, msg: 'Username and password failed.' });
+    if (!request.username || !request.password) {
+        response = { success: false, msg: 'Username and password failed.' };
     } else {
         let db = new UserRepository();
-        db.create(username, password, (err) => {
+        db.create(request.username, request.password, (err) => {
             if (err) {
-                res.json({success: false, msg: 'Failed to signup a user.'})
+                response = {success: false, msg: 'Failed to signup a user.'}
             } else {
-                res.json({success: true, msg: 'Successful created new user.'})
+                response = {success: true, msg: 'Successful created new user.'}
             }
         });
     }
+    res.json(response);
 });

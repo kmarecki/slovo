@@ -1,7 +1,5 @@
 import * as ng from 'angular';
+import { AutosizeDirective } from './autosize.directive';
 
-import './autosize/autosize.module';
-
-ng.module('directives', [
-    'directives.autosize'
-]);
+export let module = ng.module('directives', []);
+module.directive('directives.autosize', AutosizeDirective.factory());

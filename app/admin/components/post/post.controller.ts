@@ -12,7 +12,7 @@ export class PostController {
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $state: ng.ui.router.IStateService,
+        private $state: ng.ui.IStateService,
         private postDataService: IPostDataService
     ) {
         this.model.postId = $state.params && (<any>$state.params).id
