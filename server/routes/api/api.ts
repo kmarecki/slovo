@@ -6,7 +6,7 @@ import * as jwt from 'jsonwebtoken';
 
 import { ExpressApp } from 'express-app';
 
-import { IAuthenticateRequest, IAuthenticateResponse }  from '../../../shared/contracts/authenticate';
+import { IAuthenticateRequest, IAuthenticateResponse } from '../../../shared/contracts/authenticate';
 import { IUser, UserLevel } from '../../../shared/entities/user';
 import { UserRepository } from '../../db/user';
 
@@ -19,15 +19,21 @@ router.post('/api/authenticate', (req, res) => {
         if (err) {
             throw err;
         }
-
         let response: IAuthenticateResponse;
-        if (user && user.password === request.password) {
-            var token = jwt.sign(user, 'qwerty');
-            response = { success: true, token: `JWT ${token}` };
-        } else {
-            response = { success: false, msg: 'Authentication failed.' };
-        }
-        res.json(response);
+        db.comparePassword(user, request.password)
+            .then((result) => {
+                if (result.equal) {
+                    var token = jwt.sign(user, 'qwerty');
+                    response = { success: true, token: `JWT ${token}` };
+                } else {
+                    response = { success: false, msg: 'Authentication failed.' };
+                }
+                res.json(response);
+            })
+            .catch((err) => {
+                response = { success: false, msg: 'Authentication failed.' };
+                res.json(response);
+            })
     });
 });
 
@@ -41,9 +47,9 @@ router.post('/api/signup', (req, res) => {
         let db = new UserRepository();
         db.create(request.username, request.password, (err) => {
             if (err) {
-                response = {success: false, msg: 'Failed to signup a user.'}
+                response = { success: false, msg: 'Failed to signup a user.' }
             } else {
-                response = {success: true, msg: 'Successful created new user.'}
+                response = { success: true, msg: 'Successful created new user.' }
             }
         });
     }

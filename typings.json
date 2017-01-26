@@ -3,6 +3,7 @@
   "version": false,
   "dependencies": {
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20161222093745",
+    "bcryptjs": "registry:dt/bcryptjs#2.4.0+20170109141314",
     "cookie-parser": "registry:dt/cookie-parser#1.3.4+20160428043022",
     "jsonwebtoken": "registry:dt/jsonwebtoken#7.2.0+20161229235100",
     "passport-jwt": "registry:dt/passport-jwt#2.0.0+20160428045346",

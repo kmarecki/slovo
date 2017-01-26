@@ -12,6 +12,7 @@
     "blog"
   ],
   "dependencies": {
+    "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",
     "connect-flash": "^0.1.1",

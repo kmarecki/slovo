@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as bcrypt from 'bcryptjs';
 import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler } from 'mongoose-repos';
 
 import { IUser, UserLevel } from '../../shared/entities/user';
@@ -55,8 +56,8 @@ export class UserRepository extends MongoRepository {
         username: string,
         password: string,
         callback: (err: Error) => any): void {
-        
-         let user: IUser = {
+
+        let user: IUser = {
             userId: 0,
             authId: '',
             authStrategy: 'local',
@@ -74,6 +75,18 @@ export class UserRepository extends MongoRepository {
         this.findOneAndSave(this.User, query, user, (err) => defaultHandler(err, callback));
     }
 
+    comparePassword(user: IUser, password: string): Promise<{ err: Error, equal: boolean }> {
+        return new Promise((fullfill, reject) => {
+            if (user && user.password) {
+                bcrypt.compare(password, user.password)
+                    .then(
+                    (result) => fullfill({ equal: result }),
+                    (err) => reject({ err: err, equal: false }));
+            } else {
+                reject({ equal: false });
+            }
+        });
+    }
 
     protected addSchemas(): void {
         let schema = new mongoose.Schema({
@@ -95,7 +108,24 @@ export class UserRepository extends MongoRepository {
                 field: 'userId',
                 startAt: 1,
             },
-        }
+        };
+        schema.pre('save', function (next) {
+            let user = this;
+            bcrypt.genSalt(10)
+                .then(
+                (salt) => {
+                    bcrypt.hash(user.password, salt)
+                        .then(
+                        (hash) => {
+                            user.password = hash;
+                            next();
+                        },
+                        (err) => {
+                            next(err);
+                        });
+                },
+                (err) => next(err))
+        });
         this.User = this.addModel<UserModel>('User', schema, options);
     }
 }
