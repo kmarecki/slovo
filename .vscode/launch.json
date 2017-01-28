@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Launch",
-            "type": "node2",
+            "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/server/app.js",
             "stopOnEntry": false,
@@ -23,7 +23,7 @@
         },
         {
             "name": "Attach",
-            "type": "node2",
+            "type": "node",
             "request": "attach",
             "port": 5858,
             "address": "localhost",
@@ -35,7 +35,7 @@
         },
         {
             "name": "Attach to Process",
-            "type": "node2",
+            "type": "node",
             "request": "attach",
             "processId": "${command.PickProcess}",
             "port": 5858,

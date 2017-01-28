@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as passport from 'passport';
 
 import { ExpressApp, ResponseUtil } from 'express-app';
 
@@ -7,7 +8,9 @@ import { UserRepository } from '../../db/user';
 
 export let router = express.Router();
 
-router.post('/api/users', (req: express.Request, res: express.Response) => {
+router.post('/api/users', 
+    passport.authenticate('jwt', { session: false}),
+    (req: express.Request, res: express.Response) => {
     let db = new UserRepository();
     let post = <IUser>req.body;
     db.save(post, (err) => {

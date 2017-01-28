@@ -23,7 +23,7 @@ router.post('/api/authenticate', (req, res) => {
         db.comparePassword(user, request.password)
             .then((result) => {
                 if (result.equal) {
-                    var token = jwt.sign(user, 'qwerty');
+                    var token = jwt.sign({ userId: user.userId }, 'qwerty');
                     response = { success: true, token: `JWT ${token}` };
                 } else {
                     response = { success: false, msg: 'Authentication failed.' };

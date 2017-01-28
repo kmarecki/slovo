@@ -10,11 +10,17 @@ let strategy = new Strategy(
         let db = new UserRepository();
         db.findByName(username, (err, user) => {
             if (!err && user) {
-                if (user.password == password) {
-                    return done(null, user);
-                }
+                db.comparePassword(user, password)
+                    .then((equal) => {
+                        if (equal) {
+                            return done(null, user);
+                        } else {
+                            return done(err, false, { message: 'Failed to authenticate.' });
+                        }
+                    });
+            } else {
+                return done(err, false, { message: 'Failed to authenticate.' });
             }
-            return done(err, false, { message: 'Failed to authenticate.' });
         });
     });
 passport.use(strategy);
@@ -38,7 +44,6 @@ let jwtStrategy = new jwt.Strategy(
                 }
             }
         });
-        done(null, { userName: 'test1' })
     }
 );
 

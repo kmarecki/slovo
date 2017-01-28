@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as passport from 'passport';
 
 import { ExpressApp, ResponseUtil } from 'express-app';
 
@@ -31,7 +32,9 @@ router.get('/api/posts', (req: express.Request, res: express.Response) => {
     });
 });
 
-router.post('/api/posts', (req: express.Request, res: express.Response) => {
+router.post('/api/posts', 
+    passport.authenticate('jwt', { session: false}),
+    (req: express.Request, res: express.Response) => {
     let db = new PostRepository();
     let post = <IPost>req.body;
     db.savePost(post, (err) => {
@@ -58,7 +61,9 @@ router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
 router.put('/api/posts/:id', (req: express.Request, res: express.Response) => {
 });
 
-router.delete('/api/posts/:id', (req: express.Request, res: express.Response) => {
+router.delete('/api/posts/:id', 
+    passport.authenticate('jwt', { session: false}),
+    (req: express.Request, res: express.Response) => {
     let db = new PostRepository();
     let postId = req.params.id;
     db.removePost(postId, (err) => {

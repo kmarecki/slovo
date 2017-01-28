@@ -20,25 +20,25 @@ export class SettingsDataService implements ISettingsDataService {
         return <ISettingsResource>this.$resource('/api/siteSettings');
     };
 
-    getSettings(result: (settings: ISettings) => any, err?: (err) => any) {
+    getSettings(result: (settings: ISettings) => any, err?: (error) => any) {
         let resource = this.getSettingsResource();
         resource.get(
             (settings) => {
                 result(settings);
             },
-            (err) => {
-                err(err);
+            (error) => {
+                err(error);
             });
     }
 
-    saveSettings(settings: ISettings, success: () => any, err?: (err) => any) {
+    saveSettings(settings: ISettings, success: () => any, err?: (error) => any) {
         let resource = this.getSettingsResource();
         resource.save({}, settings,
             () => {
                 success();
             },
-            (err) => {
-                err(err);
+            (error) => {
+                err(error);
             });
     }
 }
