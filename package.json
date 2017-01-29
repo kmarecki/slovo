@@ -12,6 +12,7 @@
     "blog"
   ],
   "dependencies": {
+    "angular-ui-router": "^0.4.2",
     "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "config": "^1.21.0",

@@ -13,17 +13,8 @@ import './services/services.module';
 import './components/components.module';
 
 
-import { Run } from './run';
-
-interface IAdminScope extends ng.IScope {
-    name: string;
-}
-
-class AdminController {
-    constructor($scope: IAdminScope) {
-        $scope.name = 'admin';
-    }
-}
+//import { Run } from './run';
+import { IAuthService } from './services/auth.service';
 
 let app = ng.module('adminApp', [
     'ngRoute',
@@ -35,10 +26,12 @@ let app = ng.module('adminApp', [
     'services',
     'components',
 ]);
-app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
+
+//TODO Move config and run function to seperate classes
+app.config(['$routeProvider', '$locationProvider', '$stateProvider', (
     $routeProvider: ng.route.IRouteProvider,
     $locationProvider: ng.ILocationProvider,
-    $stateProvider: ng.ui.IStateProvider) {
+    $stateProvider: ng.ui.IStateProvider)  => {
 
     $stateProvider
         .state('login', {
@@ -76,8 +69,21 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', function (
 
     $locationProvider.html5Mode(true);
 }]);
-app.controller('AdminController', AdminController);
 
-//app.run(['$rootScope', '$state', '$stateParams', Run]);
+app.run(['$rootScope', '$state', '$stateParams', 'services.auth', (
+        $rootScope: ng.IRootScopeService,
+        $state: ng.ui.IStateService,
+        $stateParams: ng.ui.IStateParamsService,
+        authService: IAuthService) => {
+            
+        $rootScope.$on('$stateChangeStart', (event, next, nextParams, fromState) => {
+            if (!authService.isAuthenticated()) {
+                if (next.name !== 'login') {
+                    event.preventDefault();
+                    $state.go('login');
+                }
+            }
+        });
+}]);
 
 

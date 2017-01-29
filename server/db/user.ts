@@ -112,19 +112,12 @@ export class UserRepository extends MongoRepository {
         schema.pre('save', function (next) {
             let user = this;
             bcrypt.genSalt(10)
-                .then(
-                (salt) => {
-                    bcrypt.hash(user.password, salt)
-                        .then(
-                        (hash) => {
-                            user.password = hash;
-                            next();
-                        },
-                        (err) => {
-                            next(err);
-                        });
-                },
-                (err) => next(err))
+                .then((salt) => bcrypt.hash(user.password, salt))
+                .then((hash) => {
+                    user.password = hash;
+                    next()
+                })
+                .catch((err) => next(err));
         });
         this.User = this.addModel<UserModel>('User', schema, options);
     }
