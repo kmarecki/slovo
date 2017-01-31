@@ -55,6 +55,7 @@ export class UserRepository extends MongoRepository {
     create(
         username: string,
         password: string,
+        email: string,
         callback: (err: Error) => any): void {
 
         let user: IUser = {
@@ -63,7 +64,7 @@ export class UserRepository extends MongoRepository {
             authStrategy: 'local',
             userName: username,
             password: password,
-            email: '',
+            email: email,
             userLevel: UserLevel.User
         };
 

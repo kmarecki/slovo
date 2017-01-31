@@ -7,6 +7,7 @@ import * as jwt from 'jsonwebtoken';
 import { ExpressApp } from 'express-app';
 
 import { IAuthenticateRequest, IAuthenticateResponse } from '../../../shared/contracts/authenticate';
+import { ISignupRequest, ISignupResponse } from '../../../shared/contracts/signup';
 import { IUser, UserLevel } from '../../../shared/entities/user';
 import { UserRepository } from '../../db/user';
 
@@ -38,20 +39,25 @@ router.post('/api/authenticate', (req, res) => {
 });
 
 router.post('/api/signup', (req, res) => {
-    let request = <IAuthenticateRequest>req.body;
-    let response: IAuthenticateResponse;
+    let request = <ISignupRequest>req.body;
+    let response: ISignupResponse;
 
     if (!request.username || !request.password) {
-        response = { success: false, msg: 'Username and password failed.' };
+        response = { success: false, msg: 'Username or password failed.' };
+        res.json(response);
     } else {
         let db = new UserRepository();
-        db.create(request.username, request.password, (err) => {
+        db.create(
+            request.username, 
+            request.password, 
+            request.email,
+            (err) => {
             if (err) {
                 response = { success: false, msg: 'Failed to signup a user.' }
             } else {
                 response = { success: true, msg: 'Successful created new user.' }
             }
+            res.json(response);
         });
     }
-    res.json(response);
 });

@@ -38,6 +38,10 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', (
             url: '/login',
             template: '<login></login>'
         })
+        .state('signup', {
+            url: '/signup',
+            template: '<signup></signup>'
+        })
         .state('panel', {
             url: '/',
             template: '<panel></panel>'
@@ -78,7 +82,7 @@ app.run(['$rootScope', '$state', '$stateParams', 'services.auth', (
             
         $rootScope.$on('$stateChangeStart', (event, next, nextParams, fromState) => {
             if (!authService.isAuthenticated()) {
-                if (next.name !== 'login') {
+                if (next.name !== 'login' && next.name !== 'signup') {
                     event.preventDefault();
                     $state.go('login');
                 }

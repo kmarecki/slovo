@@ -8,6 +8,7 @@ import './panel/panel.module';
 import './posts/posts.module';
 import './post/post.module';
 import './settings/settings.module';
+import './signup/signup.module';
 import './users/users.module';
 
 ng.module('components', [
@@ -19,5 +20,6 @@ ng.module('components', [
     'components.posts',
     'components.post',
     'components.settings',
+    'components.signup',
     'components.users',
 ]);

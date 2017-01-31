@@ -3,11 +3,14 @@ import * as ng from 'angular';
 import { IAuthService } from '../../services/auth.service';
 import { MessageBoxController, MessageBoxType } from '../message-box/message-box.controller';
 
-export class LoginController {
+export class SignupController {
     static $inject = ['$uibModal', '$state', 'services.auth']
 
     username: string;
+    email: string;
     password: string;
+    repeatPassword: string;
+
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
@@ -17,10 +20,10 @@ export class LoginController {
 
     }
 
-    login() {
+    signup() {
         this.authService
-            .login(this.username, this.password)
-            .then(() => this.$state.go('panel'))
+            .signup(this.username, this.password, this.email)
+            .then(() => this.$state.go('login'))
             .catch(
             (msg) => MessageBoxController.show(
                 this.$uibModal, MessageBoxType.Error, '', msg));

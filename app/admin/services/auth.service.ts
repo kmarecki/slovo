@@ -1,9 +1,14 @@
-import { IAuthenticateRequest, IAuthenticateResponse } from '../../../shared/contracts/authenticate';
+import { IAuthenticateRequest, IAuthenticateResponse } from 
+    '../../../shared/contracts/authenticate';
+import { ISignupRequest, ISignupResponse } from 
+    '../../../shared/contracts/signup';
+
 
 export interface IAuthService {
     isAuthenticated(): boolean;
     login(username: string, password: string): ng.IPromise<{}>
     logout(): ng.IPromise<{}>
+    signup(username: string, password: string, email: string): ng.IPromise<{}>
 }
 
 export class AuthService implements IAuthService {
@@ -52,11 +57,11 @@ export class AuthService implements IAuthService {
 
     login(username: string, password: string): ng.IPromise<{}> {
         return this.$q((resolve, reject) => {
-            let user: IAuthenticateRequest = {
+            let request: IAuthenticateRequest = {
                 username: username,
                 password: password
             }
-            this.$http.post('/api/authenticate', user)
+            this.$http.post('/api/authenticate', request)
                 .then(result => {
                     let response = <IAuthenticateResponse>result.data;
                     if (response && response.success) {
@@ -73,6 +78,25 @@ export class AuthService implements IAuthService {
         return this.$q((resolve, reject) => {
             this.deleteUserCredentials();
             resolve();
+        });
+    }
+
+    signup(username: string, password: string, email: string): ng.IPromise<{}> {
+        return this.$q((resolve, reject) => {
+            let request: ISignupRequest = {
+                username: username,
+                password: password,
+                email: email
+            }
+            this.$http.post('/api/signup', request)
+                .then(result => {
+                    let response = <ISignupResponse>result.data;
+                    if (response && response.success) {
+                        resolve(response.msg);
+                    } else {
+                        reject(response.msg);
+                    }
+                });
         });
     }
 }
