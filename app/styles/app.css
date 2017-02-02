@@ -35,13 +35,7 @@ html, body {
   justify-content: center;
 }
 
-.flex-horiz {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-
 .content {
   min-height: 85%;
+  max-width: 95%;
 }
