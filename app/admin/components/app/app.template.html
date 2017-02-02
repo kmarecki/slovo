@@ -1,19 +1,13 @@
 <div class="container-fluid">
-    <header>
+    <header class="row">
+        <a href="/">Blog</a>
         <h1 class="text-center">Admin Panel</h1>
-        <nav>
-            <ul class="list-inline">
-                <li><a href="/">Blog</a></li>
-                <li><a ui-sref="login">Login</a></li>
-            </ul>
-        </nav>
     </header>
-    <div ui-view>
+    <div class="row" ui-view>
     </div>
-</div>
-<footer class="text-center">
-    <div>
-        <p>@ 2016 Krzysztof Marecki</p>
-    </div>
-</footer>
+    <footer class="row text-center">
+        <div>
+            <p>@ 2016 Krzysztof Marecki</p>
+        </div>
+    </footer>
 </div>
