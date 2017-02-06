@@ -22,13 +22,13 @@
     "jquery": "^2.2.4",
     "bootstrap": "^3.3.6",
     "lodash": "^4.13.1",
-    "angular": "^1.5.8",
+    "angular": "^1.6.1",
     "system.js": "^0.19.31",
-    "angular-route": "^1.5.8",
-    "angular-mocks": "^1.5.8",
-    "angular-resource": "^1.5.8",
+    "angular-route": "^1.6.1",
+    "angular-mocks": "^1.6.1",
+    "angular-resource": "^1.6.1",
     "angular-bootstrap": "^2.0.1",
-    "angular-sanitize": "^1.5.8",
+    "angular-sanitize": "^1.6.1",
     "showdown": "^1.5.1",
     "angular-ui-router": "^0.4.2"
   }

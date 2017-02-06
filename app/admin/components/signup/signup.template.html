@@ -1,32 +1,36 @@
 <div class="flex content">
-    <form class="form-horizontal">
+    <form name="signupForm" class="form-horizontal" ng-submit="$ctrl.signup()">
         <div class="form-group">
             <label class="control-label col-sm-4" for="name">User name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="name" ng-model="$ctrl.username" placeholder="Enter user name">
+                <input type="text" class="form-control" name="name" 
+                    ng-model="$ctrl.username" required placeholder="Enter user name">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="email">Email:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="email" ng-model="$ctrl.email" placeholder="Enter email">
+                <input type="text" class="form-control" name="email" 
+                    ng-model="$ctrl.email" placeholder="Enter email">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="password">Password:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="password" ng-model="$ctrl.password" placeholder="Enter password">
+                <input type="text" class="form-control" name="password" 
+                    ng-model="$ctrl.password" required placeholder="Enter password">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="repeatPassword">Repeat password:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="repeatPassword" ng-model="$ctrl.repeatPassword" placeholder="Repeat password">
+                <input type="text" class="form-control" name="repeatPassword" 
+                    ng-model="$ctrl.repeatPassword" required placeholder="Repeat password">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-4">
-                <a class="btn btn-info" ng-click="$ctrl.signup()">Signup</a>
+                <button type="submit" class="btn btn-info" ng-disabled="signupForm.$invalid">Signup</button>
                 <a class="pull-right" ui-sref="login">Do you have an account? Log in!</a>
             </div>
         </div>

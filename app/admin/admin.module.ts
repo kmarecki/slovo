@@ -1,5 +1,6 @@
 import * as ng from 'angular';
 
+import 'angular-messages';
 import 'angular-resource';
 import 'angular-route';
 import 'angular-sanitize';
@@ -19,6 +20,7 @@ import { IAuthService } from './services/auth.service';
 let app = ng.module('adminApp', [
     'ngRoute',
     'ngSanitize',
+    'ngMessages',
     'ui.bootstrap',
     'ui.router',
     'core',
