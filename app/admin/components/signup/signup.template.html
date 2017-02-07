@@ -4,28 +4,40 @@
             <label class="control-label col-sm-4" for="name">User name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="name" 
-                    ng-model="$ctrl.username" required placeholder="Enter user name">
+                    ng-model="$ctrl.username" required placeholder="Enter user name"/>
+                 <div ng-messages="signupForm.name.$error" ng-show="signupForm.name.$touched">
+                    <span ng-message="required">User name required</span>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="email">Email:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="email" 
-                    ng-model="$ctrl.email" placeholder="Enter email">
+                <input type="email" class="form-control" name="email" 
+                    ng-model="$ctrl.email" placeholder="Enter email"/>
+                 <div ng-messages="signupForm.email.$error" ng-show="signupForm.email.$touched">
+                    <span ng-message="email">Invalid format</span>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="password">Password:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="password" 
-                    ng-model="$ctrl.password" required placeholder="Enter password">
+                <input type="password" class="form-control" name="password" 
+                    ng-model="$ctrl.password" required placeholder="Enter password"/>
+                 <div ng-messages="signupForm.password.$error" ng-show="signupForm.password.$touched">
+                    <span ng-message="required">Password required</span>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="repeatPassword">Repeat password:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="repeatPassword" 
-                    ng-model="$ctrl.repeatPassword" required placeholder="Repeat password">
+                <input type="password" class="form-control" name="repeatPassword"
+                    ng-model="$ctrl.repeatPassword" required  equal-to="password" placeholder="Repeat password"/>
+                 <div ng-messages="signupForm.repeatPassword.$error" ng-show="signupForm.repeatPassword.$touched">
+                    <span ng-message="equalTo">Repeated password doesn't match</span>
+                </div>
             </div>
         </div>
         <div class="form-group">

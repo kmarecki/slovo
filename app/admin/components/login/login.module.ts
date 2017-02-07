@@ -6,4 +6,5 @@ let module = ng.module('components.login', []);
 module.component('login', {
     controller: LoginController,
     templateUrl: 'components/login/login.template.html',
+    
 });

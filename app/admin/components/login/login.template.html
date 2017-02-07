@@ -3,18 +3,20 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="name">User name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="name" ng-model="$ctrl.username" required placeholder="Enter user name">
+                <input type="text" class="form-control" name="name" 
+                    ng-model="$ctrl.username" required placeholder="Enter user name"/>
                 <div ng-messages="loginForm.name.$error" ng-show="loginForm.name.$touched">
-                    <div ng-message="User name required">required</div>
+                    <span ng-message="required">User name required</span>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-4" for="password">Password:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="password" ng-model="$ctrl.password" required placeholder="Enter password">
+                <input type="password" class="form-control" name="password" 
+                    ng-model="$ctrl.password" required placeholder="Enter password">
                 <div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$touched">
-                    <div ng-message="Password required">required</div>
+                    <span ng-message="required">Password required</span>
                 </div>
             </div>
         </div>

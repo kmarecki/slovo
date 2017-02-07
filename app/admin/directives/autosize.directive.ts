@@ -2,7 +2,7 @@ import * as ng from 'angular';
 
 export class AutosizeDirective implements ng.IDirective {
 
-    require: 'ngModel';
+    require: string = 'ngModel';
     scope = {
         ngModel: '='
     };

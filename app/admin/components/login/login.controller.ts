@@ -14,7 +14,7 @@ export class LoginController {
         private $state: ng.ui.IStateService,
         private authService: IAuthService
     ) {
-
+       
     }
 
     login() {
