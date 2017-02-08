@@ -7,11 +7,18 @@ import { ExpressApp } from 'express-app';
 
 export let router = express.Router();
 
-router.get('/admin',
-    (req: express.Request, res: express.Response) => {
-        let indexPath = path.join(ExpressApp.physicalPath, 'admin', 'index.html');
-        res.sendFile(indexPath);
-    });
+const indexPage = (req: express.Request, res: express.Response) => {
+    let indexPath = path.join(ExpressApp.physicalPath, 'admin', 'index.html');
+    res.sendFile(indexPath);
+}
+
+router.get('/admin/', indexPage);
+router.get('/admin/login', indexPage);
+router.get('/admin/signup', indexPage);
+router.get('/admin/comments(/*)?', indexPage);
+router.get('/admin/posts(/*)?', indexPage);
+router.get('/admin/settings(/*)?', indexPage);
+router.get('/admin/users(/*)?', indexPage);
 
 router.get('/admin/*',
     //passport.authenticate('jwt', { session: false }),
@@ -21,7 +28,7 @@ router.get('/admin/*',
             if (stats && stats.isFile()) {
                 res.sendFile(filePath);
             } else {
-                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.write('404 Not Found\n');
                 res.end();
             }
