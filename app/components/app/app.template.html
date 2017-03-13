@@ -1,4 +1,4 @@
-<div class="container">
+<div ng-show="$ctrl.settings" class="container">
     <header>
         <div class="jumbotron text-center">
             <h1>{{$ctrl.settings.blogName}}</h1>
@@ -24,4 +24,10 @@
             <p>@ 2016 Krzysztof Marecki</p>
         </div>
     </footer>
+</div>
+<!-- Error message, when setting could not be loaded, e.g. database connection error -->
+<div ng-show="!$ctrl.settings">
+     <header>
+        <h2 class="text-center">We are sorry, the site is not available. Please try later.</h1>
+     </header>
 </div>

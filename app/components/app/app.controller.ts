@@ -1,5 +1,5 @@
-import { ISettings } from '../shared/entities/settings'
-import { ISettingsDataService } from './core/settings/settings.service';
+import { ISettings } from '../../../shared/entities/settings'
+import { ISettingsDataService } from '../../core/settings/settings.service';
 
 export class AppController {
 

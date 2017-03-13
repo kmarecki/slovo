@@ -9,7 +9,7 @@ import { PostRepository } from '../../db/post';
 export let router = express.Router();
 
 router.get('/api/postHeaders', (req: express.Request, res: express.Response) => {
-    let onlyPublished = req.param('published') == 'true';
+    let onlyPublished = req.query.published == 'true';
     let db = new PostRepository();
     db.findPostHeaders(onlyPublished, (err, headers) => {
         if (err) {
@@ -21,7 +21,7 @@ router.get('/api/postHeaders', (req: express.Request, res: express.Response) => 
 });
 
 router.get('/api/posts', (req: express.Request, res: express.Response) => {
-    let onlyPublished = req.param('published') == 'true';
+    let onlyPublished = req.query.published == 'true';
     let db = new PostRepository();
     db.findPosts(onlyPublished, (err, headers) => {
         if (err) {
