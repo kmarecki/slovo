@@ -44,6 +44,7 @@ app.use('/', express.static(ExpressApp.physicalPath));
 
 MongoConfiguration.uri = config.MongoDb.uri;
 MongoConfiguration.useAutoIncrement = true;
+MongoConfiguration.useLogger = true;
 MongoDb.open();
 
 http.createServer(app).listen(app.get('port'), function () {

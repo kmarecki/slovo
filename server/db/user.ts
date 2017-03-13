@@ -45,11 +45,8 @@ export class UserRepository extends MongoRepository {
         userName: string,
         callback: (err: Error, user: IUser) => any): void {
 
-        this.connect();
         let query = { userName: userName };
-        this.User.findOne(
-            query,
-            (err, result) => defaultResultHandler(err, result, callback));
+        this.findOne(this.User, query, (err, result) => defaultResultHandler(err, result, callback));
     }
 
     create(
