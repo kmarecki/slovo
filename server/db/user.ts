@@ -15,9 +15,9 @@ export class UserRepository extends MongoRepository {
         authStrategy: string,
         callback: (err: Error, user: IUser) => any): void {
 
-        this.connect();
         let query = { authId: authId, authStrategy: authStrategy };
-        this.User.findOne(
+        this.findOne(
+            this.User,
             query,
             (err, result) => defaultResultHandler(err, result, (err, user) => {
                 if (user === null && err === null) {
@@ -34,9 +34,9 @@ export class UserRepository extends MongoRepository {
         userId: number,
         callback: (err: Error, user: IUser) => any): void {
 
-        this.connect();
         let query = { userId: userId };
-        this.User.findOne(
+        this.findOne(
+            this.User,
             query,
             (err, result) => defaultResultHandler(err, result, callback));
     }
@@ -46,7 +46,10 @@ export class UserRepository extends MongoRepository {
         callback: (err: Error, user: IUser) => any): void {
 
         let query = { userName: userName };
-        this.findOne(this.User, query, (err, result) => defaultResultHandler(err, result, callback));
+        this.findOne(
+            this.User, 
+            query, 
+            (err, result) => defaultResultHandler(err, result, callback));
     }
 
     create(
@@ -70,7 +73,11 @@ export class UserRepository extends MongoRepository {
 
     save(user: IUser, callback: (err: Error) => any): void {
         let query = { userId: user.userId };
-        this.findOneAndSave(this.User, query, user, (err) => defaultHandler(err, callback));
+        this.findOneAndSave(
+            this.User, 
+            query, 
+            user, 
+            (err) => defaultHandler(err, callback));
     }
 
     comparePassword(user: IUser, password: string): Promise<{ err: Error, equal: boolean }> {

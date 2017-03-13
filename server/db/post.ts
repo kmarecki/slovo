@@ -13,9 +13,9 @@ export class PostRepository extends MongoRepository {
         postId: number,
         callback: (err: Error, Post: IPost) => any): void {
 
-        this.connect();
         let query = { postId: postId };
-        this.Post.findOne(
+        this.findOne(
+            this.Post,
             query,
             (err, result) => defaultResultHandler(err, result, callback));
     }
@@ -23,46 +23,56 @@ export class PostRepository extends MongoRepository {
     findPostHeaders(
         onlyPublished: boolean,
         callback: (err: Error, headers: IPostHeader[]) => any): void {
-        this.connect();
-        let query = onlyPublished ? {published: true} : {};
-        this.Post.find(query)
-            .sort({ postId: 'asc' })
-            .select({ date: 1, postId: 1, title: 1, published: 1 })
-            .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
-                let header: IPostHeader = {
-                    date: item.date,
-                    postId: item.postId,
-                    title: item.title,
-                    published: item.published
-                };
-                return header;
-            }));
+        this.connect()
+            .then(() => {
+                let query = onlyPublished ? { published: true } : {};
+                this.Post.find(query)
+                    .sort({ postId: 'asc' })
+                    .select({ date: 1, postId: 1, title: 1, published: 1 })
+                    .exec((err, result) => defaultResultArrayHandler(err, result, callback, (item: PostModel) => {
+                        let header: IPostHeader = {
+                            date: item.date,
+                            postId: item.postId,
+                            title: item.title,
+                            published: item.published
+                        };
+                        return header;
+                    }));
+            })
+            .catch((err) => callback(err, null));
     }
 
     findPosts(
         onlyPublished: boolean,
         callback: (err: Error, posts: IPost[]) => any): void {
-        this.connect();
-        let query = onlyPublished ? {published: true} : {};
-        this.Post.find(query)
-            .sort({ postId: 'asc' })
-            .select({})
-            .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
+        this.connect()
+            .then(() => {
+                let query = onlyPublished ? { published: true } : {};
+                this.Post.find(query)
+                    .sort({ postId: 'asc' })
+                    .select({})
+                    .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
+            })
+            .catch((err) => callback(err, null));
     }
 
 
     savePost(post: IPost, callback: (err: Error) => any): void {
         let query = { postId: post.postId };
-        this.findOneAndSave(this.Post, query, post, (err) => defaultHandler(err, callback));
+        this.findOneAndSave(
+            this.Post,
+            query,
+            post,
+            (err) => defaultHandler(err, callback));
     }
 
     removePost(
         postId: number,
         callback: (err: Error) => any): void {
 
-        this.connect();
         let query = { postId: postId };
-        this.Post.remove(
+        this.remove(
+            this.Post,
             query,
             (err) => defaultHandler(err, callback));
     }

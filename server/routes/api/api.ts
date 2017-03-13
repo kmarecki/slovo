@@ -19,7 +19,7 @@ router.post('/api/authenticate', (req, res) => {
     db.findByName(request.username, (err, user) => {
         let response: IAuthenticateResponse;
         if (err) {
-            response = { success: false, msg: `Authentication exception: ${err.message}` };
+            response = { success: false, msg: `Authentication error: ${err.message}` };
             res.json(response);
         } else {
             db.comparePassword(user, request.password)
@@ -55,7 +55,7 @@ router.post('/api/signup', (req, res) => {
             request.email,
             (err) => {
                 if (err) {
-                    response = { success: false, msg: 'Failed to signup a user.' }
+                    response = { success: false, msg: `Signup error: ${err.message}` }
                 } else {
                     response = { success: true, msg: 'Successful created new user.' }
                 }

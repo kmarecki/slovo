@@ -10,14 +10,13 @@ export class SettingsRepository extends MongoRepository {
     private Settings: mongoose.Model<SettingsModel>;
 
     getSettings(callback: (err: Error, settings: ISettings) => any): void {
-        this.connect();
-        this.Settings.findOne(
+        this.findOne(
+            this.Settings,
             {}, 
             (err, result) => defaultResultHandler(err, result, callback));
     }
 
     saveSettings(settings: ISettings, callback: (err: Error) => any): void {
-        this.connect();
         this.findOneAndSave(this.Settings, {}, settings, (err) => defaultHandler(err, callback));
     }
 
