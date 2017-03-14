@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as passport from 'passport';
 
-import { ExpressApp, ResponseUtil } from 'express-app';
+import { ExpressApp, ResponseService } from 'express-app';
 
 import { IUser } from '../../../shared/entities/user';
 import { UserRepository } from '../../db/user';

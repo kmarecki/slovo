@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as passport from 'passport';
 
-import { ExpressApp, ResponseUtil } from 'express-app';
+import { ExpressApp, ResponseService } from 'express-app';
 
 import { IPost } from '../../../shared/entities/post';
 import { PostRepository } from '../../db/post';

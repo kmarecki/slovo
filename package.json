@@ -20,7 +20,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "express-app": "0.0.7",
+    "express-app": "0.0.8",
     "express-session": "^1.14.2",
     "jade": "^1.11.0",
     "jsonwebtoken": "^7.2.1",

@@ -20,16 +20,16 @@ export class PostsController {
     }
 
     private refreshModel() {
-        this.postDataService.getPostHeaders(
-            false,
-            (headers) => {
+        this.postDataService.getPostHeaders(false)
+            .then((headers) => {
                 this.model.refreshHeaders(headers);
                 let firstHeader = _.first(this.model.headers);
                 if (firstHeader) {
                     this.selectPost(firstHeader.postId);
                 }
-            },
-            (err) => MessageBoxController.showError(this.$uibModal, err));
+            })
+            .catch((err) => MessageBoxController.showError(this.$uibModal, err));
+
     }
 
     selectPost(postId: number): void {

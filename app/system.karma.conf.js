@@ -6,21 +6,15 @@ System.config({
         'systemjs': 'app/bower_components/system.js/dist/system.js'
     },
     map: {
-        'jquery': 'bower_components/jquery/dist/jquery.js',
+        'jquery': 'app/bower_components/jquery/dist/jquery.js',
         'angular': 'app/bower_components/angular/angular.js',
-        'bootsrap': 'bower_components/bootstrap/dist/js/bootstrap.js',
+        'angular-resource': 'app/bower_components/angular-resource/angular-resource.js',            
+        'bootsrap': 'app/bower_components/bootstrap/dist/js/bootstrap.js',
     },
     meta: {
-        'jquery': {
-            format: 'global',
-            exports: 'jquery'
-        },
-        'angular': {
-            format: 'global',
-            exports: 'angular'
-        },
-        'bootsrap': {
-            deps: ['jquery']
-        }
+        'jquery': { format: 'global', exports: 'jquery' },
+        'bootsrap': { format: 'global', deps: ['jquery'] },
+        'angular': { format: 'global', exports: 'angular' },
+        'angular-resource': { format: 'global', deps: ['angular'] }
     }
 });

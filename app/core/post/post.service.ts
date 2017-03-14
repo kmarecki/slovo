@@ -7,8 +7,10 @@ export interface IPostHeaderResource extends ng.resource.IResourceClass<ng.resou
 export interface IPostResource extends ng.resource.IResourceClass<ng.resource.IResource<IPost>> { }
 
 export interface IPostDataService {
-    getPostHeaders(onlyPublished: boolean, result: (headers: IPostHeader[]) => any, err?: (err) => any);
+    // getPostHeaders(onlyPublished: boolean, result: (headers: IPostHeader[]) => any, err?: (err) => any);
 
+    getPostHeaders(onlyPublished: boolean): ng.IPromise<IPostHeader[]>;
+  
     getPosts(onlyPublished: boolean, result: (posts: IPost[]) => any, err?: (err) => any);
 
     getPost(id, result: (post: IPost) => any, err?: (err) => any);
@@ -19,9 +21,11 @@ export interface IPostDataService {
 }
 
 export class PostDataService implements IPostDataService {
-    static $inject = ['$resource'];
+    static $inject = ['$resource', '$q'];
 
-    constructor(private $resource: ng.resource.IResourceService) { }
+    constructor(
+        private $resource: ng.resource.IResourceService,
+        private $q: ng.IQService) { }
 
     private getPostHeaderResource(): IPostHeaderResource {
         return <IPostHeaderResource>this.$resource('/api/postHeaders');
@@ -31,16 +35,18 @@ export class PostDataService implements IPostDataService {
         return <IPostResource>this.$resource('/api/posts/:id');
     };
 
-    getPostHeaders(onlyPublished: boolean, result: (headers: IPostHeader[]) => any, err?: (err) => any) {
-        let postHeaderResource = this.getPostHeaderResource();
-        postHeaderResource.query(
-            { published: onlyPublished },
-            (headers) => {
-                result(headers);
-            },
-            (err) => {
-                err(err);
-            });
+    getPostHeaders(onlyPublished: boolean): ng.IPromise<IPostHeader[]> {
+        return this.$q((resolve, reject) => {
+            let postHeaderResource = this.getPostHeaderResource();
+            postHeaderResource.query(
+                { published: onlyPublished },
+                (headers) => {
+                    resolve(headers);
+                },
+                (err) => {
+                    reject(err);
+                });
+        });
     }
 
     getPosts(onlyPublished: boolean, result: (posts: IPost[]) => any, err?: (err) => any) {
@@ -79,12 +85,12 @@ export class PostDataService implements IPostDataService {
     }
 
     deletePost(postId, success: (result) => any, err?: (err) => any) {
-         let postResource = this.getPostResource();
+        let postResource = this.getPostResource();
         postResource.delete(
             { id: postId },
             (result) => {
                 success(result);
-            }, 
+            },
             (err) => {
                 err(err);
             });

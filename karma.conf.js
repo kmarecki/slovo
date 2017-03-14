@@ -42,7 +42,7 @@ module.exports = function (config) {
       config: {
         paths: {
          
-          'angular-mocks': 'app/bower_components/angular-mocks/angular-mocks.js'
+          'angular-mocks': 'app/bower_components/angular-mocks/angular-mocks.js',
           //'jasmine': '../node_modules/jasmine-core/lib/jasmine-core/jasmine.js'
 
         }
