@@ -9,14 +9,14 @@ export class ArticlesController {
     static $inject = ['postDataService'];
 
     model = new ArticlesModel();
+    refresh: ng.IPromise<any>;
 
     constructor(private postDataService: IPostDataService) {
         this.refreshModel();
     }
 
-    private refreshModel() {
-        this.postDataService.getPosts(true, (posts) => {
-            this.model.refresh(posts);
-        });
+    private refreshModel(): void {
+        this.refresh = this.postDataService.getPosts(true)
+            .then((posts) => this.model.refresh(posts));
     }
 }

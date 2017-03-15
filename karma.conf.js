@@ -14,6 +14,7 @@ module.exports = function (config) {
 
        //included('bower_components/angular/angular.js'),
        //'bower_components/angular/angular.js',
+       served('app/**/*.js'),
        'app/components/**/*.spec.js'
       //'components/articles-nav/articles-nav.spec.js'
 

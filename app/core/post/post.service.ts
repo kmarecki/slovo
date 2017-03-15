@@ -7,11 +7,10 @@ export interface IPostHeaderResource extends ng.resource.IResourceClass<ng.resou
 export interface IPostResource extends ng.resource.IResourceClass<ng.resource.IResource<IPost>> { }
 
 export interface IPostDataService {
-    // getPostHeaders(onlyPublished: boolean, result: (headers: IPostHeader[]) => any, err?: (err) => any);
 
     getPostHeaders(onlyPublished: boolean): ng.IPromise<IPostHeader[]>;
-  
-    getPosts(onlyPublished: boolean, result: (posts: IPost[]) => any, err?: (err) => any);
+
+    getPosts(onlyPublished: boolean):  ng.IPromise<IPost[]>;
 
     getPost(id, result: (post: IPost) => any, err?: (err) => any);
 
@@ -49,16 +48,18 @@ export class PostDataService implements IPostDataService {
         });
     }
 
-    getPosts(onlyPublished: boolean, result: (posts: IPost[]) => any, err?: (err) => any) {
-        let postResource = this.getPostResource();
-        postResource.query(
-            { published: true },
-            (posts) => {
-                result(posts);
-            },
-            (err) => {
-                err(err);
-            });
+    getPosts(onlyPublished: boolean): ng.IPromise<IPost[]> {
+        return this.$q((resolve, reject) => {
+            let postResource = this.getPostResource();
+            postResource.query(
+                { published: true },
+                (posts) => {
+                    resolve(posts);
+                },
+                (err) => {
+                    reject(err);
+                });
+        });
     }
 
     getPost(id, result: (post: IPost) => any, err?: (err) => any) {
