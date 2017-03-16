@@ -20,7 +20,7 @@ import * as settingsRoutes from './routes/api/settings';
 let config = require('config');
 let root = path.join(__dirname, '..');
 let publicPath = path.join(root, 'app');
-let app = express();
+export let app = express();
 
 app.use(cookieParser());
 app.use(session({ secret: '1234567890qwerty' }));
@@ -45,26 +45,32 @@ app.use('/', express.static(ExpressApp.physicalPath));
 MongoConfiguration.uri = config.MongoDb.uri;
 MongoConfiguration.useAutoIncrement = true;
 MongoConfiguration.useLogger = true;
+MongoConfiguration.debug = config.MongoDb.debug;
 MongoDb.configure();
 
-var server: http.Server;
+let server: http.Server;
+let port = app.get('port');
+server = http.createServer(app);
+server.listen(app.get('port'), () => {
+    console.log(`Express server listening on port ${port}`);
+});
 
-export function start() {
-    if (!server) {
-        var port = app.get('port');
-        console.log('Site start');
-        console.log(`Site port: ${port}`);
-        server = http.createServer(app);
-        server.listen(app.get('port'), () => {
-            console.log(`Express server listening on port ${port}`);
-        });
-    }
-}
+// export function start() {
+//     if (!server) {
+//         var port = app.get('port');
+//         console.log('Site start');
+//         console.log(`Site port: ${port}`);
+//         server = http.createServer(app);
+//         server.listen(app.get('port'), () => {
+//             console.log(`Express server listening on port ${port}`);
+//         });
+//     }
+// }
 
-export function stop() {
-    if (server) {
-        console.log('Site shutdown');
-        server.close();
-        server = null;
-    }
-}
+// export function stop() {
+//     if (server) {
+//         console.log('Site shutdown');
+//         server.close();
+//         server = null;
+//     }
+// }

@@ -1,5 +1,6 @@
 {
   "MongoDb": {
+    "debug": true,
     "uri": "mongodb://localhost/blog"
   }
 }

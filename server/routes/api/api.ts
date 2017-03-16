@@ -5,11 +5,14 @@ import * as passport from 'passport';
 import * as jwt from 'jsonwebtoken';
 
 import { ExpressApp } from 'express-app';
+import { MongoDb } from 'mongoose-repos';
 
 import { IAuthenticateRequest, IAuthenticateResponse } from '../../../shared/contracts/authenticate';
 import { ISignupRequest, ISignupResponse } from '../../../shared/contracts/signup';
+import { IAliveResponse } from '../../../shared/contracts/alive';
 import { IUser, UserLevel } from '../../../shared/entities/user';
 import { UserRepository } from '../../db/user';
+var packageJson = require('../../../package.json');
 
 export let router = express.Router();
 
@@ -63,3 +66,16 @@ router.post('/api/signup', (req, res) => {
             });
     }
 });
+
+router.get('/api/alive', (req, res) => {
+    const response: IAliveResponse = {
+        isConnectedToDatabase: false,
+        version: packageJson.version
+    }
+    MongoDb.open()
+        .then(() => {
+            response.isConnectedToDatabase = true;
+            res.json(response);
+        })
+        .catch(() => res.json(response));
+})

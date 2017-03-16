@@ -20,6 +20,14 @@ export class SettingsRepository extends MongoRepository {
         this.findOneAndSave(this.Settings, {}, settings, (err) => defaultHandler(err, callback));
     }
 
+    removeSettings(callback: (err: Error) => any): void {
+        this.remove(
+            this.Settings,
+            {},
+            callback
+        );
+    }
+
     protected addSchemas(): void {
         let schema = new mongoose.Schema({
             blogName: String,
