@@ -6,7 +6,7 @@ module.exports = function (config) {
 
     basePath: './',
 
-    frameworks: ['systemjs', 'jasmine'],
+    frameworks: ['systemjs', 'mocha'],
 
     browsers: ['Chrome'],
 
@@ -32,7 +32,7 @@ module.exports = function (config) {
       'karma-systemjs',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-jasmine'
+      'karma-mocha'
     ],
 
     systemjs: {

@@ -7,6 +7,9 @@ import './articles-nav.module';
 import { ArticlesNavController } from './articles-nav.controller';
 import { IPostHeader } from '../../../shared/entities/post';
 
+import * as chai from 'chai';
+let expect = chai.expect;
+
 describe('articlesNav', () => {
     beforeEach(angular.mock.module('core.post', 'articlesNav'));
     describe('ArticlesNavController', () => {
@@ -30,14 +33,14 @@ describe('articlesNav', () => {
             httpLocalBackend.whenGET('/api/postHeaders?published=true').respond(headers);
             ctrl.refresh
                 .then(() => {
-                    expect(ctrl.model.links.length).toEqual(2);
-                    expect(ctrl.model.links[0].href).toEqual(`#${headers[0].title}`);
-                    expect(ctrl.model.links[1].href).toEqual(`#${headers[1].title}`);
-                    expect(ctrl.model.links[0].text).toEqual(`${now}: ${headers[0].title}`);
-                    expect(ctrl.model.links[1].text).toEqual(`${now}: ${headers[1].title}`);
+                    expect(ctrl.model.links.length).eq(2);
+                    expect(ctrl.model.links[0].href).eq(`#${headers[0].title}`);
+                    expect(ctrl.model.links[1].href).eq(`#${headers[1].title}`);
+                    expect(ctrl.model.links[0].text).eq(`${now}: ${headers[0].title}`);
+                    expect(ctrl.model.links[1].text).eq(`${now}: ${headers[1].title}`);
                     done();
                 })
-                .catch((err) => done.fail(err))
+                .catch((err) => done(err))
             httpLocalBackend.flush();
             $scope.$apply();
         });

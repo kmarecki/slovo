@@ -7,6 +7,9 @@ import './articles.module';
 import { ArticlesController } from './articles.controller';
 import { IPost } from '../../../shared/entities/post';
 
+import * as chai from 'chai';
+let expect = chai.expect;
+
 describe('articlesNav', () => {
     beforeEach(angular.mock.module('core.post', 'articles'));
 
@@ -31,14 +34,14 @@ describe('articlesNav', () => {
             httpLocalBackend.whenGET('/api/posts?published=true').respond(posts);
             ctrl.refresh
                 .then(() => {
-                    expect(ctrl.model.posts.length).toEqual(2);
-                    expect(ctrl.model.posts[0].textToDisplay).toEqual(`<p>${posts[0].text}</p>`);
-                    expect(ctrl.model.posts[1].textToDisplay).toEqual(`<p>${posts[1].text}</p>`);
-                    expect(ctrl.model.posts[0].title).toEqual(posts[0].title);
-                    expect(ctrl.model.posts[1].title).toEqual(posts[1].title);
+                    expect(ctrl.model.posts.length).eq(2);
+                    expect(ctrl.model.posts[0].textToDisplay).eq(`<p>${posts[0].text}</p>`);
+                    expect(ctrl.model.posts[1].textToDisplay).eq(`<p>${posts[1].text}</p>`);
+                    expect(ctrl.model.posts[0].title).eq(posts[0].title);
+                    expect(ctrl.model.posts[1].title).eq(posts[1].title);
                     done();
                 })
-                .catch((err) => done.fail(err))
+                .catch((err) => done(err))
             httpLocalBackend.flush();
             $scope.$apply();
         });
