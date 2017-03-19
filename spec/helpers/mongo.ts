@@ -22,7 +22,10 @@ export class MongoHelper {
     dropAll(): Promise<any> {
         return this.db.collections()
             .then((collections) => Promise.all(
-               _.each(collections, (collection) => collection.drop())));
+               _(collections)
+               .filter((collection) => collection.collectionName.indexOf('system') == -1)
+               .map((collection) => collection.drop())
+               .value()));
         
     }
 }
