@@ -1,8 +1,7 @@
 import * as _ from 'lodash';
 
 import { MongoClient, Db, InsertOneWriteOpResult } from 'mongodb';
-
-export class MongoHelper {
+export class MongoSupport {
     private db: Db;
     open(uri: string): Promise<any> {
         return MongoClient.connect(uri)

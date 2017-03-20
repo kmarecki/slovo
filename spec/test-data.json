@@ -1,0 +1,14 @@
+{
+    "settings" : [{
+        "blogDescription": "Some description",
+        "blogName": "The Blog"
+    }],
+
+    "users" : [{
+        "userName": "Test1",
+        "password": "$2a$10$LvrY2iEGJZDKWDOUbPZfyu/uf.bQLN8RWWzRfEQFDlB3ovHRA49Nm",
+        "email": "test@xxx.com",
+        "userId": 1,
+        "userLevel": 0
+    }]
+}

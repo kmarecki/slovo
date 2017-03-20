@@ -1,16 +1,9 @@
-process.env['NODE_ENV'] = 'test';
-process.env['NODE_CONFIG_DIR'] = '../config';
-
+import * as helper from '../helper';
 import * as chai from 'chai';
-let chaiHttp = require('chai-http');
 let expect = chai.expect;
-// let should = chai.should();
 
 import server = require('../../server/server');
-import {IAliveResponse} from '../../shared/contracts/alive';
-
-
-chai.use(chaiHttp);
+import { IAliveResponse } from '../../shared/contracts/alive';
 
 describe('alive', () => {
 
@@ -18,9 +11,9 @@ describe('alive', () => {
     afterEach((done) => done());
 
     it('/GET alive', (done) => {
-        chai.request(server.app)
-            .get('/api/alive')
-            .end((err, res) => {
+        helper.makeNonAuthorizedGetRequest(
+            '/api/alive',
+            (err, res) => {
                 expect(res.status).equal(200);
                 let response = <IAliveResponse>res.body;
                 expect(response).is.not.null;
