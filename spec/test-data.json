@@ -10,5 +10,12 @@
         "email": "test@xxx.com",
         "userId": 1,
         "userLevel": 0
+    },
+    {
+        "userName": "Test2",
+        "password": "$2a$10$LvrY2iEGJZDKWDOUbPZfyu/uf.bQLN8RWWzRfEQFDlB3ovHRA49Nm",
+        "email": "test2@xxx.com",
+        "userId": 2,
+        "userLevel": 0
     }]
 }

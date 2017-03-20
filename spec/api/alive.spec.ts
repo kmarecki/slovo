@@ -10,7 +10,7 @@ describe('alive', () => {
     beforeEach((done) => done());
     afterEach((done) => done());
 
-    it('/GET alive', (done) => {
+    it('GET /api/alive', (done) => {
         helper.makeNonAuthorizedGetRequest(
             '/api/alive',
             (err, res) => {

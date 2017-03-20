@@ -1,6 +1,6 @@
 {
   "MongoDb": {
-    "debug": true,
+    "debug": false,
     "uri": "mongodb://localhost/blog"
   }
 }

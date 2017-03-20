@@ -1,10 +1,9 @@
 import * as helper from '../helper';
-import { IAliveResponse } from '../../shared/contracts/alive';
 import { SettingsRepository } from '../../server/db/settings';
 import { ISettings } from '../../shared/entities/settings';
 
 import * as chai from 'chai';
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('settings', () => {
 
@@ -13,10 +12,12 @@ describe('settings', () => {
         blogName: 'The Blog - modified'
     };
 
-    before((done) => helper.beforeTestSuite()
-        .then(() => done()));
+    before((done) => {
+        helper.beforeTestSuite()
+            .then(() => done())
+    });
 
-    it('/GET siteSettings', (done) => {
+    it('GET /api/siteSettings', (done) => {
         helper.makeNonAuthorizedGetRequest(
             '/api/siteSettings',
             (err, res) => {
@@ -30,7 +31,7 @@ describe('settings', () => {
             });
     });
 
-    it('/POST siteSettings', (done) => {
+    it('POST /api/siteSettings', (done) => {
         helper.makeAuthorizedPostRequest(
             '/api/siteSettings',
             modifiedSettings,
@@ -40,7 +41,7 @@ describe('settings', () => {
             });
     });
 
-    it('/GET siteSettings after update', (done) => {
+    it('GET /api/siteSettings after settings updated', (done) => {
         helper.makeNonAuthorizedGetRequest(
             '/api/siteSettings',
             (err, res) => {

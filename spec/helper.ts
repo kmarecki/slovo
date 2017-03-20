@@ -4,13 +4,15 @@ process.env['NODE_CONFIG_DIR'] = '../config';
 import { MongoSupport } from './mongo.support';
 import server = require('../server/server');
 import { IAuthenticateRequest, IAuthenticateResponse } from '../shared/contracts/authenticate';
-
+import { IUser } from '../shared/entities/user';
 
 const config = require('config');
 
 import * as chai from 'chai';
+const expect = chai.expect;
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+
 
 const db = new MongoSupport();
 const testData = require('./test-data.json');
@@ -61,6 +63,8 @@ export function makeAuthorizedPostRequest(
         request,
         (err, res) => {
             let response = <IAuthenticateResponse>res.body;
+            expect(response.success).is.true;
+            expect(response.token).is.not.null;
             let token = response.token;
             chai.request(server.app)
                 .post(uri)

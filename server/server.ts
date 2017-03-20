@@ -16,6 +16,7 @@ import * as apiRoutes from './routes/api/api';
 //TODO Combine seperate api routers
 import * as postRoutes from './routes/api/post';
 import * as settingsRoutes from './routes/api/settings';
+import * as userRoutes from './routes/api/user';
 
 let config = require('config');
 let root = path.join(__dirname, '..');
@@ -40,6 +41,7 @@ app.use(adminRoutes.router);
 app.use(apiRoutes.router);
 app.use(postRoutes.router);
 app.use(settingsRoutes.router);
+app.use(userRoutes.router);
 app.use('/', express.static(ExpressApp.physicalPath));
 
 MongoConfiguration.uri = config.MongoDb.uri;
