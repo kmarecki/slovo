@@ -1,5 +1,4 @@
 import * as helper from '../helper';
-import { SettingsRepository } from '../../server/db/settings';
 import { ISettings } from '../../shared/entities/settings';
 
 import * as chai from 'chai';

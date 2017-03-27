@@ -39,6 +39,30 @@ export function makeNonAuthorizedGetRequest(
         .end((err, res) => callback(err, res));
 }
 
+export function makeAuthorizedGetRequest(
+    uri: string,
+    callback: (err, res: ChaiHttp.Response) => any): void {
+    const request: IAuthenticateRequest = {
+        username: 'Test1',
+        password: 'qwerty'
+    }
+    makeNonAuthorizedPostRequest(
+        '/api/authenticate',
+        request,
+        (err, res) => {
+            let response = <IAuthenticateResponse>res.body;
+            expect(response.success).is.true;
+            expect(response.token).is.not.null;
+            let token = response.token;
+            chai.request(server.app)
+                .get(uri)
+                .set('authorization', token)
+                .end((err, res) => callback(err, res));
+        }
+    )
+}
+
+
 export function makeNonAuthorizedPostRequest(
     uri: string,
     data: any,

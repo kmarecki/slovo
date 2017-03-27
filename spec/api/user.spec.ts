@@ -31,9 +31,10 @@ describe('users', () => {
 
     const modifiedName = "Test2 modified";
     const modifiedEmail = "modified@xxx.com";
-    const modifiedPassword ="qwerty2";
+    const modifiedPassword = "qwerty2";
 
-    it('POST /api/users', (done) => {
+    it('POST /api/users', function (done) {
+        this.timeout(3000);
         const user = <IUser>helper.getTestData().users[1];
         user.userName = modifiedName;
         user.email = modifiedEmail;
@@ -78,7 +79,9 @@ describe('users', () => {
             });
     });
 
-    it('POST /api/users password modified', (done) => {
+    it('POST /api/users password modified', function (done) {
+        this.timeout(3000);
+
         const user = <IUser>helper.getTestData().users[1];
         user.password = modifiedPassword;
         helper.makeAuthorizedPostRequest(
@@ -91,7 +94,7 @@ describe('users', () => {
         )
     });
 
-    
+
     it('POST /api/authenticate after password updated', (done) => {
         const request: IAuthenticateRequest = {
             username: modifiedName,

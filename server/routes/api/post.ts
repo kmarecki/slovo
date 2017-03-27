@@ -21,30 +21,41 @@ router.get('/api/postHeaders', (req: express.Request, res: express.Response) => 
 });
 
 router.get('/api/posts', (req: express.Request, res: express.Response) => {
-    let onlyPublished = req.query.published == 'true';
-    let db = new PostRepository();
-    db.findPosts(onlyPublished, (err, headers) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        let onlyPublished = req.query.published ?
+            req.query.published == 'true' :
+            undefined;
+        if (!user && !onlyPublished && onlyPublished !== undefined) {
+            res.status(401).end();
         } else {
-            res.status(200).json(headers);
+            if (!user && onlyPublished === undefined) {
+                onlyPublished = true;
+            }
+            let db = new PostRepository();
+            db.findPosts(onlyPublished, (err, headers) => {
+                if (err) {
+                    ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
+                } else {
+                    res.status(200).json(headers);
+                }
+            });
         }
-    });
+    })(req, res, undefined);
 });
 
-router.post('/api/posts', 
-    passport.authenticate('jwt', { session: false}),
+router.post('/api/posts',
+    passport.authenticate('jwt', { session: false }),
     (req: express.Request, res: express.Response) => {
-    let db = new PostRepository();
-    let post = <IPost>req.body;
-    db.savePost(post, (err) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, 'Failed to save a post');
-        } else {
-            res.status(201).end();
-        }
+        let db = new PostRepository();
+        let post = <IPost>req.body;
+        db.savePost(post, (err) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, 'Failed to save a post');
+            } else {
+                res.status(201).end();
+            }
+        });
     });
-});
 
 router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
     let db = new PostRepository();
@@ -61,19 +72,19 @@ router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
 router.put('/api/posts/:id', (req: express.Request, res: express.Response) => {
 });
 
-router.delete('/api/posts/:id', 
-    passport.authenticate('jwt', { session: false}),
+router.delete('/api/posts/:id',
+    passport.authenticate('jwt', { session: false }),
     (req: express.Request, res: express.Response) => {
-    let db = new PostRepository();
-    let postId = req.params.id;
-    db.removePost(postId, (err) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, `Failed to delete post {Id: ${postId}}`);
-        } else {
-            res.status(204).end();
-        }
+        let db = new PostRepository();
+        let postId = req.params.id;
+        db.removePost(postId, (err) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, `Failed to delete post {Id: ${postId}}`);
+            } else {
+                res.status(204).end();
+            }
+        });
     });
-});
 
 router.get('/api/settings', (req: express.Request, res: express.Response) => {
 });

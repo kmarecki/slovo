@@ -49,6 +49,7 @@ MongoConfiguration.useAutoIncrement = true;
 MongoConfiguration.useLogger = true;
 MongoConfiguration.debug = config.MongoDb.debug;
 MongoDb.configure();
+MongoDb.open();
 
 let server: http.Server;
 let port = app.get('port');

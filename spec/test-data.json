@@ -4,6 +4,28 @@
         "blogName": "The Blog"
     }],
 
+    "posts" : [{
+        "postId": 1,
+        "title": "First Post",
+        "date": "2017-01-12",
+        "text": "Firs Post text",
+        "published": true
+    },
+    {
+        "postId": 2,
+        "title": "First Post",
+        "date": "2017-02-13",
+        "text": "Second Post text",
+        "published": false
+    },
+    {
+        "postId": 3,
+        "title": "Third Post",
+        "date": "2017-03-14",
+        "text": "Thrid Post text",
+        "published": true
+    }],
+
     "users" : [{
         "userName": "Test1",
         "password": "$2a$10$LvrY2iEGJZDKWDOUbPZfyu/uf.bQLN8RWWzRfEQFDlB3ovHRA49Nm",
