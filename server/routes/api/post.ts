@@ -8,19 +8,10 @@ import { PostRepository } from '../../db/post';
 
 export let router = express.Router();
 
-router.get('/api/postHeaders', (req: express.Request, res: express.Response) => {
-    let onlyPublished = req.query.published == 'true';
-    let db = new PostRepository();
-    db.findPostHeaders(onlyPublished, (err, headers) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
-        } else {
-            res.status(200).json(headers);
-        }
-    });
-});
-
-router.get('/api/posts', (req: express.Request, res: express.Response) => {
+function authenticateAndSetOnlyPublished(
+    req: express.Request,
+    res: express.Response,
+    callback: (req: express.Request, res: express.Response, onlyPublished: boolean) => any) {
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
         let onlyPublished = req.query.published ?
             req.query.published == 'true' :
@@ -31,16 +22,35 @@ router.get('/api/posts', (req: express.Request, res: express.Response) => {
             if (!user && onlyPublished === undefined) {
                 onlyPublished = true;
             }
-            let db = new PostRepository();
-            db.findPosts(onlyPublished, (err, headers) => {
-                if (err) {
-                    ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
-                } else {
-                    res.status(200).json(headers);
-                }
-            });
+            callback(req, res, onlyPublished);
         }
     })(req, res, undefined);
+}
+
+router.get('/api/postHeaders', (req: express.Request, res: express.Response) => {
+    authenticateAndSetOnlyPublished(req, res, (req, res, onlyPublished) => {
+        let db = new PostRepository();
+        db.findPostHeaders(onlyPublished, (err, headers) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
+            } else {
+                res.status(200).json(headers);
+            }
+        });
+    });
+});
+
+router.get('/api/posts', (req: express.Request, res: express.Response) => {
+    authenticateAndSetOnlyPublished(req, res, (req, res, onlyPublished) => {
+        let db = new PostRepository();
+        db.findPosts(onlyPublished, (err, headers) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, 'Failed to get posts');
+            } else {
+                res.status(200).json(headers);
+            }
+        });
+    });
 });
 
 router.post('/api/posts',
@@ -58,15 +68,21 @@ router.post('/api/posts',
     });
 
 router.get('/api/posts/:id', (req: express.Request, res: express.Response) => {
-    let db = new PostRepository();
-    let postId = req.params.id;
-    db.findPost(postId, (err, post) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, `Failed to get post {Id: ${postId}}`);
-        } else {
-            res.status(200).json(post);
-        }
-    });
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        let db = new PostRepository();
+        let postId = req.params.id;
+        db.findPost(postId, (err, post) => {
+            if (err || !post) {
+                ExpressApp.response.handleError(res, err ? err.message : '', `Failed to get post {Id: ${postId}}`);
+            } else {
+                if (!user && !post.published) {
+                    res.status(401).end();
+                } else {
+                    res.status(200).json(post);
+                }
+            }
+        });
+    })(req, res, undefined);
 });
 
 router.put('/api/posts/:id', (req: express.Request, res: express.Response) => {
@@ -86,5 +102,6 @@ router.delete('/api/posts/:id',
         });
     });
 
+//TODO remove this route
 router.get('/api/settings', (req: express.Request, res: express.Response) => {
 });

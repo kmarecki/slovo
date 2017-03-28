@@ -99,3 +99,28 @@ export function makeAuthorizedPostRequest(
         }
     )
 }
+
+export function makeAuthorizedDeleteRequest(
+    uri: string,
+    data: any,
+    callback: (err, res: ChaiHttp.Response) => any): void {
+    const request: IAuthenticateRequest = {
+        username: 'Test1',
+        password: 'qwerty'
+    }
+    makeNonAuthorizedPostRequest(
+        '/api/authenticate',
+        request,
+        (err, res) => {
+            let response = <IAuthenticateResponse>res.body;
+            expect(response.success).is.true;
+            expect(response.token).is.not.null;
+            let token = response.token;
+            chai.request(server.app)
+                .del(uri)
+                .set('authorization', token)
+                .send(data)
+                .end((err, res) => callback(err, res));
+        }
+    )
+}
