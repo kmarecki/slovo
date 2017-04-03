@@ -30,7 +30,7 @@ export class MessageBoxController {
     }
 
     private static formatError(err: any): string {
-        return `Status Code ${err.status}: ${err.statusText}<br/>${err.data.error}`;
+        return `Status Code ${err.status}: ${err.statusText}<br/>${err.data ? err.data.error : ''}`;
     }
 
 

@@ -1,8 +1,7 @@
 import 'angular';
 import 'angular-mocks';
 import 'angular-resource';
-import '../../core/post/post.module';
-import './articles-nav.module';
+import '../../site.module';
 
 import { ArticlesNavController } from './articles-nav.controller';
 import { IPostHeader } from '../../../shared/entities/post';
@@ -11,7 +10,7 @@ import * as chai from 'chai';
 let expect = chai.expect;
 
 describe('articlesNav', () => {
-    beforeEach(angular.mock.module('core.post', 'articlesNav'));
+    beforeEach(angular.mock.module('siteApp'));
     describe('ArticlesNavController', () => {
         let ctrl: ArticlesNavController;
         let $scope: ng.IScope;

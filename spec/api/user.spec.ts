@@ -35,7 +35,7 @@ describe('users', () => {
 
     it('POST /api/users', function (done) {
         //TODO Why is it neccessary to increase timeout? Investigate a poor performance on VM.
-        this.timeout(3000);
+        this.timeout(4000);
         const user = <IUser>helper.getTestData().users[1];
         user.userName = modifiedName;
         user.email = modifiedEmail;
@@ -81,7 +81,7 @@ describe('users', () => {
     });
 
     it('POST /api/users password modified', function (done) {
-        this.timeout(3000);
+        this.timeout(4000);
 
         const user = <IUser>helper.getTestData().users[1];
         user.password = modifiedPassword;

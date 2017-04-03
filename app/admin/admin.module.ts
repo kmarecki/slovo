@@ -4,7 +4,7 @@ import 'angular-messages';
 import 'angular-resource';
 import 'angular-route';
 import 'angular-sanitize';
-import 'angular-ui-bootsrap';
+import 'angular-ui-bootstrap';
 import 'angular-ui-router';
 
 import '../core/core.module';

@@ -1,4 +1,3 @@
-
 import { ISettings } from '../../../../shared/entities/settings'
 import { ISettingsDataService } from '../../../core/settings/settings.service';
 import { MessageBoxController } from '../message-box/message-box.controller';
@@ -7,6 +6,7 @@ export class SettingsController {
     static $inject = ['$uibModal', '$state', 'settingsDataService'];
 
     settings: ISettings;
+    refresh: ng.IPromise<any>;
 
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
@@ -17,11 +17,9 @@ export class SettingsController {
     }
 
     private refreshModel() {
-        this.settingsDataService.getSettings(
-            (settings) => {
-                this.settings = settings;
-            },
-            (err) => MessageBoxController.showError(this.$uibModal, err));
+        this.refresh = this.settingsDataService.getSettings()
+            .then((settings) => this.settings = settings)
+            .catch((err) => MessageBoxController.showError(this.$uibModal, err));
     }
 
     save(): void {

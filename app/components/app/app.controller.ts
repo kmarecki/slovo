@@ -6,6 +6,7 @@ export class AppController {
     static $inject = ['settingsDataService'];
 
     settings: ISettings;
+    refresh: ng.IPromise<any>;
 
     constructor(
         private settingsDataService: ISettingsDataService
@@ -14,9 +15,7 @@ export class AppController {
     }
 
     private refreshModel() {
-        this.settingsDataService.getSettings(
-            (settings) => {
-                this.settings = settings;
-            });
+        this.refresh = this.settingsDataService.getSettings()
+            .then((settings) => this.settings = settings);
     }
 }
