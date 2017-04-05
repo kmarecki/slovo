@@ -8,7 +8,7 @@ export interface ISettingsResource extends ng.resource.IResourceClass<ng.resourc
 export interface ISettingsDataService {
     getSettings(): ng.IPromise<ISettings>;
 
-    saveSettings(settings: ISettings, success: () => any, err?: (err) => any);
+    saveSettings(settings: ISettings): ng.IPromise<any>;
 }
 
 export class SettingsDataService implements ISettingsDataService {
@@ -24,25 +24,19 @@ export class SettingsDataService implements ISettingsDataService {
 
     getSettings(): ng.IPromise<ISettings> {
         return this.$q((resolve, reject) => {
-        let resource = this.getSettingsResource();
-        resource.get(
-            (settings) => {
-                resolve(settings);
-            },
-            (error) => {
-                reject(error);
-            });
+            let resource = this.getSettingsResource();
+            resource.get(
+                (settings) => resolve(settings),
+                (error) => reject(error));
         });
     }
 
-    saveSettings(settings: ISettings, success: () => any, err?: (error) => any) {
-        let resource = this.getSettingsResource();
-        resource.save({}, settings,
-            () => {
-                success();
-            },
-            (error) => {
-                err(error);
-            });
+    saveSettings(settings: ISettings): ng.IPromise<any> {
+        return this.$q((resolve, reject) => {
+            let resource = this.getSettingsResource();
+            resource.save({}, settings,
+                () => resolve(),
+                (error) => reject(error));
+        });
     }
 }

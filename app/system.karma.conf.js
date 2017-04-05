@@ -18,6 +18,7 @@ System.config({
         'bootstrap': 'app/bower_components/bootstrap/dist/js/bootstrap.js',
         'showdown': 'app/bower_components/showdown/dist/showdown.js',
         'chai': 'app/bower_components/chai/chai.js',
+        'sinon': 'app/bower_components/sinon-1.17.7/index.js',
     },
     meta: {
         'lodash': { format: 'global', exports: '_' },
@@ -31,5 +32,6 @@ System.config({
         'angular-ui-bootstrap': { format: 'global', deps: ['angular'] },
         'angular-ui-router': { format: 'global', deps: ['angular'] },
         'chai': { format: 'global', exports: 'chai' },
+        'sinon': { format: 'global', exports: 'sinon' },
     }
 });

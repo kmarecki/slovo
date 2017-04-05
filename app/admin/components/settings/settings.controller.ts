@@ -22,13 +22,9 @@ export class SettingsController {
             .catch((err) => MessageBoxController.showError(this.$uibModal, err));
     }
 
-    save(): void {
-        this.settingsDataService.saveSettings(this.settings,
-            () => {
-                this.$state.go('panel.posts');
-            },
-            (err) => {
-                MessageBoxController.showError(this.$uibModal, err);
-            });
+    save(): ng.IPromise<any> {
+        return this.settingsDataService.saveSettings(this.settings)
+            .then(() => this.$state.go('panel.posts'))
+            .catch((err) => MessageBoxController.showError(this.$uibModal, err));
     }
 }
