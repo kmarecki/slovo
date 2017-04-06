@@ -1,6 +1,5 @@
 import 'angular';
 import 'angular-mocks';
-import 'angular-resource';
 import '../../site.module';
 
 import { ArticlesNavController } from './articles-nav.controller';
@@ -10,7 +9,9 @@ import * as chai from 'chai';
 let expect = chai.expect;
 
 describe('articlesNav', () => {
+
     beforeEach(angular.mock.module('siteApp'));
+    
     describe('ArticlesNavController', () => {
         let ctrl: ArticlesNavController;
         let $scope: ng.IScope;

@@ -17,8 +17,8 @@ export class LoginController {
        
     }
 
-    login() {
-        this.authService
+    login(): ng.IPromise<any> {
+        return this.authService
             .login(this.username, this.password)
             .then(() => this.$state.go('panel'))
             .catch(

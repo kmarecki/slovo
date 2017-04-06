@@ -1,6 +1,5 @@
 import 'angular';
 import 'angular-mocks';
-import 'angular-resource';
 import '../../site.module';
 
 import { ArticlesController } from './articles.controller';

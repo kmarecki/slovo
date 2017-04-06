@@ -20,8 +20,8 @@ export class SignupController {
 
     }
 
-    signup() {
-        this.authService
+    signup(): ng.IPromise<any> {
+        return this.authService
             .signup(this.username, this.password, this.email)
             .then(() => this.$state.go('login'))
             .catch(
