@@ -1,6 +1,6 @@
 {
   "name": "slovo",
-  "version": false,
+  "version": "0.0.0",
   "dependencies": {
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20161222093745",
     "bcryptjs": "registry:dt/bcryptjs#2.4.0+20170109141314",

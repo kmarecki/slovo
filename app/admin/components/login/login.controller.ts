@@ -20,7 +20,7 @@ export class LoginController {
     login(): ng.IPromise<any> {
         return this.authService
             .login(this.username, this.password)
-            .then(() => this.$state.go('panel'))
+            .then(() => this.$state.go('panel.posts'))
             .catch(
             (msg) => MessageBoxController.show(
                 this.$uibModal, MessageBoxType.Error, '', msg));

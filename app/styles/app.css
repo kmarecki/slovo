@@ -39,3 +39,18 @@ html, body {
   min-height: 85%;
   max-width: 95%;
 }
+
+.list a {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   display: block;
+}
+
+.post {
+  border-radius: 1em;
+  /*border: 0.250em solid gray;*/
+  background: #eee;
+  padding: 1em;
+  padding-top: 0.125em;
+}

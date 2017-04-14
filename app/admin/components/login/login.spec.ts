@@ -53,8 +53,8 @@ describe('login', () => {
             ctrl.login()
                 .then(() => {
                     expect(authService.isAuthenticated()).is.true;
-                    sinon.assert.calledWith(go, 'panel');
-                    expect(state.current.name).eq('panel');
+                    sinon.assert.calledWith(go, 'panel.posts');
+                    expect(state.current.name).eq('panel.posts');
                     done();
                 })
                 .catch((err) => done(err));

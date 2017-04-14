@@ -56,11 +56,11 @@ app.config(['$routeProvider', '$locationProvider', '$stateProvider', (
             url: 'posts',
             template: '<posts></posts>',
         })
-        .state('panel.post-create', {
+        .state('panel.posts-create', {
             url: 'posts/create',
             template: '<post></post>',
         })
-        .state('panel.post-edit', {
+        .state('panel.posts-edit', {
             url: 'posts/:id',
             template: '<post></post>',
         })

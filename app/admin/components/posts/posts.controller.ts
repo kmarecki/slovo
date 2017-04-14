@@ -42,7 +42,7 @@ export class PostsController {
     }
 
     editPost(postId: number): void {
-        this.$state.go('panel.post-edit', { id: postId});
+        this.$state.go('panel.posts-edit', { id: postId});
     }
 
     removePost(postId: number): void {

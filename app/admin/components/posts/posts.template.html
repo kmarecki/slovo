@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-6 list">
         <nav>
             <ul>
                 <li ng-repeat="header in $ctrl.model.headers">
-                    <div class="col-xs-6">
+                    <div class="col-xs-8">
                         <a href="" ng-click="$ctrl.selectPost(header.postId)">{{header.title}}</a>
                     </div>
-                    <div class="buttons col-xs-6">
+                    <div class="buttons col-xs-4">
                         <button type="button" class="btn-xs" ng-click="$ctrl.editPost(header.postId)">Edit</button>
                         <button type="button" class="btn-xs" ng-click="$ctrl.removePost(header.postId)">Del</button>
                         <button type="button" class="btn-xs ng-hide" ng-hide="header.published" ng-click="$ctrl.publish(header.postId)">Publish</a>
@@ -16,7 +16,10 @@
             </ul>
         </nav>
     </div>
-    <div class="col-xs-8">
+    <div class="col-xs-6 post">
+        <header>
+            <h3>{{$ctrl.model.selectedPost.title}}</h3>
+        </header>
         <div ng-bind-html="$ctrl.model.selectedPost.textToDisplay" />
     </div>
 </div>
