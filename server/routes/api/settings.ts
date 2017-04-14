@@ -8,8 +8,7 @@ import { SettingsRepository } from '../../db/settings';
 
 export let router = express.Router();
 
-//TODO: Why /api/settings doesn't work - it hangs?
-router.get('/api/siteSettings', 
+router.get('/api/settings', 
     (req: express.Request, res: express.Response) => {
     let db = new SettingsRepository();
     db.getSettings((err, settings) => {
@@ -21,7 +20,7 @@ router.get('/api/siteSettings',
     });
 });
 
-router.post('/api/siteSettings', 
+router.post('/api/settings', 
     passport.authenticate('jwt', { session: false}),
     (req: express.Request, res: express.Response) => {
     let db =  new SettingsRepository();

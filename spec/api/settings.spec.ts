@@ -16,9 +16,9 @@ describe('settings', () => {
             .then(() => done())
     });
 
-    it('GET /api/siteSettings', (done) => {
+    it('GET /api/settings', (done) => {
         helper.makeNonAuthorizedGetRequest(
-            '/api/siteSettings',
+            '/api/settings',
             (err, res) => {
                 expect(res.status).equal(200);
                 const response = <ISettings>res.body;
@@ -30,9 +30,9 @@ describe('settings', () => {
             });
     });
 
-    it('POST /api/siteSettings', (done) => {
+    it('POST /api/settings', (done) => {
         helper.makeAuthorizedPostRequest(
-            '/api/siteSettings',
+            '/api/settings',
             modifiedSettings,
             (err, res) => {
                 expect(res.status).equal(201);
@@ -40,9 +40,9 @@ describe('settings', () => {
             });
     });
 
-    it('GET /api/siteSettings after settings updated', (done) => {
+    it('GET /api/settings after settings updated', (done) => {
         helper.makeNonAuthorizedGetRequest(
-            '/api/siteSettings',
+            '/api/settings',
             (err, res) => {
                 expect(res.status).equal(200);
                 let response = <ISettings>res.body;

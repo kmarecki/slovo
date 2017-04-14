@@ -29,7 +29,7 @@ describe('articlesNav', () => {
                 blogDescription: "Some description",
                 blogName: "Some name"
             }
-            httpLocalBackend.whenGET('/api/siteSettings')
+            httpLocalBackend.whenGET('/api/settings')
                 .respond(settings);
             ctrl.refresh
                 .then(() => {

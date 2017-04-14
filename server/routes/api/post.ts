@@ -101,7 +101,3 @@ router.delete('/api/posts/:id',
             }
         });
     });
-
-//TODO remove this route
-router.get('/api/settings', (req: express.Request, res: express.Response) => {
-});

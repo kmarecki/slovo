@@ -34,7 +34,7 @@ describe('settings', () => {
         }
 
         it('load settings', (done) => {
-            httpLocalBackend.whenGET('/api/siteSettings')
+            httpLocalBackend.whenGET('/api/settings')
                 .respond(settings);
             ctrl.refresh
                 .then(() => {
@@ -53,9 +53,9 @@ describe('settings', () => {
         }
 
         it('save settings', (done) => {
-            httpLocalBackend.whenGET('/api/siteSettings')
+            httpLocalBackend.whenGET('/api/settings')
                 .respond(settings);
-            httpLocalBackend.whenPOST('/api/siteSettings')
+            httpLocalBackend.whenPOST('/api/settings')
                 .respond((method, url, data, headers) => {
                     const posted = <ISettings>angular.fromJson(data.toString());
                     expect(posted.blogDescription).eq(modifiedSettings.blogDescription);

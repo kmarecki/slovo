@@ -19,7 +19,7 @@ export class SettingsDataService implements ISettingsDataService {
         private $q: ng.IQService) { }
 
     private getSettingsResource(): ISettingsResource {
-        return <ISettingsResource>this.$resource('/api/siteSettings');
+        return <ISettingsResource>this.$resource('/api/settings');
     };
 
     getSettings(): ng.IPromise<ISettings> {
