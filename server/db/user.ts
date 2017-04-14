@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler } from 'mongoose-repos';
+import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler } from 'mongoose-repos';
 
 import { IUser, UserLevel } from '../../shared/entities/user';
 
@@ -47,11 +47,22 @@ export class UserRepository extends MongoRepository {
 
         let query = { userName: userName };
         this.findOne(
-            this.User, 
-            query, 
+            this.User,
+            query,
             (err, result) => defaultResultHandler(err, result, callback));
     }
 
+    findUsers(
+        callback: (err: Error, users: IUser[]) => any): void {
+        this.connect()
+            .then(() => {
+                this.User.find()
+                    .sort({ userName: 'asc' })
+                    .select({})
+                    .exec((err, result) => defaultResultArrayHandler(err, result, callback, ));
+            })
+            .catch((err) => callback(err, null));
+    }
     create(
         username: string,
         password: string,
@@ -74,9 +85,9 @@ export class UserRepository extends MongoRepository {
     save(user: IUser, callback: (err: Error) => any): void {
         let query = { userId: user.userId };
         this.findOneAndSave(
-            this.User, 
-            query, 
-            user, 
+            this.User,
+            query,
+            user,
             (err) => defaultHandler(err, callback));
     }
 

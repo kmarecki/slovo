@@ -12,6 +12,22 @@ describe('users', () => {
             .then(() => done())
     });
 
+    it('GET /api/users', (done) => {
+        helper.makeAuthorizedGetRequest(
+            '/api/users',
+            (err, res) => {
+                expect(res.status).equal(200);
+                const response = <IUser[]>res.body;
+                const user = <IUser>helper.getTestData().users[1];
+                expect(response.length).equal(helper.getTestData().users.length);
+                expect(response[1].userName).equal(user.userName);
+                expect(response[1].userId).equal(user.userId);
+                expect(response[1].email).equal(user.email);
+                done();
+            }
+        );
+    });
+
     //Don't mess with user Test1, he is used for default authorization
     it('GET /api/users/:id', (done) => {
         helper.makeNonAuthorizedGetRequest(
@@ -27,7 +43,7 @@ describe('users', () => {
                 done();
             }
         );
-    })
+    });
 
     const modifiedName = "Test2 modified";
     const modifiedEmail = "modified@xxx.com";

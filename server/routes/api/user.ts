@@ -8,19 +8,32 @@ import { UserRepository } from '../../db/user';
 
 export let router = express.Router();
 
-router.post('/api/users', 
-    passport.authenticate('jwt', { session: false}),
+router.get('/api/users',
+    passport.authenticate('jwt', { session: false }),
     (req: express.Request, res: express.Response) => {
-    let db = new UserRepository();
-    let post = <IUser>req.body;
-    db.save(post, (err) => {
-        if (err) {
-            ExpressApp.response.handleError(res, err.message, 'Failed to save a user');
-        } else {
-            res.status(201).end();
-        }
+        let db = new UserRepository();
+        db.findUsers((err, users) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, 'Failed to get users');
+            } else {
+                res.status(200).json(users);
+            }
+        });
     });
-});
+
+router.post('/api/users',
+    passport.authenticate('jwt', { session: false }),
+    (req: express.Request, res: express.Response) => {
+        let db = new UserRepository();
+        let post = <IUser>req.body;
+        db.save(post, (err) => {
+            if (err) {
+                ExpressApp.response.handleError(res, err.message, 'Failed to save a user');
+            } else {
+                res.status(201).end();
+            }
+        });
+    });
 
 router.get('/api/users/:id', (req: express.Request, res: express.Response) => {
     let db = new UserRepository();

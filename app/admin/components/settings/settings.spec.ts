@@ -19,14 +19,14 @@ describe('settings', () => {
         let state: ng.ui.IStateService;
 
         beforeEach(angular.mock.inject([
-            '$componentController', '$rootScope', '$httpBackend', '$state', 'services.auth', 
-            ($componentController, $rootScope, $httpBackend, $state, _authService_ ) => {
-            ctrl = <SettingsController>$componentController('settings');
-            $scope = $rootScope;
-            httpLocalBackend = $httpBackend;
-            state = $state;
-            sinon.stub(_authService_, 'isAuthenticated').returns(true);
-        }]));
+            '$componentController', '$rootScope', '$httpBackend', '$state', 'services.auth',
+            ($componentController, $rootScope, $httpBackend, $state, _authService_) => {
+                ctrl = <SettingsController>$componentController('settings');
+                $scope = $rootScope;
+                httpLocalBackend = $httpBackend;
+                state = $state;
+                sinon.stub(_authService_, 'isAuthenticated').returns(true);
+            }]));
 
         const settings: ISettings = {
             blogDescription: "Some description",

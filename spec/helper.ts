@@ -1,5 +1,5 @@
 process.env['NODE_ENV'] = 'test';
-process.env['NODE_CONFIG_DIR'] = '../config';
+process.env['NODE_CONFIG_DIR'] = './config';
 
 import { MongoSupport } from './mongo.support';
 import server = require('../server/server');
