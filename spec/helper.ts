@@ -1,7 +1,7 @@
 process.env['NODE_ENV'] = 'test';
 process.env['NODE_CONFIG_DIR'] = './config';
 
-import { MongoSupport } from './mongo.support';
+import { MongoSupport } from 'mongodb-support';
 import server = require('../server/server');
 import { IAuthenticateRequest, IAuthenticateResponse } from '../shared/contracts/authenticate';
 import { IUser } from '../shared/entities/user';
