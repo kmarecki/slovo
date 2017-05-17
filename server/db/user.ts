@@ -68,18 +68,20 @@ export class UserRepository extends MongoRepository {
         password: string,
         email: string,
         callback: (err: Error) => any): void {
-
-        let user: IUser = {
-            userId: 0,
-            authId: '',
-            authStrategy: 'local',
-            userName: username,
-            password: password,
-            email: email,
-            userLevel: UserLevel.User
-        };
-
-        this.save(user, callback);
+        this.connect()
+            .then(() => {
+                let user: IUser = {
+                    userId: 0,
+                    authId: '',
+                    authStrategy: 'local',
+                    userName: username,
+                    password: password,
+                    email: email,
+                    userLevel: UserLevel.User
+                };
+                this.User.create(user, (err) => defaultHandler(err, callback));
+            })
+            .catch((err) => defaultHandler(err, callback));
     }
 
     save(user: IUser, callback: (err: Error) => any): void {
@@ -113,7 +115,10 @@ export class UserRepository extends MongoRepository {
             },
             authId: String,
             authStrategy: String,
-            userName: String,
+            userName: {
+                type: String,
+                unique: true
+            },
             password: String,
             email: String,
             userLevel: Number

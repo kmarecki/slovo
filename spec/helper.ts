@@ -21,12 +21,14 @@ const testData = require('./test-data.json');
 export function getTestData(): any {
     return testData;
 }
-export function beforeTestSuite(): Promise<any> {
+export function beforeTestSuite(addTestData = true): Promise<any> {
     var promise = db.open(config.MongoDb.uri)
         .then(() => db.dropAll());
-    for (let property in testData) {
-        promise = promise.
-            then(() => db.insert(property, testData[property]))
+    if (addTestData) {
+        for (let property in testData) {
+            promise = promise.
+                then(() => db.insert(property, testData[property]))
+        }
     }
     return promise;
 }
@@ -39,13 +41,14 @@ export function makeNonAuthorizedGetRequest(
         .end((err, res) => callback(err, res));
 }
 
+//TODO Don't use optional parameter for request, use fluent configuration for a call
 export function makeAuthorizedGetRequest(
     uri: string,
-    callback: (err, res: ChaiHttp.Response) => any): void {
-    const request: IAuthenticateRequest = {
+    callback: (err, res: ChaiHttp.Response) => any,
+    request: IAuthenticateRequest = {
         username: 'Test1',
         password: 'qwerty'
-    }
+    }): void {
     makeNonAuthorizedPostRequest(
         '/api/authenticate',
         request,
@@ -77,11 +80,11 @@ export function makeNonAuthorizedPostRequest(
 export function makeAuthorizedPostRequest(
     uri: string,
     data: any,
-    callback: (err, res: ChaiHttp.Response) => any): void {
-    const request: IAuthenticateRequest = {
+    callback: (err, res: ChaiHttp.Response) => any,
+    request: IAuthenticateRequest = {
         username: 'Test1',
         password: 'qwerty'
-    }
+    }): void {
     makeNonAuthorizedPostRequest(
         '/api/authenticate',
         request,
@@ -103,11 +106,11 @@ export function makeAuthorizedPostRequest(
 export function makeAuthorizedDeleteRequest(
     uri: string,
     data: any,
-    callback: (err, res: ChaiHttp.Response) => any): void {
-    const request: IAuthenticateRequest = {
+    callback: (err, res: ChaiHttp.Response) => any,
+    request: IAuthenticateRequest = {
         username: 'Test1',
         password: 'qwerty'
-    }
+    }): void {
     makeNonAuthorizedPostRequest(
         '/api/authenticate',
         request,
