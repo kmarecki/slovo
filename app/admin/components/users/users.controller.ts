@@ -16,11 +16,11 @@ export class UsersController {
         private $uibModal: ng.ui.bootstrap.IModalService,
         private userService: IUserDataService
     ) {
-        this.refreshModel();
+        this.refresh = this.refreshModel();
     }
 
-    private refreshModel() {
-        this.refresh = this.userService.getUsers()
+    refreshModel(): ng.IPromise<any> {
+        return this.userService.getUsers()
             .then((users) => {
                 this.users = users
                 this.selected = this.users.length > 0 ? this.users[0] : undefined; 
@@ -30,6 +30,12 @@ export class UsersController {
 
     selectUser(userId: number): void {
        this.selected = _.find(this.users, (obj) => obj.userId == userId);
+    }
+
+    removeUser(userId: number): ng.IPromise<any> {
+        return this.userService.deleteUser(userId)
+            .then(() => this.refreshModel())
+            .catch((err) => MessageBoxController.showError(this.$uibModal, err));
     }
 
     saveSelectedUser(): ng.IPromise<any> {

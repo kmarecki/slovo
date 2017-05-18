@@ -10,7 +10,7 @@ export interface IUserDataService {
 
     saveUser(user: IUser): ng.IPromise<any>;
 
-    // deleteUser(userId: number): ng.IPromise<any>;
+    deleteUser(userId: number): ng.IPromise<any>;
 }
 
 export class UserDataService implements IUserDataService {
@@ -35,16 +35,27 @@ export class UserDataService implements IUserDataService {
         });
     }
 
-    saveUser(user: IUser): ng.IPromise<any>{
+    saveUser(user: IUser): ng.IPromise<any> {
         return this.$q((resolve, reject) => {
             const userResource = this.getUserResource();
             userResource.save(
-                {}, 
+                {},
                 user,
                 () => resolve(),
                 (err) => reject(err)
             );
         });
     }
-    
+
+    deleteUser(userId: number): ng.IPromise<any> {
+        return this.$q((resolve, reject) => {
+            const userResource = this.getUserResource();
+            userResource.delete(
+                { id: userId },
+                () => resolve(),
+                (err) => reject(err)
+            )
+        });
+    }
+
 }

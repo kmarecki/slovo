@@ -20,11 +20,13 @@ describe('users', () => {
 
         beforeEach(angular.mock.inject([
             '$componentController', '$rootScope', '$httpBackend',
-            ($componentController, $rootScope, $httpBackend, $state) => {
+            ($componentController, $rootScope, $httpBackend) => {
                 ctrl = <UsersController>$componentController('users');
                 $scope = $rootScope;
                 httpLocalBackend = $httpBackend;
             }]));
+
+        afterEach(() => httpLocalBackend.verifyNoOutstandingExpectation(false));
 
         const users = [
             {
@@ -115,5 +117,32 @@ describe('users', () => {
             $scope.$apply();
         });
 
+        it('delete user', (done) => {
+
+            httpLocalBackend.whenGET('/api/users')
+                .respond(users);
+            httpLocalBackend.whenDELETE('/api/users/2')
+                .respond(204);
+
+            ctrl.refresh
+                .then(() => {
+                    expect(ctrl.users.length).eq(users.length);
+                    const usersCopy = users.slice();
+                    const last = usersCopy.pop();
+                    httpLocalBackend.expectGET('/api/users')
+                        .respond(usersCopy);
+                    return ctrl.removeUser(last.userId);
+                })
+                .then(() => {
+                    expect(ctrl.users.length).eq(users.length - 1);
+                    done();
+                })
+                .catch((err) => done(err));
+
+            httpLocalBackend.expectDELETE('/api/users/2');
+
+            httpLocalBackend.flush();
+            $scope.$apply();
+        });
     });
 });

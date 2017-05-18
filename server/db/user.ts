@@ -63,7 +63,7 @@ export class UserRepository extends MongoRepository {
             })
             .catch((err) => callback(err, null));
     }
-    create(
+    createUser(
         username: string,
         password: string,
         email: string,
@@ -79,12 +79,23 @@ export class UserRepository extends MongoRepository {
         user.save(callback);
     }
 
-    save(user: IUser, callback: (err: Error) => any): void {
+    saveUser(user: IUser, callback: (err: Error) => any): void {
         let query = { userId: user.userId };
         this.findOneAndSave(
             this.User,
             query,
             user,
+            (err) => defaultHandler(err, callback));
+    }
+
+    removeUser(
+        userId: number,
+        callback: (err: Error) => any): void {
+
+        let query = { userId: userId };
+        this.remove(
+            this.User,
+            query,
             (err) => defaultHandler(err, callback));
     }
 

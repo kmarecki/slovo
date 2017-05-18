@@ -52,7 +52,7 @@ router.post('/api/signup', (req, res) => {
         res.json(response);
     } else {
         let db = new UserRepository();
-        db.create(
+        db.createUser(
             request.username,
             request.password,
             request.email,

@@ -127,4 +127,25 @@ describe('users', () => {
             });
     });
 
+    it('DELETE /api/users', (done) => {
+        const deleted = <IUser>helper.getTestData().users[1];
+        helper.makeAuthorizedDeleteRequest(
+            `/api/users/${deleted.userId}`,
+            {},
+            (err, res) => {
+                expect(res.status).equal(204);
+                done();
+            });
+    });
+
+    it('GET /api/users deleted users', (done) => {
+        const deleted = <IUser>helper.getTestData().users[1];
+        helper.makeNonAuthorizedGetRequest(
+            `/api/users/${deleted.userId}`,
+            (err, res) => {
+                expect(res.status).equal(500);
+                done();
+            });
+    });
+
 });
