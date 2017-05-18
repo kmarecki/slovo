@@ -8,7 +8,7 @@ export interface IUserDataService {
 
     getUsers(): ng.IPromise<IUser[]>;
 
-    // saveUser(user: IUser): ng.IPromise<any>;
+    saveUser(user: IUser): ng.IPromise<any>;
 
     // deleteUser(userId: number): ng.IPromise<any>;
 }
@@ -29,13 +29,22 @@ export class UserDataService implements IUserDataService {
         return this.$q((resolve, reject) => {
             const userResource = this.getUserResource();
             userResource.query(
-                (users) => {
-                    resolve(users);
-                },
-                (err) => {
-                    reject(err);
-                }
-            )
-        })
+                (users) => resolve(users),
+                (err) => reject(err)
+            );
+        });
     }
+
+    saveUser(user: IUser): ng.IPromise<any>{
+        return this.$q((resolve, reject) => {
+            const userResource = this.getUserResource();
+            userResource.save(
+                {}, 
+                user,
+                () => resolve(),
+                (err) => reject(err)
+            );
+        });
+    }
+    
 }

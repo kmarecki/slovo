@@ -28,7 +28,7 @@ describe('users', () => {
 
         const users = [
             {
-                authId: 1,
+                authId: '1',
                 authStrategy: 1,
                 email: 'xxx@xxx.xx',
                 password: '',
@@ -36,7 +36,7 @@ describe('users', () => {
                 userId: 1
             },
             {
-                authId: 2,
+                authId: '2',
                 authStrategy: 2,
                 email: 'yyy@yyy.yy',
                 password: '',
@@ -60,6 +60,57 @@ describe('users', () => {
                     done();
                 })
                 .catch((err) => done(err))
+            httpLocalBackend.flush();
+            $scope.$apply();
+        });
+
+        it('select user', (done) => {
+            httpLocalBackend.whenGET('/api/users')
+                .respond(users);
+            ctrl.refresh
+                .then(() => {
+                    expect(ctrl.selected.userId).eq(users[0].userId);
+                    expect(ctrl.selected.userName).eq(users[0].userName);
+
+                    ctrl.selectUser(users[1].userId);
+
+                    expect(ctrl.selected.userId).eq(users[1].userId);
+                    expect(ctrl.selected.userName).eq(users[1].userName);
+                    done();
+                })
+                .catch((err) => done(err))
+            httpLocalBackend.flush();
+            $scope.$apply();
+        });
+
+        it('save selected user', (done) => {
+
+            const modifiedUser = {
+                email: 'xxx@xxx.yy',
+                userName: 'Test1 modified',
+                userId: 1
+            };
+
+            httpLocalBackend.whenGET('/api/users')
+                .respond(users);
+            httpLocalBackend.whenPOST('/api/users')
+                .respond((method, url, data, headers) => {
+                    const posted = <IUser>angular.fromJson(data.toString());
+                    expect(posted.userId).eq(modifiedUser.userId);
+                    expect(posted.userName).eq(modifiedUser.userName);
+                    expect(posted.email).eq(modifiedUser.email);
+                    return [201, {}, {}, ''];
+                });
+
+            ctrl.refresh
+                .then(() => {
+                    ctrl.selected.userName = modifiedUser.userName;
+                    ctrl.selected.email = modifiedUser.email;
+                    return ctrl.saveSelectedUser();
+                })
+                .then(() => done())
+                .catch((err) => done(err));
+
             httpLocalBackend.flush();
             $scope.$apply();
         });
