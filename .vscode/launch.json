@@ -4,7 +4,8 @@
 
         {
             "name": "Launch",
-            "type": "node2",
+            "type": "node",
+            "protocol": "inspector",
             "request": "launch",
             "program": "${workspaceRoot}/server/app.js",
             "stopOnEntry": false,
@@ -23,7 +24,8 @@
         },
         {
             "name": "Attach",
-            "type": "node2",
+            "type": "node",
+            "protocol": "inspector",
             "request": "attach",
             "port": 5858,
             "address": "localhost",
@@ -35,7 +37,8 @@
         },
         {
             "name": "Attach to Process",
-            "type": "node2",
+            "type": "node",
+            "protocol": "inspector",
             "request": "attach",
             "processId": "${command.PickProcess}",
             "port": 5858,
@@ -52,6 +55,27 @@
                 "/": "${workspaceRoot}/",
                 "/base/": "${workspaceRoot}/"
             }
-        }
+        },
+        {
+			"name": "Run mocha",
+			"type": "node",
+            "protocol": "inspector",
+			"request": "launch",
+			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+			"stopOnEntry": false,
+			"args": [
+				"spec/**/*.js"
+			],
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "test"
+			},
+			"sourceMaps": true,
+			"outDir": null
+		}
     ]
 }

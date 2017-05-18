@@ -24,7 +24,7 @@
     "jade": "^1.11.0",
     "jsonwebtoken": "^7.2.1",
     "lodash": "^4.17.4",
-    "mongodb-support": "0.0.6",
+    "mongodb-support": "0.0.7",
     "mongoose": "^4.7.8",
     "mongoose-repos": "0.0.7",
     "passport": "^0.3.2",

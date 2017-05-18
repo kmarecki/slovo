@@ -17,19 +17,25 @@ chai.use(chaiHttp);
 const db = new MongoSupport();
 const testData = require('./test-data.json');
 
-//TODO return test data in a smarter way
+//TODO cleaner - return test data
 export function getTestData(): any {
     return testData;
 }
+//TODO cleaner - drop identitycounters only on the first run
+let firstRun = true;
 export function beforeTestSuite(addTestData = true): Promise<any> {
+    const drop = firstRun ? 
+        () => db.dropAll() : 
+        () => db.dropAllExcept('identitycounters');
     var promise = db.open(config.MongoDb.uri)
-        .then(() => db.dropAll());
+        .then(drop);
     if (addTestData) {
         for (let property in testData) {
             promise = promise.
                 then(() => db.insert(property, testData[property]))
         }
     }
+    firstRun = false;
     return promise;
 }
 
