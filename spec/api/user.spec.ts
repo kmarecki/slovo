@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import * as helper from '../helper';
 import { IUser } from '../../shared/entities/user';
 import { IAuthenticateRequest, IAuthenticateResponse } from '../../shared/contracts/authenticate';
@@ -127,7 +128,44 @@ describe('users', () => {
             });
     });
 
-    it('DELETE /api/users', (done) => {
+    const newuser: IUser = {
+        authId: undefined,
+        authStrategy: undefined,
+        email: 'zzz@zzz.com',
+        password: undefined,
+        userName: 'Test3',
+        userId: undefined,
+        userLevel: undefined
+    }
+
+    it('POST /api/users new user', (done) => {
+        helper.makeAuthorizedPostRequest(
+            '/api/users',
+            newuser,
+            (err, res) => {
+                expect(res.status).equal(201);
+                done();
+            }
+        )
+    })
+
+    it('GET /api/users after a new user was saved', (done) => {
+        helper.makeAuthorizedGetRequest(
+            '/api/users',
+            (err, res) => {
+                expect(res.status).equal(200);
+                const response = <IUser[]>res.body;
+                const user = _.last(response);
+                expect(response.length).equal(helper.getTestData().users.length + 1);
+                expect(user.userName).equal(newuser.userName);
+                expect(user.userId).not.equal(0);
+                expect(user.email).equal(newuser.email);
+                done();
+            }
+        );
+    });
+
+     it('DELETE /api/users', (done) => {
         const deleted = <IUser>helper.getTestData().users[1];
         helper.makeAuthorizedDeleteRequest(
             `/api/users/${deleted.userId}`,
@@ -147,5 +185,4 @@ describe('users', () => {
                 done();
             });
     });
-
 });

@@ -1,6 +1,6 @@
 <div class="row">
-    <a ui-sref="panel.posts-create" class="btn btn-info">New user</a>
-    <a class="btn btn-info" ng-click="$ctrl.saveSelectedUser()">Save</a>
+    <a class="btn btn-info" ng-click="$ctrl.newUser()">New user</a>
+    <a class="btn btn-info" ng-click="$ctrl.saveSelectedUser()" ng-disabled="$ctrl.readonly">Save</a>
 </div>
 <div class="row">
     <div class="col-xs-6 list">
@@ -23,7 +23,9 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="name">User name:</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" name="name" ng-model="$ctrl.selected.userName" required placeholder="Enter user name" />
+                    <input type="text" class="form-control" name="name" 
+                        ng-model="$ctrl.selected.userName" ng-disabled="$ctrl.readonly"
+                        required placeholder="Enter user name" />
                     <div ng-messages="userForm.name.$error" ng-show="userForm.name.$touched">
                         <span ng-message="required">User name required</span>
                     </div>
@@ -32,7 +34,9 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="email">Email:</label>
                 <div class="col-sm-4">
-                    <input type="email" class="form-control" name="email" ng-model="$ctrl.selected.email" placeholder="Enter email" />
+                    <input type="email" class="form-control" name="email" 
+                        ng-model="$ctrl.selected.email" ng-disabled="$ctrl.readonly"
+                        placeholder="Enter email" />
                     <div ng-messages="userForm.email.$error" ng-show="userForm.email.$touched">
                         <span ng-message="email">Invalid format</span>
                     </div>

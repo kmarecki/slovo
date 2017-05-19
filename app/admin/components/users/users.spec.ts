@@ -59,6 +59,7 @@ describe('users', () => {
                     expect(ctrl.users[1].userId).eq(users[1].userId);
                     expect(ctrl.users[1].userName).eq(users[1].userName);
                     expect(ctrl.users[1].email).eq(users[1].email);
+                    expect(ctrl.readonly).is.true;
                     done();
                 })
                 .catch((err) => done(err))
@@ -78,6 +79,7 @@ describe('users', () => {
 
                     expect(ctrl.selected.userId).eq(users[1].userId);
                     expect(ctrl.selected.userName).eq(users[1].userName);
+                    expect(ctrl.readonly).is.true;
                     done();
                 })
                 .catch((err) => done(err))
@@ -88,9 +90,9 @@ describe('users', () => {
         it('save selected user', (done) => {
 
             const modifiedUser = {
-                email: 'xxx@xxx.yy',
-                userName: 'Test1 modified',
-                userId: 1
+                email: 'modified@yyy.yy',
+                userName: 'Test2 modified',
+                userId: 2
             };
 
             httpLocalBackend.whenGET('/api/users')
@@ -106,11 +108,17 @@ describe('users', () => {
 
             ctrl.refresh
                 .then(() => {
+                    expect(ctrl.readonly).is.true;
+                    ctrl.editUser(modifiedUser.userId);
+                    expect(ctrl.readonly).is.false;
                     ctrl.selected.userName = modifiedUser.userName;
                     ctrl.selected.email = modifiedUser.email;
                     return ctrl.saveSelectedUser();
                 })
-                .then(() => done())
+                .then(() => {
+                    expect(ctrl.readonly).is.true;
+                    done();
+                })
                 .catch((err) => done(err));
 
             httpLocalBackend.flush();
@@ -140,6 +148,58 @@ describe('users', () => {
                 .catch((err) => done(err));
 
             httpLocalBackend.expectDELETE('/api/users/2');
+
+            httpLocalBackend.flush();
+            $scope.$apply();
+        });
+
+        it('new user', (done) => {
+
+            const newUser = {
+                email: 'zzzz@zzz.zz',
+                userName: 'Test3',
+            };
+            const newId = 3;
+
+            httpLocalBackend.whenGET('/api/users')
+                .respond(users);
+            httpLocalBackend.whenPOST('/api/users')
+                .respond((method, url, data, headers) => {
+                    const posted = <IUser>angular.fromJson(data.toString());
+                    expect(posted.userId).is.undefined;
+                    expect(posted.userName).eq(newUser.userName);
+                    expect(posted.email).eq(newUser.email);
+
+                    const usersCopy = users.slice();
+                    usersCopy.push(<any> {
+                        userName: newUser.userName,
+                        email: newUser.email,
+                        userId: newId
+                    })
+                    httpLocalBackend.expectGET('/api/users')
+                        .respond(usersCopy);
+
+                    return [201, {}, {}, ''];
+                });
+
+            ctrl.refresh
+                .then(() => {
+                    expect(ctrl.users.length).eq(users.length);
+
+                    ctrl.newUser();
+                    ctrl.selected.userName = newUser.userName;
+                    ctrl.selected.email = newUser.email;
+                    return ctrl.saveSelectedUser();
+                })
+                .then(() => {
+                    expect(ctrl.users.length).eq(users.length + 1);
+                    ctrl.selectUser(newId);
+                    expect(ctrl.selected.userName).eq(newUser.userName);
+                    expect(ctrl.selected.email).eq(newUser.email);
+                    done();
+                })
+                .catch((err) => done(err));
+
 
             httpLocalBackend.flush();
             $scope.$apply();
