@@ -104,7 +104,7 @@ export class UserRepository extends MongoRepository {
             if (user && user.password) {
                 bcrypt.compare(password, user.password)
                     .then(
-                    (result) => fullfill({ equal: result }),
+                    (result) => fullfill({ err: undefined, equal: result }),
                     (err) => reject({ err: err, equal: false }));
             } else {
                 reject({ equal: false });
@@ -137,7 +137,7 @@ export class UserRepository extends MongoRepository {
             },
         };
         schema.pre('save', function (next) {
-            let user = this;
+            let user = <UserModel>this;
             if (user.password) {
                 bcrypt.genSalt(10)
                     .then((salt) => bcrypt.hash(user.password, salt))

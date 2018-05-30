@@ -4,7 +4,7 @@ import './app/app.module';
 import './articles/articles.module';
 import './articles-nav/articles-nav.module';
 
-ng.module('components', [
+const module = ng.module('components', [
     'app',
     'articles',
     'articlesNav',

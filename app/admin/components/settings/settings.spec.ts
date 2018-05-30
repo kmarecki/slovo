@@ -1,16 +1,13 @@
-import 'angular';
-import 'angular-mocks';
-import '../../admin.module';
-
 import { SettingsController } from './settings.controller';
 import { ISettings } from '../../../../shared/entities/settings';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 let expect = chai.expect;
 
 describe('settings', () => {
-    beforeEach(angular.mock.module('adminApp'));
+    beforeEach(ng.mock.module('adminApp'));
 
     describe('SettingsController', () => {
         let ctrl: SettingsController;
@@ -18,7 +15,7 @@ describe('settings', () => {
         let httpLocalBackend: ng.IHttpBackendService;
         let state: ng.ui.IStateService;
 
-        beforeEach(angular.mock.inject([
+        beforeEach(ng.mock.inject([
             '$componentController', '$rootScope', '$httpBackend', '$state', 'services.auth',
             ($componentController, $rootScope, $httpBackend, $state, _authService_) => {
                 ctrl = <SettingsController>$componentController('settings');
@@ -57,7 +54,7 @@ describe('settings', () => {
                 .respond(settings);
             httpLocalBackend.whenPOST('/api/settings')
                 .respond((method, url, data, headers) => {
-                    const posted = <ISettings>angular.fromJson(data.toString());
+                    const posted = <ISettings>ng.fromJson(data.toString());
                     expect(posted.blogDescription).eq(modifiedSettings.blogDescription);
                     expect(posted.blogName).eq(modifiedSettings.blogName);
                     return [201, {}, {}, ''];

@@ -17,7 +17,7 @@ import './components/components.module';
 //import { Run } from './run';
 import { IAuthService } from './services/auth.service';
 
-let app = ng.module('adminApp', [
+const app = ng.module('adminApp', [
     'ngRoute',
     'ngSanitize',
     'ngMessages',

@@ -4,11 +4,17 @@
         "module": "commonjs",
         "sourceMap": true,
         "allowJs": false,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "lib": [
+            "dom",
+            "es5",
+            "scripthost",
+            "es2015.promise",
+            "es2015.symbol"
+        ]
     },
     "exclude": [
         "bower_components",
         "node_modules",
-        "typings/globals"
     ]
 }

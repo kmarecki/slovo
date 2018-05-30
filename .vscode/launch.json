@@ -20,7 +20,6 @@
                 "NODE_ENV": "development"
             },
             "sourceMaps": true,
-            "outFiles": null
         },
         {
             "name": "Attach",
@@ -31,7 +30,6 @@
             "address": "localhost",
             "restart": false,
             "sourceMaps": false,
-            "outFiles": null,
             "localRoot": "${workspaceRoot}",
             "remoteRoot": null
         },
@@ -40,10 +38,9 @@
             "type": "node",
             "protocol": "inspector",
             "request": "attach",
-            "processId": "${command.PickProcess}",
+            "processId": "${command:PickProcess}",
             "port": 5858,
             "sourceMaps": false,
-            "outFiles": null
         },
         {
             "type": "chrome",
@@ -75,7 +72,6 @@
 				"NODE_ENV": "test"
 			},
 			"sourceMaps": true,
-			"outDir": null
 		}
     ]
 }

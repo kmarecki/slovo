@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 import { SettingsController } from './settings.controller';
 
-export let module = ng.module('components.settings', []);
+const module = ng.module('components.settings', []);
 
 module.component('settings', {
     controller: SettingsController,

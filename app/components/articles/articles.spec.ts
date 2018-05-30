@@ -1,23 +1,19 @@
-import 'angular';
-import 'angular-mocks';
-import '../../site.module';
-
 import { ArticlesController } from './articles.controller';
 import { IPost } from '../../../shared/entities/post';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 let expect = chai.expect;
 
 describe('articlesNav', () => {
-    beforeEach(angular.mock.module('siteApp'));
+    beforeEach(ng.mock.module('siteApp'));
 
     describe('ArticlesNavController', () => {
         let ctrl: ArticlesController;
         let $scope: ng.IScope;
         let httpLocalBackend: ng.IHttpBackendService;
 
-
-        beforeEach(angular.mock.inject(($componentController, $rootScope, $httpBackend) => {
+        beforeEach(ng.mock.inject(($componentController, $rootScope, $httpBackend) => {
             ctrl = <ArticlesController>$componentController('articles');
             $scope = $rootScope;
             httpLocalBackend = $httpBackend;

@@ -1,7 +1,7 @@
 import * as ng from 'angular';
 import {PostsController} from './posts.controller';
 
-let module = ng.module('components.posts', []);
+const module = ng.module('components.posts', []);
 
 module.component('posts', {
     controller: PostsController,

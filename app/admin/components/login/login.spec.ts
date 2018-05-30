@@ -1,17 +1,14 @@
-import 'angular';
-import 'angular-mocks';
-import '../../admin.module';
-
 import { LoginController } from './login.controller';
 import { IAuthService } from '../../services/auth.service';
 import { IAuthenticateRequest, IAuthenticateResponse } from '../../../../shared/contracts/authenticate';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 let expect = chai.expect;
 
 describe('login', () => {
-    beforeEach(angular.mock.module('adminApp'));
+    beforeEach(ng.mock.module('adminApp'));
 
     describe('LoginController', () => {
         let ctrl: LoginController;
@@ -20,7 +17,7 @@ describe('login', () => {
         let state: ng.ui.IStateService;
         let authService: IAuthService;
 
-        beforeEach(angular.mock.inject([
+        beforeEach(ng.mock.inject([
             '$componentController', '$rootScope', '$httpBackend', '$state', 'services.auth', 
             ($componentController, $rootScope, $httpBackend, $state, _authService_) => {
             ctrl = <LoginController>$componentController('login');
@@ -36,7 +33,7 @@ describe('login', () => {
 
             httpLocalBackend.whenPOST('/api/authenticate')
                 .respond((method, url, data, headers) => {
-                    const request = <IAuthenticateRequest>angular.fromJson(data.toString());
+                    const request = <IAuthenticateRequest>ng.fromJson(data.toString());
                     expect(request.password).eq(password);
                     expect(request.username).eq(username);
                     const token = 'qwerty';
@@ -68,7 +65,7 @@ describe('login', () => {
 
             httpLocalBackend.whenPOST('/api/authenticate')
                 .respond((method, url, data, headers) => {
-                    const request = <IAuthenticateRequest>angular.fromJson(data.toString());
+                    const request = <IAuthenticateRequest>ng.fromJson(data.toString());
                     expect(request.password).eq(password);
                     expect(request.username).eq(username);
                     const response: IAuthenticateResponse = {

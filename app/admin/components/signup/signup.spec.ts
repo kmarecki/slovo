@@ -1,17 +1,14 @@
-import 'angular';
-import 'angular-mocks';
-import '../../admin.module';
-
 import { SignupController } from './signup.controller';
 import { IAuthService } from '../../services/auth.service';
 import { ISignupRequest, ISignupResponse } from '../../../../shared/contracts/signup';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 let expect = chai.expect;
 
 describe('signup', () => {
-    beforeEach(angular.mock.module('adminApp'));
+    beforeEach(ng.mock.module('adminApp'));
 
     describe('SignupController', () => {
         let ctrl: SignupController;
@@ -20,7 +17,7 @@ describe('signup', () => {
         let state: ng.ui.IStateService;
         let authService: IAuthService;
 
-        beforeEach(angular.mock.inject([
+        beforeEach(ng.mock.inject([
             '$componentController', '$rootScope', '$httpBackend', '$state', 'services.auth',
             ($componentController, $rootScope, $httpBackend, $state, _authService_) => {
                 ctrl = <SignupController>$componentController('signup');
@@ -37,7 +34,7 @@ describe('signup', () => {
 
             httpLocalBackend.whenPOST('/api/signup')
                 .respond((method, url, data, headers) => {
-                    const request = <ISignupRequest>angular.fromJson(data.toString());
+                    const request = <ISignupRequest>ng.fromJson(data.toString());
                     expect(request.email).eq(email);
                     expect(request.password).eq(password);
                     expect(request.username).eq(username);

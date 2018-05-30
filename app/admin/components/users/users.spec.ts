@@ -1,16 +1,13 @@
-import 'angular';
-import 'angular-mocks';
-import '../../admin.module';
-
 import { UsersController } from './users.controller';
 import { IUser } from '../../../../shared/entities/user';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
 let expect = chai.expect;
 
 describe('users', () => {
-    beforeEach(angular.mock.module('adminApp'));
+    beforeEach(ng.mock.module('adminApp'));
 
     describe('UsersController', () => {
         let ctrl: UsersController;
@@ -18,7 +15,7 @@ describe('users', () => {
         let httpLocalBackend: ng.IHttpBackendService;
 
 
-        beforeEach(angular.mock.inject([
+        beforeEach(ng.mock.inject([
             '$componentController', '$rootScope', '$httpBackend',
             ($componentController, $rootScope, $httpBackend) => {
                 ctrl = <UsersController>$componentController('users');
@@ -99,7 +96,7 @@ describe('users', () => {
                 .respond(users);
             httpLocalBackend.whenPOST('/api/users')
                 .respond((method, url, data, headers) => {
-                    const posted = <IUser>angular.fromJson(data.toString());
+                    const posted = <IUser>ng.fromJson(data.toString());
                     expect(posted.userId).eq(modifiedUser.userId);
                     expect(posted.userName).eq(modifiedUser.userName);
                     expect(posted.email).eq(modifiedUser.email);
@@ -165,7 +162,7 @@ describe('users', () => {
                 .respond(users);
             httpLocalBackend.whenPOST('/api/users')
                 .respond((method, url, data, headers) => {
-                    const posted = <IUser>angular.fromJson(data.toString());
+                    const posted = <IUser>ng.fromJson(data.toString());
                     expect(posted.userId).is.undefined;
                     expect(posted.userName).eq(newUser.userName);
                     expect(posted.email).eq(newUser.email);

@@ -1,16 +1,13 @@
-import 'angular';
-import 'angular-mocks';
-import '../../site.module';
-
 import { ArticlesNavController } from './articles-nav.controller';
 import { IPostHeader } from '../../../shared/entities/post';
 
+import * as ng from 'angular';
 import * as chai from 'chai';
 let expect = chai.expect;
 
 describe('articlesNav', () => {
 
-    beforeEach(angular.mock.module('siteApp'));
+    beforeEach(ng.mock.module('siteApp'));
     
     describe('ArticlesNavController', () => {
         let ctrl: ArticlesNavController;
@@ -18,7 +15,7 @@ describe('articlesNav', () => {
         let httpLocalBackend: ng.IHttpBackendService;
 
 
-        beforeEach(angular.mock.inject(($componentController, $rootScope, $httpBackend) => {
+        beforeEach(ng.mock.inject(($componentController, $rootScope, $httpBackend) => {
             ctrl = <ArticlesNavController>$componentController('articlesNav');
             $scope = $rootScope;
             httpLocalBackend = $httpBackend;

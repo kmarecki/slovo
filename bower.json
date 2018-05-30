@@ -23,7 +23,7 @@
     "bootstrap": "^3.3.6",
     "lodash": "^4.13.1",
     "angular": "^1.6.1",
-    "system.js": "^0.19.31",
+    "system.js": "^0.19.47",
     "angular-route": "^1.6.1",
     "angular-mocks": "^1.6.1",
     "angular-resource": "^1.6.1",
