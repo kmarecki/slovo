@@ -22,7 +22,7 @@
             meta: {
                 'lodash': { format: 'global', exports: '_' },
                 'showdown': { format: 'global', exports: 'showdown' },
-                'jquery': { format: 'global', exports: 'jquery' },
+                'jquery': { format: 'global', exports: '$' },
                 'bootstrap': { format: 'global', deps: ['jquery'] },
                 'angular': { format: 'global', exports: 'angular' },
                 'angular-resource': { format: 'global', deps: ['angular'] },
@@ -31,6 +31,7 @@
         });
         System.import('site.module.js');
     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body ng-app="siteApp">

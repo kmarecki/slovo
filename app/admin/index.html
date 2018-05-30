@@ -25,11 +25,11 @@
         'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router.js'
       },
       meta: {
-        'jquery': { format: 'global', exports: 'jquery' },
+        'jquery': { format: 'global', exports: '$' },
         'bootstrap': { format: 'global', deps: ['jquery'] },
         'showdown': { format: 'global', exports: 'showdown' },
         'angular': { format: 'global', exports: 'angular' },
-        'angular-messages' : { format: 'global', deps: ['angular'] },
+        'angular-messages': { format: 'global', deps: ['angular'] },
         'angular-resource': { format: 'global', deps: ['angular'] },
         'angular-route': { format: 'global', deps: ['angular'] },
         'angular-sanitize': { format: 'global', deps: ['angular'] },
@@ -39,11 +39,12 @@
     });
     SystemJS.import('admin/admin.module.js');
   </script>
-<base href="/admin/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/admin/" />
 </head>
 
 <body ng-app="adminApp">
-    <app></app>
+  <app></app>
 </body>
 
 </html>

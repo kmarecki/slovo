@@ -19,8 +19,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.4",
-    "bootstrap": "^3.3.6",
+    "jquery": "^3.3.1",
+    "bootstrap": "^3.3.7",
     "lodash": "^4.13.1",
     "angular": "^1.6.1",
     "system.js": "^0.19.47",

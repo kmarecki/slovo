@@ -1,4 +1,5 @@
-import * as ng from 'angular';
+import 'jquery';
+import 'bootstrap';
 
 import 'angular-messages';
 import 'angular-resource';
@@ -13,6 +14,7 @@ import './services/services.module';
 
 import './components/components.module';
 
+import * as ng from 'angular';
 
 //import { Run } from './run';
 import { IAuthService } from './services/auth.service';
