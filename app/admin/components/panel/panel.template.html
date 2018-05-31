@@ -1,13 +1,11 @@
-<div class="content">
-    <div class="col-xs-2 side">
-        <nav>
+<div class="row content extra-padding-top">
+    <div class="col-xs-2 sidenav panel panel-default no-gutter">
             <ul class="nav nav-pills nav-stacked">
                 <li ng-class="{ active: $ctrl.isActive('panel.posts')}"><a ui-sref="panel.posts">Posts</a></li>
                 <li ng-class="{ active: $ctrl.isActive('panel.settings')}"><a ui-sref="panel.settings">Settings</a></li>
                 <li ng-class="{ active: $ctrl.isActive('panel.users')}"><a ui-sref="panel.users">Users</a></li>
             </ul>
-        </nav>
     </div>
-    <div class="col-xs-10" ui-view>
+    <div class="col-xs-10 panel panel-default extra-gutter" ui-view>
     </div>
 </div>

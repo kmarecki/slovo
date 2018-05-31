@@ -23,8 +23,9 @@ textarea {
 
 }
 
-.side {
-
+.sidenav {
+  background-color: #f1f1f1;
+  height: 88%;
 }
 
 .buttons {
@@ -61,6 +62,35 @@ textarea {
 .navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #F0F0F0}
 .navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #FFFFFF}
 
+.navbar {
+  margin-bottom: 0;
+}
 
+.nav-pills{
+  width: 100%;
+}
 
+/*.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+.no-margin {
+  margin-right: 0;
+  margin-left: 0;
+} */
+
+.no-gutter {
+  padding-right:0;
+  padding-left:0;
+}
+
+.extra-gutter {
+  padding-right:30px;
+  padding-left:30px;
+}
+
+.extra-padding-top > [class*='col-'] {
+  padding-top: 15px;
+}
 
