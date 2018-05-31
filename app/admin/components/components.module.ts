@@ -9,6 +9,7 @@ import './posts/posts.module';
 import './post/post.module';
 import './settings/settings.module';
 import './signup/signup.module';
+import './topnav/topnav.module';
 import './users/users.module';
 
 ng.module('components', [
@@ -21,5 +22,6 @@ ng.module('components', [
     'components.post',
     'components.settings',
     'components.signup',
+    'components.topnav',
     'components.users',
 ]);

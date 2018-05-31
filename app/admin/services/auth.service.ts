@@ -1,6 +1,6 @@
-import { IAuthenticateRequest, IAuthenticateResponse } from 
+import { IAuthenticateRequest, IAuthenticateResponse } from
     '../../../shared/contracts/authenticate';
-import { ISignupRequest, ISignupResponse } from 
+import { ISignupRequest, ISignupResponse } from
     '../../../shared/contracts/signup';
 
 
@@ -9,6 +9,7 @@ export interface IAuthService {
     login(username: string, password: string): ng.IPromise<{}>
     logout(): ng.IPromise<{}>
     signup(username: string, password: string, email: string): ng.IPromise<{}>
+    getUserName(): string;
 }
 
 export class AuthService implements IAuthService {
@@ -24,6 +25,7 @@ export class AuthService implements IAuthService {
 
     private authenticated = false;
     private authToken;
+    private username = '';
 
     private loadUserCredentials() {
         var token = window.localStorage.getItem(AuthService.LOCAL_TOKEN_KEY);
@@ -32,21 +34,22 @@ export class AuthService implements IAuthService {
         }
     }
 
-    private saveUserCredentials(token) {
+    private saveUserCredentials(username, token) {
         window.localStorage.setItem(AuthService.LOCAL_TOKEN_KEY, token);
         this.useCredentials(token);
+        this.username = username;
     }
 
     private useCredentials(token) {
         this.authenticated = true;
         this.authToken = token;
-
         this.$http.defaults.headers.common.Authorization = this.authToken;
     }
 
     private deleteUserCredentials() {
         this.authToken = undefined;
         this.authenticated = false;
+        this.username = '';
         this.$http.defaults.headers.common.Authorization = undefined;
         window.localStorage.removeItem(AuthService.LOCAL_TOKEN_KEY);
     }
@@ -65,7 +68,7 @@ export class AuthService implements IAuthService {
                 .then(result => {
                     let response = <IAuthenticateResponse>result.data;
                     if (response && response.success) {
-                        this.saveUserCredentials(response.token)
+                        this.saveUserCredentials(username, response.token);
                         resolve(response.msg);
                     } else {
                         reject(response.msg);
@@ -98,5 +101,9 @@ export class AuthService implements IAuthService {
                     }
                 });
         });
+    }
+
+    getUserName(): string {
+        return this.username;
     }
 }
