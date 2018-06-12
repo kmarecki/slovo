@@ -6,6 +6,4 @@
         "**/*.js": { "when": "$(basename).ts"},
         "**/*.js.map": true
     },
-
-    "eslint.enable": false
 }

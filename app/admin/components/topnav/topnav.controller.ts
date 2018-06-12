@@ -2,9 +2,10 @@ import { IAuthService } from '../../services/auth.service';
 import { IRootScopeService } from 'angular';
 import { TopNavModel } from './topnav.model';
 import { MessageBoxController, MessageBoxType } from '../message-box/message-box.controller';
+import { TransitionService } from '@uirouter/core';
 
 export class TopNavController {
-    static $inject = ['$rootScope', '$uibModal', '$state', 'services.auth']
+    static $inject = ['$rootScope', '$uibModal', '$state', '$transitions', 'services.auth'];
 
     username: string;
     model: TopNavModel;
@@ -13,9 +14,10 @@ export class TopNavController {
         private $rootScope: IRootScopeService,
         private $uibModal: ng.ui.bootstrap.IModalService,
         private $state: ng.ui.IStateService,
+        private $transitions: TransitionService,
         private authService: IAuthService
     ) {
-        $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+        $transitions.onSuccess({}, (trans) => {
             this.refreshModel();
         });
 
@@ -26,13 +28,13 @@ export class TopNavController {
     private refreshModel() {
         this.model.username = this.authService.getUserName();
     }
-    
+
     logout(): ng.IPromise<any> {
         return this.authService
             .logout()
             .then(() => this.$state.go('login'))
-            .catch(
-            (msg) => MessageBoxController.show(
-                this.$uibModal, MessageBoxType.Error, '', msg));
+            .catch((msg) =>
+                MessageBoxController.show(this.$uibModal, MessageBoxType.Error, '', msg)
+            );
     }
 }

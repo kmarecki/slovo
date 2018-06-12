@@ -64,6 +64,7 @@
     "@types/serve-static": "^1.13.2",
     "@types/showdown": "^1.7.3",
     "@types/sinon": "^5.0.1",
+    "@uirouter/angularjs": "^1.0.18",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "jasmine": "^3.1.0",
