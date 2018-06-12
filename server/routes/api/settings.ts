@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as passport from 'passport';
 
-import { ExpressApp, ResponseService } from 'express-app';
+import { ExpressApp } from 'express-app';
 
 import { ISettings} from '../../../shared/entities/settings';
 import { SettingsRepository } from '../../db/settings';

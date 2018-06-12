@@ -27,7 +27,7 @@ passport.use(strategy);
 
 let jwtOptions: jwt.StrategyOptions = {
     secretOrKey: 'qwerty',
-    jwtFromRequest: jwt.ExtractJwt.fromAuthHeader()
+    jwtFromRequest: jwt.ExtractJwt.fromAuthHeaderWithScheme('jwt')
 };
 let jwtStrategy = new jwt.Strategy(
     jwtOptions,

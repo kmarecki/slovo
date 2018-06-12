@@ -18,10 +18,10 @@ import * as postRoutes from './routes/api/post';
 import * as settingsRoutes from './routes/api/settings';
 import * as userRoutes from './routes/api/user';
 
-let config = require('config');
-let root = path.join(__dirname, '..');
-let publicPath = path.join(root, 'app');
-export let app = express();
+const config = require('config');
+const root = path.join(__dirname, '..');
+const publicPath = path.join(root, 'app');
+export const app = express();
 
 app.use(cookieParser());
 app.use(session({ secret: '1234567890qwerty' }));
@@ -49,31 +49,9 @@ MongoConfiguration.useAutoIncrement = true;
 MongoConfiguration.useLogger = true;
 MongoConfiguration.debug = config.MongoDb.debug;
 MongoDb.configure();
-MongoDb.open();
 
-let server: http.Server;
-let port = app.get('port');
-server = http.createServer(app);
-server.listen(app.get('port'), () => {
+const server = http.createServer(app);
+const port = app.get('port');
+server.listen(port, () => {
     console.log(`Express server listening on port ${port}`);
 });
-
-// export function start() {
-//     if (!server) {
-//         var port = app.get('port');
-//         console.log('Site start');
-//         console.log(`Site port: ${port}`);
-//         server = http.createServer(app);
-//         server.listen(app.get('port'), () => {
-//             console.log(`Express server listening on port ${port}`);
-//         });
-//     }
-// }
-
-// export function stop() {
-//     if (server) {
-//         console.log('Site shutdown');
-//         server.close();
-//         server = null;
-//     }
-// }
