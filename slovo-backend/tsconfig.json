@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "lib": ["es2017"],
+        "module": "commonjs",
+        "target": "es2017",
+        "outDir": "dist",
+        "paths": {
+            "@db/*": ["./db/*"],
+            "@shared/*": ["./shared/*"],
+        },
+        "typeRoots" : ["./node_modules/@types"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}

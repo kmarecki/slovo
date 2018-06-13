@@ -2,8 +2,8 @@ import * as passport from 'passport';
 import { Strategy } from 'passport-local';
 import * as jwt from 'passport-jwt';
 
-import { IUser } from '../shared/entities/user';
-import { UserRepository } from './db/user';
+import { IUser } from '@shared/entities/user';
+import { UserRepository } from '@db/user';
 
 let strategy = new Strategy(
     (username, password, done) => {

@@ -3,8 +3,8 @@ import * as passport from 'passport';
 
 import { ExpressApp, ResponseService } from 'express-app';
 
-import { IPost } from '../../../shared/entities/post';
-import { PostRepository } from '../../db/post';
+import { IPost } from '@shared/entities/post';
+import { PostRepository } from '@db/post';
 
 export let router = express.Router();
 

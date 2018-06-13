@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler } from 'mongoose-repos';
 
-import { IUser, UserLevel } from '../../shared/entities/user';
+import { IUser, UserLevel } from '@shared/entities/user';
 
 interface UserModel extends IUser, mongoose.Document { }
 

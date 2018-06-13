@@ -17,7 +17,7 @@ export class TopNavController {
         private $transitions: TransitionService,
         private authService: IAuthService
     ) {
-        $transitions.onSuccess({}, (trans) => {
+        this.$transitions.onSuccess({}, (trans) => {
             this.refreshModel();
         });
 
