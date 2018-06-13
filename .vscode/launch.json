@@ -7,7 +7,7 @@
             "type": "node",
             "protocol": "inspector",
             "request": "launch",
-            "program": "${workspaceRoot}/server/app.js",
+            "program": "${workspaceRoot}/build/app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
