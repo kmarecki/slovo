@@ -3,8 +3,8 @@ import * as passport from 'passport';
 
 import { ExpressApp } from 'express-app';
 
-import { ISettings} from '../../../shared/entities/settings';
-import { SettingsRepository } from '../../db/settings';
+import { ISettings} from '@shared/entities/settings';
+import { SettingsRepository } from '@db/settings';
 
 export let router = express.Router();
 

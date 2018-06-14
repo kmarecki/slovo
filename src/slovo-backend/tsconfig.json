@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "lib": ["es2017"],
+        "module": "commonjs",
+        "target": "es2017",
+        "paths": {
+            "@db/*": ["./db/*"],
+            "@root/*": ["../../*"],
+            "@shared/*": ["../slovo-shared/*"]
+        }
+    },
+    "include": ["./**/*"]
+}

@@ -19,7 +19,7 @@ import * as settingsRoutes from './routes/api/settings';
 import * as userRoutes from './routes/api/user';
 
 const config = require('config');
-const root = path.join(__dirname, '..');
+const root = path.join(__dirname, '../..');
 const publicPath = path.join(root, 'app');
 export const app = express();
 

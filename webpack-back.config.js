@@ -1,18 +1,20 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const tsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        server: './server/app.ts'
+        server: './src/slovo-backend/app.ts'
     },
     output: {
-        path: path.resolve(__dirname, './build'),
+        path: path.resolve(__dirname, './dist/slovo-backend'),
         filename: 'app.js'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        plugins: [new tsconfigPathsPlugin({ configFile: './src/slovo-backend/tsconfig.json' })]
     },
 
     module: {

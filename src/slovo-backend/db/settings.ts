@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler } from 'mongoose-repos';
 
-import { ISettings } from '../../shared/entities/settings';
+import { ISettings } from '@shared/entities/settings';
 
 interface SettingsModel extends ISettings, mongoose.Document { }
 

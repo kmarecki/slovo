@@ -3,8 +3,8 @@ import * as passport from 'passport';
 
 import { ExpressApp, ResponseService } from 'express-app';
 
-import { IUser } from '../../../shared/entities/user';
-import { UserRepository } from '../../db/user';
+import { IUser } from '@shared/entities/user';
+import { UserRepository } from '@db/user';
 
 export let router = express.Router();
 

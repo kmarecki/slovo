@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { MongoRepository, SchemaOptions, defaultHandler, defaultResultHandler, defaultResultArrayHandler } from 'mongoose-repos';
 
-import { IPost, IPostHeader } from '../../shared/entities/post';
+import { IPost, IPostHeader } from '@shared/entities/post';
 
 interface PostModel extends IPost, mongoose.Document { }
 

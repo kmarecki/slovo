@@ -7,12 +7,12 @@ import * as jwt from 'jsonwebtoken';
 import { ExpressApp } from 'express-app';
 import { MongoDb } from 'mongoose-repos';
 
-import { IAuthenticateRequest, IAuthenticateResponse } from '../../../shared/contracts/authenticate';
-import { ISignupRequest, ISignupResponse } from '../../../shared/contracts/signup';
-import { IAliveResponse } from '../../../shared/contracts/alive';
-import { IUser, UserLevel } from '../../../shared/entities/user';
-import { UserRepository } from '../../db/user';
-var packageJson = require('../../../package.json');
+import { IAuthenticateRequest, IAuthenticateResponse } from '@shared/contracts/authenticate';
+import { ISignupRequest, ISignupResponse } from '@shared/contracts/signup';
+import { IAliveResponse } from '@shared/contracts/alive';
+import { IUser, UserLevel } from '@shared/entities/user';
+import { UserRepository } from '@db/user';
+var packageJson = require('@root/package.json');
 
 export let router = express.Router();
 
