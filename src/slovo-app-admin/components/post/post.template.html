@@ -1,0 +1,25 @@
+<div class="row">
+    <a ui-sref="panel.posts-create" class="btn btn-info">New post</a>
+    <a class="btn btn-info" ng-click="$ctrl.save()">Save</a>
+    <a class="btn btn-info ng-hide" ng-hide="$ctrl.model.published" ng-click="$ctrl.publish()">Publish</a>
+    <a class="btn btn-info ng-hide" ng-hide="!$ctrl.model.published" ng-click="$ctrl.hide()">Hide</a>
+</div>
+<br/>
+<div class="row">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <input type="text" class="form-control" id="title" ng-model="$ctrl.model.title" placeholder="Enter title">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-6">
+                <textarea class="form-control" autosize ng-model="$ctrl.model.text" placeholder="Enter text" ng-trim="false">
+                </textarea>
+            </div>
+            <div class="col-xs-6 post">
+                <div ng-bind-html="$ctrl.model.textToDisplay" />
+            </div>
+        </div>
+    </form>
+</div>

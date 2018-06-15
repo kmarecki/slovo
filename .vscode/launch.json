@@ -7,7 +7,7 @@
             "type": "node",
             "protocol": "inspector",
             "request": "launch",
-            "program": "${workspaceRoot}/build/app.js",
+            "program": "${workspaceRoot}/dist/slovo-backend/app.js",
             "stopOnEntry": false,
             "args": [],
             "cwd": "${workspaceRoot}",
