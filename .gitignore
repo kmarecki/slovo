@@ -4,3 +4,4 @@ typings
 *.js
 *.js.map
 *.log
+dist

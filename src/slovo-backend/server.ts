@@ -10,7 +10,7 @@ import flash = require('connect-flash');
 import { ExpressApp } from 'express-app';
 import { MongoConfiguration, MongoDb } from 'mongoose-repos';
 
-import * as adminRoutes from './routes/admin';
+import { AdminRoutes } from './routes/admin';
 
 import * as apiRoutes from './routes/api/api';
 //TODO Combine seperate api routers
@@ -21,6 +21,8 @@ import * as userRoutes from './routes/api/user';
 const config = require('config');
 const root = path.join(__dirname, '../..');
 const publicPath = path.join(root, 'app');
+const adminPath = path.join(root, 'dist/slovo-app-admin');
+
 export const app = express();
 
 app.use(cookieParser());
@@ -37,12 +39,13 @@ ExpressApp.physicalPath = publicPath;
 
 app.set('port', process.env.PORT || 3000);
 
-app.use(adminRoutes.router);
+app.use(new AdminRoutes(adminPath).router);
 app.use(apiRoutes.router);
 app.use(postRoutes.router);
 app.use(settingsRoutes.router);
 app.use(userRoutes.router);
 app.use('/', express.static(ExpressApp.physicalPath));
+
 
 MongoConfiguration.uri = config.MongoDb.uri;
 MongoConfiguration.useAutoIncrement = true;

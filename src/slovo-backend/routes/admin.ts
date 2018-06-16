@@ -3,35 +3,40 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as passport from 'passport';
 
-import { ExpressApp } from 'express-app';
+export class AdminRoutes {
+    public router = express.Router();
 
-export let router = express.Router();
+    constructor(root: string) {
+        const indexPage = (req: express.Request, res: express.Response) => {
+            const indexPath = path.join(root, 'index.html');
+            res.sendFile(indexPath);
+        };
 
-const indexPage = (req: express.Request, res: express.Response) => {
-    let indexPath = path.join(ExpressApp.physicalPath, 'admin', 'index.html');
-    res.sendFile(indexPath);
-}
+        this.router.get('/admin/', indexPage);
+        this.router.get('/admin/login', indexPage);
+        this.router.get('/admin/signup', indexPage);
+        this.router.get('/admin/comments(/*)?', indexPage);
+        this.router.get('/admin/posts(/*)?', indexPage);
+        this.router.get('/admin/settings(/*)?', indexPage);
+        this.router.get('/admin/users(/*)?', indexPage);
 
-router.get('/admin/', indexPage);
-router.get('/admin/login', indexPage);
-router.get('/admin/signup', indexPage);
-router.get('/admin/comments(/*)?', indexPage);
-router.get('/admin/posts(/*)?', indexPage);
-router.get('/admin/settings(/*)?', indexPage);
-router.get('/admin/users(/*)?', indexPage);
-
-router.get('/admin/*',
-    //passport.authenticate('jwt', { session: false }),
-    (req: express.Request, res: express.Response) => {
-        let filePath = path.join(ExpressApp.physicalPath, req.path);
-        fs.stat(filePath, (err, stats) => {
-            if (stats && stats.isFile()) {
-                res.sendFile(filePath);
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/plain' });
-                res.write('404 Not Found\n');
-                res.end();
+        this.router.get(
+            '/admin/*',
+            //passport.authenticate('jwt', { session: false }),
+            
+            (req: express.Request, res: express.Response) => {
+                const toplevelPath = req.path.replace('admin/','');
+                const filePath = path.join(root, toplevelPath);
+                fs.stat(filePath, (err, stats) => {
+                    if (stats && stats.isFile()) {
+                        res.sendFile(filePath);
+                    } else {
+                        res.writeHead(200, { 'Content-Type': 'text/plain' });
+                        res.write('404 Not Found\n');
+                        res.end();
+                    }
+                });
             }
-        });
-    });
-
+        );
+    }
+}

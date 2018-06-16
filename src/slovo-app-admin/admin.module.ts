@@ -1,20 +1,23 @@
 import 'jquery';
 import 'bootstrap';
 
+import * as ng from 'angular';
+import { TransitionService } from '@uirouter/angularjs';
+
 import 'angular-messages';
 import 'angular-resource';
 import 'angular-sanitize';
-import 'angular-bootstrap';
+import 'angular-ui-bootstrap';
 import 'angular-ui-router';
 
 import '@core/core.module';
 import './directives/directives.module';
 import './services/services.module';
-
 import './components/components.module';
 
-import * as ng from 'angular';
-import { TransitionService } from '@uirouter/angularjs';
+import '@styles/app.css';
+import '@styles/admin.css';
+
 
 //import { Run } from './run';
 import { IAuthService } from './services/auth.service';
