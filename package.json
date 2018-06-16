@@ -99,6 +99,7 @@
     "raw-loader": "^0.5.1",
     "sinon": "^6.0.0",
     "style-loader": "^0.21.0",
+    "supervisor": "^0.12.0",
     "ts-loader": "^4.4.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^2.9.2",
@@ -109,11 +110,15 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "build-app": "webpack --config webpack-app.config.js --watch",
-    "build-app-admin": "webpack --config webpack-app-admin.config.js --watch",
-    "build-backend": "webpack --config webpack-back.config.js --watch",
+    "build-app": "webpack --config webpack-app.config.js",
+    "build-app-watch": "webpack --config webpack-app.config.js --watch",
+    "build-app-admin": "webpack --config webpack-app-admin.config",
+    "build-app-admin-watch": "webpack --config webpack-app-admin.config.js --watch",
+    "build-backend": "webpack --config webpack-back.config.js",
+    "build-backend-watch": "webpack --config webpack-back.config.js --watch",
     "build": "npm-run-all --parallel build-app build-app-admin build-backend",
-    "start": "node ./dist/slovo-backend/app.js",
+    "build-watch": "npm-run-all --parallel build-app-watch build-app-admin-watch build-backend-watch",
+    "start": "supervisor ./dist/slovo-backend/app.js",
     "test": "karma start karma.conf.js",
     "test-admin": "karma start karma.admin.conf.js",
     "test-server": "mocha spec/**/*.js"
