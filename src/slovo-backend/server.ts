@@ -20,7 +20,7 @@ import * as userRoutes from './routes/api/user';
 
 const config = require('config');
 const root = path.join(__dirname, '../..');
-const publicPath = path.join(root, 'app');
+const publicPath = path.join(root, 'dist/slovo-app');
 const adminPath = path.join(root, 'dist/slovo-app-admin');
 
 export const app = express();

@@ -1,0 +1,59 @@
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css');
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+ 
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  justify-content: center;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+  align-self: flex-start;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.red {
+  background-color: red;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.content {
+  min-height: 85%;
+  /* max-width: 99%;  */
+}
+
+.list a {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   display: block;
+}
+
+.post {
+  border-radius: 1em;
+  /*border: 0.250em solid gray;*/
+  background: #eee;
+  padding: 1em;
+  padding-top: 0.125em;
+  margin-bottom: 1em;
+}
